@@ -24,6 +24,8 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DropMode;
@@ -41,7 +43,7 @@ import java.awt.event.KeyEvent;
 public class PantallaPrincipal {
 
 	private JFrame frame;
-	private JTextField txtIngreseSuNombre;
+	private JTextField txfNombre;
 
 	/**
 	 * Launch the application.
@@ -104,27 +106,51 @@ public class PantallaPrincipal {
 		lblNewLabel_1_1.setBounds(58, 145, 113, 21);
 		panel_3.add(lblNewLabel_1_1);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(
+		JComboBox comboBoxDificultad = new JComboBox();
+		comboBoxDificultad.setModel(
 				new DefaultComboBoxModel(new String[] { "Facil - Easy", "Medio - Medium", "Dificil - Hard" }));
-		comboBox.setBounds(163, 95, 175, 22);
-		panel_3.add(comboBox);
+		comboBoxDificultad.setBounds(163, 95, 175, 22);
+		panel_3.add(comboBoxDificultad);
 
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Español - ES", "Ingles - EN" }));
-		comboBox_1.setBounds(163, 146, 175, 22);
-		panel_3.add(comboBox_1);
+		JComboBox comboBoxLenguaje = new JComboBox();
+		comboBoxLenguaje.setModel(new DefaultComboBoxModel(new String[] { "Español - ES", "Ingles - EN" }));
+		comboBoxLenguaje.setBounds(163, 146, 175, 22);
+		panel_3.add(comboBoxLenguaje);
 
-		txtIngreseSuNombre = new JTextField();
-		txtIngreseSuNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		txtIngreseSuNombre.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
-		txtIngreseSuNombre.setText("Ingrese su Nombre");
-		txtIngreseSuNombre.setBounds(58, 41, 280, 31);
-		panel_3.add(txtIngreseSuNombre);
-		txtIngreseSuNombre.setColumns(10);
+		txfNombre = new JTextField();
+		JButton btnSiguiente = new JButton("Siguiente");
 
-		JButton btnNewButton = new JButton("Siguiente");
-		btnNewButton.addActionListener(new ActionListener() {
+		txfNombre.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				verificar();
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				verificar();
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				verificar();
+			}
+
+			// Creamos una pequeña función interna para validar
+			public void verificar() {
+				// .trim().isEmpty() verifica si está vacío o solo tiene espacios
+				if (txfNombre.getText().trim().isEmpty()) {
+					btnSiguiente.setEnabled(false); // Se apaga
+				} else {
+					btnSiguiente.setEnabled(true); // Se prende
+				}
+			}
+		});
+
+		txfNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		txfNombre.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
+		txfNombre.setBounds(58, 41, 280, 31);
+		panel_3.add(txfNombre);
+		txfNombre.setColumns(10);
+
+		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 1. Obtenemos el layout del panel padre (el que se llama 'panel')
 				CardLayout cl = (CardLayout) (panel.getLayout());
@@ -133,10 +159,20 @@ public class PantallaPrincipal {
 				cl.show(panel, "Tutorial");
 			}
 		});
-		btnNewButton.setBackground(new Color(119, 196, 172));
-		btnNewButton.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
-		btnNewButton.setBounds(94, 233, 216, 39);
-		panel_3.add(btnNewButton);
+		btnSiguiente.setBackground(new Color(119, 196, 172));
+		btnSiguiente.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
+		btnSiguiente.setBounds(94, 233, 216, 39);
+		panel_3.add(btnSiguiente);
+
+		if (txfNombre.getText().isEmpty()) {
+			btnSiguiente.setEnabled(false);
+		}
+
+		if (!txfNombre.getText().isEmpty()) {
+			btnSiguiente.setEnabled(true);
+		}
+
+		/////////////////////////////////////////////////////////////////// TUTORIAL//////////////////////////////////////////////////////////////////////////////
 
 		JPanel Tutorial = new JPanel();
 		Tutorial.setName("Tutorial");
@@ -170,6 +206,8 @@ public class PantallaPrincipal {
 		btnNewButton_1.setBackground(new Color(119, 196, 172));
 		btnNewButton_1.setBounds(292, 469, 216, 39);
 		Tutorial.add(btnNewButton_1);
+
+		/////////////////////////////////////////////////////////////// JUEGO//////////////////////////////////////////////////////////////
 
 		JPanel Juego = new JPanel();
 		panel.add(Juego, "Juego");
