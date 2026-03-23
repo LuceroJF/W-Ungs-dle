@@ -79,6 +79,10 @@ public class InterfazGrafica {
 		frame.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
+		frame.setSize(800, 600); // 👈 tamaño
+		frame.setLocationRelativeTo(null); // 👈 centrar
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 👈 cerrar bien
+		frame.setVisible(true); // 👈 mostrar
 		panel.setBounds(0, 0, 791, 553);
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new CardLayout(0, 0));
@@ -365,10 +369,5 @@ public class InterfazGrafica {
 		lblNewLabel_3.setBounds(304, 11, 432, 54);
 		Juego.add(lblNewLabel_3);
 
-	}
-
-	public String devolverNombrePersonaje() {
-		System.out.println(txfNombre);
-		return txfNombre.getText();
 	}
 }
