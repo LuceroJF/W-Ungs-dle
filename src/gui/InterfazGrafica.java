@@ -1,4 +1,4 @@
-package paquete;
+package gui;
 
 import java.awt.EventQueue;
 
@@ -26,6 +26,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import model.Jugador;
+
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DropMode;
@@ -40,7 +43,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class PantallaPrincipal {
+public class InterfazGrafica {
 
 	private JFrame frame;
 	private JTextField txfNombre;
@@ -52,7 +55,7 @@ public class PantallaPrincipal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaPrincipal window = new PantallaPrincipal();
+					InterfazGrafica window = new InterfazGrafica();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +67,7 @@ public class PantallaPrincipal {
 	/**
 	 * Create the application.
 	 */
-	public PantallaPrincipal() {
+	public InterfazGrafica() {
 		initialize();
 	}
 
@@ -86,7 +89,7 @@ public class PantallaPrincipal {
 		MenuPrincipal.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("D:\\Desktop\\wordle_og_1200x630.png"));
+		lblNewLabel.setIcon(new ImageIcon("../wordle_og_1200x630.png"));
 		lblNewLabel.setBounds(115, 11, 572, 147);
 		MenuPrincipal.add(lblNewLabel);
 
@@ -157,6 +160,8 @@ public class PantallaPrincipal {
 
 				// 2. Le decimos que muestre el panel que se llama "Tutorial"
 				cl.show(panel, "Tutorial");
+				Jugador jugador = new Jugador(txfNombre.getText());
+
 			}
 		});
 		btnSiguiente.setBackground(new Color(119, 196, 172));
@@ -355,9 +360,15 @@ public class PantallaPrincipal {
 		lblNewLabel_2.setBounds(10, 11, 169, 21);
 		Juego.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("Wordle");
+		JLabel lblNewLabel_3 = new JLabel("W-ungs-dle");
 		lblNewLabel_3.setFont(new Font("Luckiest Guy", Font.BOLD, 45));
 		lblNewLabel_3.setBounds(304, 11, 432, 54);
 		Juego.add(lblNewLabel_3);
+
+	}
+
+	public String devolverNombrePersonaje() {
+		System.out.println(txfNombre);
+		return txfNombre.getText();
 	}
 }
