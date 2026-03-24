@@ -209,11 +209,9 @@ public class InterfazGrafica {
 		panel.add(Tutorial, "Tutorial");
 
 		scrollPane = new JScrollPane();
-
-		scrollPane.setBounds(39, 27, 716, 400);
+		scrollPane.setBounds(41, 33, 716, 400);
 		JButton btnSiguienteTutorial = new JButton("Siguiente");
 		btnSiguienteTutorial.setBounds(292, 469, 216, 39);
-
 		Tutorial.setLayout(null);
 
 		scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -221,14 +219,10 @@ public class InterfazGrafica {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		Tutorial.add(scrollPane);
 
-		JTextArea txtrdeQuTrata = new JTextArea();
-		txtrdeQuTrata.setWrapStyleWord(true);
-		txtrdeQuTrata.setTabSize(7);
-		txtrdeQuTrata.setLineWrap(true);
-		txtrdeQuTrata.setFont(new Font("Luckiest Guy", Font.PLAIN, 13));
-		txtrdeQuTrata.setText(
-				"¿De qué trata Wordle?\nEl objetivo es adivinar una palabra oculta de 5 letras en un máximo de 6 intentos. Cada vez que envías una palabra, el juego te da pistas usando colores.\r\nEsta es la parte más importante. Después de cada intento, el color de los cuadritos cambiará:\r\n\r\n🟩 Verde\t¡Acierto total!\tLa letra está en la palabra y en la posición correcta.\r\n🟨 Amarillo,\tCasi...\tLa letra sí está en la palabra, pero en una posición diferente.\r\n⬛ Gris\tError\tLa letra no forma parte de la palabra oculta.\r\n\r\nReglas paso a paso\n:\r\nEscribe una palabra válida: Debes ingresar una palabra que exista (de 5 letras). \r\nNo puedes poner \"AAAAA\".\r\n\n\nPresiona Enter: Al enviar la palabra, los cuadritos se darán vuelta para mostrarte los colores.\r\n\r\n\n\nUsa las pistas: \n\n\r\nSi una letra salió gris, no la vuelvas a usar en el siguiente intento.\r\n\n\nSi salió amarilla, cámbiala de lugar.\n\n\r\nSi salió verde, déjala exactamente donde está.\r\n\r\n\n\nGanar o Perder: \n\nGanas si consigues que las 5 letras se pongan verdes antes del 6to intento.\n\nPierdes si agotas los 6 intentos sin adivinarla.\n\n\r\n\r\n🚀 Ejemplo de una partida:  \nImagina que la palabra oculta es \"TIGRE\":\n\n1er Intento: Escribes PERRO\n\nP (Gris), E (Amarillo), R (Verde), R (Gris), O (Gris).\n\nPista: Ya sabes que la R va en la tercera posición y que la E está en la palabra pero no ahí.\n\n2do Intento: Escribes TIGRE\n\nT (Verde), I (Verde), G (Verde), R (Verde), E (Verde).\n\n¡VICTORIA! 🏆\r\n");
-		scrollPane.setViewportView(txtrdeQuTrata);
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(
+				"D:\\Desktop\\TP1-Progra3-main\\src\\recursos\\imagenes\\177286dc-313a-4708-afc6-d2f321a0c71c.png"));
+		scrollPane.setViewportView(lblNewLabel_4);
 
 		btnSiguienteTutorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
