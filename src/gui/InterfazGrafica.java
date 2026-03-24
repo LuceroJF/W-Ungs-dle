@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import java.awt.Adjustable;
 import java.awt.BorderLayout;
 import java.awt.ScrollPane;
 import java.awt.Panel;
@@ -22,6 +24,8 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
@@ -33,6 +37,8 @@ import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DropMode;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -42,11 +48,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Component;
 
 public class InterfazGrafica {
 
 	private JFrame frame;
 	private JTextField txfNombre;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -76,6 +84,7 @@ public class InterfazGrafica {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+
 		frame.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
@@ -163,10 +172,16 @@ public class InterfazGrafica {
 
 				// 2. Le decimos que muestre el panel que se llama "Tutorial"
 				cl.show(panel, "Tutorial");
+				// Crea el jugador con el nombre introducido
 				Jugador jugador = new Jugador(txfNombre.getText());
-
+				System.out.println(jugador.mostrarNombreJugador());
+				// Forzamos al scroll a subir ni bien mostramos la pantalla
+				SwingUtilities.invokeLater(() -> {
+					scrollPane.getVerticalScrollBar().setValue(0);
+				});
 			}
 		});
+
 		btnSiguiente.setBackground(new Color(119, 196, 172));
 		btnSiguiente.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
 		btnSiguiente.setBounds(94, 233, 216, 39);
@@ -186,34 +201,42 @@ public class InterfazGrafica {
 		Tutorial.setName("Tutorial");
 		Tutorial.setToolTipText("");
 		panel.add(Tutorial, "Tutorial");
+
+		scrollPane = new JScrollPane();
+
+		scrollPane.setBounds(39, 27, 716, 400);
+		JButton btnSiguienteTutorial = new JButton("Siguiente");
+		btnSiguienteTutorial.setBounds(292, 469, 216, 39);
+
 		Tutorial.setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 27, 716, 400);
+		scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+		scrollPane.setEnabled(false);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		Tutorial.add(scrollPane);
 
 		JTextArea txtrdeQuTrata = new JTextArea();
+		txtrdeQuTrata.setWrapStyleWord(true);
+		txtrdeQuTrata.setTabSize(7);
+		txtrdeQuTrata.setLineWrap(true);
+		txtrdeQuTrata.setFont(new Font("Luckiest Guy", Font.PLAIN, 13));
 		txtrdeQuTrata.setText(
 				"¿De qué trata Wordle?\nEl objetivo es adivinar una palabra oculta de 5 letras en un máximo de 6 intentos. Cada vez que envías una palabra, el juego te da pistas usando colores.\r\nEsta es la parte más importante. Después de cada intento, el color de los cuadritos cambiará:\r\n\r\n🟩 Verde\t¡Acierto total!\tLa letra está en la palabra y en la posición correcta.\r\n🟨 Amarillo,\tCasi...\tLa letra sí está en la palabra, pero en una posición diferente.\r\n⬛ Gris\tError\tLa letra no forma parte de la palabra oculta.\r\n\r\nReglas paso a paso\n:\r\nEscribe una palabra válida: Debes ingresar una palabra que exista (de 5 letras). \r\nNo puedes poner \"AAAAA\".\r\n\n\nPresiona Enter: Al enviar la palabra, los cuadritos se darán vuelta para mostrarte los colores.\r\n\r\n\n\nUsa las pistas: \n\n\r\nSi una letra salió gris, no la vuelvas a usar en el siguiente intento.\r\n\n\nSi salió amarilla, cámbiala de lugar.\n\n\r\nSi salió verde, déjala exactamente donde está.\r\n\r\n\n\nGanar o Perder: \n\nGanas si consigues que las 5 letras se pongan verdes antes del 6to intento.\n\nPierdes si agotas los 6 intentos sin adivinarla.\n\n\r\n\r\n🚀 Ejemplo de una partida:  \nImagina que la palabra oculta es \"TIGRE\":\n\n1er Intento: Escribes PERRO\n\nP (Gris), E (Amarillo), R (Verde), R (Gris), O (Gris).\n\nPista: Ya sabes que la R va en la tercera posición y que la E está en la palabra pero no ahí.\n\n2do Intento: Escribes TIGRE\n\nT (Verde), I (Verde), G (Verde), R (Verde), E (Verde).\n\n¡VICTORIA! 🏆\r\n");
-		txtrdeQuTrata.setLineWrap(true);
-		txtrdeQuTrata.setWrapStyleWord(true);
 		scrollPane.setViewportView(txtrdeQuTrata);
 
-		JButton btnNewButton_1 = new JButton("Siguiente");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnSiguienteTutorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 1. Obtenemos el layout del panel padre (el que se llama 'panel')
 				CardLayout cl = (CardLayout) (panel.getLayout());
 
-				// 2. Le decimos que muestre el panel que se llama "Tutorial"
+				// 2. Le decimos que muestre el panel que se llama "Juego"
 				cl.show(panel, "Juego");
 			}
 		});
-		btnNewButton_1.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
-		btnNewButton_1.setBackground(new Color(119, 196, 172));
-		btnNewButton_1.setBounds(292, 469, 216, 39);
-		Tutorial.add(btnNewButton_1);
+
+		btnSiguienteTutorial.setFont(new Font("Luckiest Guy", Font.BOLD, 15));
+		btnSiguienteTutorial.setBackground(new Color(119, 196, 172));
+		Tutorial.add(btnSiguienteTutorial);
 
 		/////////////////////////////////////////////////////////////// JUEGO//////////////////////////////////////////////////////////////
 
