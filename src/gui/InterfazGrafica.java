@@ -31,6 +31,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import model.Juego;
 import model.Jugador;
 
 import javax.swing.ImageIcon;
@@ -174,7 +175,12 @@ public class InterfazGrafica {
 				cl.show(panel, "Tutorial");
 				// Crea el jugador con el nombre introducido
 				Jugador jugador = new Jugador(txfNombre.getText());
+				Juego juego = new Juego(comboBoxDificultad.getSelectedItem().toString(),
+						comboBoxLenguaje.getSelectedItem().toString());
 				System.out.println(jugador.mostrarNombreJugador());
+				System.out.println(comboBoxDificultad.getSelectedItem().toString());
+				System.out.println(comboBoxLenguaje.getSelectedItem().toString());
+				System.out.println(juego.getPalabraElegidaPc());
 				// Forzamos al scroll a subir ni bien mostramos la pantalla
 				SwingUtilities.invokeLater(() -> {
 					scrollPane.getVerticalScrollBar().setValue(0);

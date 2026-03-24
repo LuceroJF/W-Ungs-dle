@@ -14,21 +14,60 @@ public class Juego {
 	List<String> palabrasDificiles = new ArrayList<>();
 	
 	
-	public Juego(String dificultad) {
-	    palabrasFaciles.addAll(Arrays.asList("CASAS", "PERRO", "GATOS", "LIBRO", "PLANO", "MESAS", "SILLA", "MANOS", "RADIO", "ARBOL", "FLORES", "COCHE", "FRUTA", "JUEGO", "NUEVO", "CLASE", "MUNDO", "CAMPO", "PADRE", "MADRE"));
-	    palabrasMedias.addAll(Arrays.asList("BRISA", "VOCAL", "TIGRE", "FUEGO", "GOLPE", "BARCO", "QUESO", "HUEVO", "DULCE", "CALOR", "VERDE", "BARRO", "TRUCO", "NOCHE", "PLAZA", "SUENO", "BRAZO", "JUNTO", "LEJOS", "GRITO"));
-	    palabrasDificiles.addAll(Arrays.asList("AXIAL", "KIWIS", "ZORRO", "JABON", "CAUCE", "PIZCA", "REHEN", "QUINO", "NANDU", "OXIDO", "JUDIO", "MEZCLA", "FLUJO", "BODAS", "VORAZ", "GENIO", "EXITO", "BRUJO", "KOALA", "JEQUE"));
-	    
-	    Random rand = new Random();
+	public Juego(String dificultad, String idioma) {
+		cargarPalabras(dificultad,idioma);
+	}
+	
+	public void cargarPalabras(String dificultad, String idioma) {
+		cargarPalabrasConIdiomaElegido(idioma);
+		dificultadElegida(dificultad);
+	}
+	
+	public void cargarPalabrasConIdiomaElegido(String idioma) {
+		if(idioma.equals("Español - ES")) {
+			palabrasFaciles.addAll(Arrays.asList("CASAS", "PERRO", "GATOS", "LIBRO", "PLANO",
+					"MESAS", "SILLA", "MANOS", "RADIO", "ARBOL",
+					"FLORES", "COCHE", "FRUTA", "JUEGO", "NUEVO",
+					"CLASE", "MUNDO", "CAMPO", "PADRE", "MADRE"));
+		    palabrasMedias.addAll(Arrays.asList("BRISA", "VOCAL", "TIGRE", "FUEGO", "GOLPE",
+		    		"BARCO", "QUESO", "HUEVO", "DULCE", "CALOR",
+		    		"VERDE", "BARRO", "TRUCO", "NOCHE", "PLAZA",
+		    		"SUENO", "BRAZO", "JUNTO", "LEJOS", "GRITO"));
+		    palabrasDificiles.addAll(Arrays.asList("AXIAL", "KIWIS", "ZORRO", "JABON", "CAUCE",
+		    		"PIZCA", "REHEN", "QUINO", "NANDU", "OXIDO",
+		    		"JUDIO", "MEZCLA", "FLUJO", "BODAS", "VORAZ",
+		    		"GENIO", "EXITO", "BRUJO", "KOALA", "JEQUE"));
+		}
+		if(idioma.equals("Ingles - EN")) {
+			palabrasFaciles.addAll(Arrays.asList("HOUSE", "APPLE", "SMILE", "BREAD", "LIGHT", 
+				    "WATER", "NIGHT", "TABLE", "MUSIC", "GREEN", 
+				    "PHONE", "CLOUD", "HEART", "MONEY", "PARTY", 
+				    "PLANT", "STORY", "WORLD", "PAPER", "BEACH"));
+		    palabrasMedias.addAll(Arrays.asList("BLOCK", "FLAME", "GRAPE", "BRICK", "CLOCK", 
+		    	    "DREAM", "SHARK", "SNAKE", "TRAIN", "VOICE", 
+		    	    "BRAVE", "FRESH", "GHOST", "LUNCH", "SHAPE", 
+		    	    "TRUCK", "MOUSE", "PIANO", "STICK", "SWEET"));
+		    palabrasDificiles.addAll(Arrays.asList("JAZZY", "PROXY", "WHACK", "QUART", "KNACK", 
+		    	    "ZONAL", "FJORD", "LYNCH", "MYTHS", "VIXEN", 
+		    	    "WALTZ", "BLITZ", "JOKER", "KYLIX", "PIXIE", 
+		    	    "QUIRK", "SWIRL", "TOXIC", "YACHT", "ZEBRA"));
+		}
+	}
+	public void dificultadElegida(String dificultad) {
+		Random rand = new Random();
 	    int indiceAleatorio = rand.nextInt(palabrasFaciles.size());
-	    if(dificultad == "facil") {
+	    
+	    if(dificultad == "Facil - Easy") {
 	    	palabraElegidaPc = palabrasFaciles.get(indiceAleatorio);
 	    }
-	    if(dificultad == "medio") {
+	    if(dificultad == "Medio - Medium") {
 	    	palabraElegidaPc = palabrasMedias.get(indiceAleatorio);
 	    }
-	    if(dificultad == "dificil") {
+	    if(dificultad == "Dificil - Hard") {
 	    	palabraElegidaPc = palabrasDificiles.get(indiceAleatorio);
 	    }
+	}
+	public String getPalabraElegidaPc() {
+		return palabraElegidaPc;
 	}
 }
