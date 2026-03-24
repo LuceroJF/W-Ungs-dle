@@ -180,7 +180,7 @@ public class InterfazGrafica {
 				System.out.println(jugador.mostrarNombreJugador());
 				System.out.println(comboBoxDificultad.getSelectedItem().toString());
 				System.out.println(comboBoxLenguaje.getSelectedItem().toString());
-				System.out.println(juego.getPalabraElegidaPc());
+				System.out.println(juego.getPalabraSecreta());
 				// Forzamos al scroll a subir ni bien mostramos la pantalla
 				SwingUtilities.invokeLater(() -> {
 					scrollPane.getVerticalScrollBar().setValue(0);
@@ -247,16 +247,19 @@ public class InterfazGrafica {
 		/////////////////////////////////////////////////////////////// JUEGO//////////////////////////////////////////////////////////////
 
 		JPanel Juego = new JPanel();
+		Juego.setVisible(false);
 		panel.add(Juego, "Juego");
 		Juego.setLayout(null);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(177, 222, 208));
-		panel_1.setBounds(187, 63, 434, 411);
+		panel_1.setBounds(187, 63, 434, 393);
 		Juego.add(panel_1);
 		panel_1.setLayout(null);
 
 		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setVisible(false);
+		formattedTextField.setEnabled(false);
 		formattedTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -268,124 +271,178 @@ public class InterfazGrafica {
 		panel_1.add(formattedTextField);
 
 		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1.setVisible(false);
 		formattedTextField_1.setEditable(false);
 		formattedTextField_1.setBounds(126, 28, 53, 48);
 		panel_1.add(formattedTextField_1);
 
 		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
+		formattedTextField_2.setVisible(false);
 		formattedTextField_2.setEditable(false);
 		formattedTextField_2.setBounds(189, 28, 53, 48);
 		panel_1.add(formattedTextField_2);
 
 		JFormattedTextField formattedTextField_3 = new JFormattedTextField();
+		formattedTextField_3.setVisible(false);
 		formattedTextField_3.setEditable(false);
 		formattedTextField_3.setBounds(252, 28, 53, 48);
 		panel_1.add(formattedTextField_3);
 
 		JFormattedTextField formattedTextField_4 = new JFormattedTextField();
+		formattedTextField_4.setVisible(false);
 		formattedTextField_4.setEditable(false);
 		formattedTextField_4.setBounds(315, 28, 53, 48);
 		panel_1.add(formattedTextField_4);
 
 		JFormattedTextField formattedTextField_5 = new JFormattedTextField();
+		formattedTextField_5.setVisible(false);
 		formattedTextField_5.setEditable(false);
 		formattedTextField_5.setBounds(63, 82, 53, 48);
 		panel_1.add(formattedTextField_5);
 
 		JFormattedTextField formattedTextField_1_1 = new JFormattedTextField();
+		formattedTextField_1_1.setVisible(false);
 		formattedTextField_1_1.setEditable(false);
 		formattedTextField_1_1.setBounds(126, 82, 53, 48);
 		panel_1.add(formattedTextField_1_1);
 
 		JFormattedTextField formattedTextField_2_1 = new JFormattedTextField();
+		formattedTextField_2_1.setVisible(false);
 		formattedTextField_2_1.setEditable(false);
 		formattedTextField_2_1.setBounds(189, 82, 53, 48);
 		panel_1.add(formattedTextField_2_1);
 
 		JFormattedTextField formattedTextField_3_1 = new JFormattedTextField();
+		formattedTextField_3_1.setVisible(false);
 		formattedTextField_3_1.setEditable(false);
 		formattedTextField_3_1.setBounds(252, 82, 53, 48);
 		panel_1.add(formattedTextField_3_1);
 
 		JFormattedTextField formattedTextField_4_1 = new JFormattedTextField();
+		formattedTextField_4_1.setVisible(false);
 		formattedTextField_4_1.setEditable(false);
 		formattedTextField_4_1.setBounds(315, 82, 53, 48);
 		panel_1.add(formattedTextField_4_1);
 
 		JFormattedTextField formattedTextField_6 = new JFormattedTextField();
+		formattedTextField_6.setVisible(false);
 		formattedTextField_6.setEditable(false);
 		formattedTextField_6.setBounds(63, 138, 53, 48);
 		panel_1.add(formattedTextField_6);
 
 		JFormattedTextField formattedTextField_1_2 = new JFormattedTextField();
+		formattedTextField_1_2.setVisible(false);
 		formattedTextField_1_2.setEditable(false);
 		formattedTextField_1_2.setBounds(126, 138, 53, 48);
 		panel_1.add(formattedTextField_1_2);
 
 		JFormattedTextField formattedTextField_2_2 = new JFormattedTextField();
+		formattedTextField_2_2.setVisible(false);
 		formattedTextField_2_2.setEditable(false);
 		formattedTextField_2_2.setBounds(189, 138, 53, 48);
 		panel_1.add(formattedTextField_2_2);
 
 		JFormattedTextField formattedTextField_3_2 = new JFormattedTextField();
+		formattedTextField_3_2.setVisible(false);
 		formattedTextField_3_2.setEditable(false);
 		formattedTextField_3_2.setBounds(252, 138, 53, 48);
 		panel_1.add(formattedTextField_3_2);
 
 		JFormattedTextField formattedTextField_4_2 = new JFormattedTextField();
+		formattedTextField_4_2.setVisible(false);
 		formattedTextField_4_2.setEditable(false);
 		formattedTextField_4_2.setBounds(315, 138, 53, 48);
 		panel_1.add(formattedTextField_4_2);
 
 		JFormattedTextField formattedTextField_7 = new JFormattedTextField();
+		formattedTextField_7.setVisible(false);
 		formattedTextField_7.setEditable(false);
 		formattedTextField_7.setBounds(63, 194, 53, 48);
 		panel_1.add(formattedTextField_7);
 
 		JFormattedTextField formattedTextField_1_3 = new JFormattedTextField();
+		formattedTextField_1_3.setVisible(false);
 		formattedTextField_1_3.setEditable(false);
 		formattedTextField_1_3.setBounds(126, 194, 53, 48);
 		panel_1.add(formattedTextField_1_3);
 
 		JFormattedTextField formattedTextField_2_3 = new JFormattedTextField();
+		formattedTextField_2_3.setVisible(false);
 		formattedTextField_2_3.setEditable(false);
 		formattedTextField_2_3.setBounds(189, 194, 53, 48);
 		panel_1.add(formattedTextField_2_3);
 
 		JFormattedTextField formattedTextField_3_3 = new JFormattedTextField();
+		formattedTextField_3_3.setVisible(false);
 		formattedTextField_3_3.setEditable(false);
 		formattedTextField_3_3.setBounds(252, 194, 53, 48);
 		panel_1.add(formattedTextField_3_3);
 
 		JFormattedTextField formattedTextField_4_3 = new JFormattedTextField();
+		formattedTextField_4_3.setVisible(false);
 		formattedTextField_4_3.setEditable(false);
 		formattedTextField_4_3.setBounds(315, 194, 53, 48);
 		panel_1.add(formattedTextField_4_3);
 
 		JFormattedTextField formattedTextField_8 = new JFormattedTextField();
+		formattedTextField_8.setVisible(false);
 		formattedTextField_8.setEditable(false);
 		formattedTextField_8.setBounds(63, 251, 53, 48);
 		panel_1.add(formattedTextField_8);
 
 		JFormattedTextField formattedTextField_1_4 = new JFormattedTextField();
+		formattedTextField_1_4.setVisible(false);
 		formattedTextField_1_4.setEditable(false);
 		formattedTextField_1_4.setBounds(126, 251, 53, 48);
 		panel_1.add(formattedTextField_1_4);
 
 		JFormattedTextField formattedTextField_2_4 = new JFormattedTextField();
+		formattedTextField_2_4.setVisible(false);
 		formattedTextField_2_4.setEditable(false);
 		formattedTextField_2_4.setBounds(189, 251, 53, 48);
 		panel_1.add(formattedTextField_2_4);
 
 		JFormattedTextField formattedTextField_3_4 = new JFormattedTextField();
+		formattedTextField_3_4.setVisible(false);
 		formattedTextField_3_4.setEditable(false);
 		formattedTextField_3_4.setBounds(252, 251, 53, 48);
 		panel_1.add(formattedTextField_3_4);
 
 		JFormattedTextField formattedTextField_4_4 = new JFormattedTextField();
+		formattedTextField_4_4.setVisible(false);
 		formattedTextField_4_4.setEditable(false);
 		formattedTextField_4_4.setBounds(315, 251, 53, 48);
 		panel_1.add(formattedTextField_4_4);
+
+		JFormattedTextField formattedTextField_8_1 = new JFormattedTextField();
+		formattedTextField_8_1.setVisible(false);
+		formattedTextField_8_1.setEditable(false);
+		formattedTextField_8_1.setBounds(63, 310, 53, 48);
+		panel_1.add(formattedTextField_8_1);
+
+		JFormattedTextField formattedTextField_1_4_1 = new JFormattedTextField();
+		formattedTextField_1_4_1.setVisible(false);
+		formattedTextField_1_4_1.setEditable(false);
+		formattedTextField_1_4_1.setBounds(126, 310, 53, 48);
+		panel_1.add(formattedTextField_1_4_1);
+
+		JFormattedTextField formattedTextField_2_4_1 = new JFormattedTextField();
+		formattedTextField_2_4_1.setVisible(false);
+		formattedTextField_2_4_1.setEditable(false);
+		formattedTextField_2_4_1.setBounds(189, 310, 53, 48);
+		panel_1.add(formattedTextField_2_4_1);
+
+		JFormattedTextField formattedTextField_3_4_1 = new JFormattedTextField();
+		formattedTextField_3_4_1.setVisible(false);
+		formattedTextField_3_4_1.setEditable(false);
+		formattedTextField_3_4_1.setBounds(252, 310, 53, 48);
+		panel_1.add(formattedTextField_3_4_1);
+
+		JFormattedTextField formattedTextField_4_4_1 = new JFormattedTextField();
+		formattedTextField_4_4_1.setVisible(false);
+		formattedTextField_4_4_1.setEditable(false);
+		formattedTextField_4_4_1.setBounds(315, 310, 53, 48);
+		panel_1.add(formattedTextField_4_4_1);
 
 		JLabel lblNewLabel_2 = new JLabel("PUNTAJE: ");
 		lblNewLabel_2.setFont(new Font("Luckiest Guy", Font.BOLD, 20));

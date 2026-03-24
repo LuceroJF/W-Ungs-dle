@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Juego {
 	String palabraIngresadaUsuario;
-	String palabraElegidaPc;
+	String palabraSecreta;
 	//Todas las listas tienen 20 palabras
 	List<String> palabrasFaciles = new ArrayList<>();
 	List<String> palabrasMedias = new ArrayList<>();
@@ -15,10 +15,10 @@ public class Juego {
 	
 	
 	public Juego(String dificultad, String idioma) {
-		cargarPalabras(dificultad,idioma);
+		cargarPalabraSecreta(dificultad,idioma);
 	}
 	
-	public void cargarPalabras(String dificultad, String idioma) {
+	public void cargarPalabraSecreta(String dificultad, String idioma) {
 		cargarPalabrasConIdiomaElegido(idioma);
 		dificultadElegida(dificultad);
 	}
@@ -58,16 +58,18 @@ public class Juego {
 	    int indiceAleatorio = rand.nextInt(palabrasFaciles.size());
 	    
 	    if(dificultad == "Facil - Easy") {
-	    	palabraElegidaPc = palabrasFaciles.get(indiceAleatorio);
+	    	palabraSecreta = palabrasFaciles.get(indiceAleatorio);
 	    }
 	    if(dificultad == "Medio - Medium") {
-	    	palabraElegidaPc = palabrasMedias.get(indiceAleatorio);
+	    	palabraSecreta = palabrasMedias.get(indiceAleatorio);
 	    }
 	    if(dificultad == "Dificil - Hard") {
-	    	palabraElegidaPc = palabrasDificiles.get(indiceAleatorio);
+	    	palabraSecreta = palabrasDificiles.get(indiceAleatorio);
 	    }
 	}
-	public String getPalabraElegidaPc() {
-		return palabraElegidaPc;
+	
+	/////////////////////////////////////////////////////////////////////////////////TEST///////////////////////////////////////////////////////////////////////////////////
+	public String getPalabraSecreta() {
+		return palabraSecreta;
 	}
 }
