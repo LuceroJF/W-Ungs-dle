@@ -72,4 +72,13 @@ public class Juego {
 	public String getPalabraSecreta() {
 		return palabraSecreta;
 	}
+	public void setPalabraSeleccionada(String palabraSeleccionada) {
+        palabraIngresadaUsuario = palabraSeleccionada; 
+
+    }
+
+    public String getPalabraSeleccionada() {
+        return palabraIngresadaUsuario;
+    }
+    
 }
