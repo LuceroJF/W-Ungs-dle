@@ -61,7 +61,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Component;
 
-
 public class InterfazGrafica {
 
 	private JFrame frame;
@@ -71,7 +70,6 @@ public class InterfazGrafica {
 	private Jugador jugador;
 	private JTextField textField;
 
-	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -85,11 +83,9 @@ public class InterfazGrafica {
 		});
 	}
 
-
 	public InterfazGrafica() {
 		initialize();
 	}
-
 
 	private void initialize() {
 		frame = new JFrame();
@@ -98,8 +94,8 @@ public class InterfazGrafica {
 
 		JPanel panel = new JPanel();
 		frame.setSize(800, 600);
-		frame.setLocationRelativeTo(null); 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.setBounds(0, 0, 791, 553);
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new CardLayout(0, 0));
@@ -110,7 +106,8 @@ public class InterfazGrafica {
 		MenuPrincipal.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("D:\\Eclipse\\Programacion 3\\src\\recursos\\imagenes\\wordle_og_1200x630.png"));
+		lblNewLabel
+				.setIcon(new ImageIcon(InterfazGrafica.class.getResource("/recursos/imagenes/wordle_og_1200x630.png")));
 		lblNewLabel.setBounds(115, 11, 572, 147);
 		MenuPrincipal.add(lblNewLabel);
 
@@ -228,7 +225,8 @@ public class InterfazGrafica {
 		Tutorial.add(scrollPane);
 
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("D:\\Eclipse\\Programacion 3\\src\\recursos\\imagenes\\1aef2b2f-6fb1-42f3-b004-716abbd618dd.png"));
+		lblNewLabel_4.setIcon(new ImageIcon(
+				InterfazGrafica.class.getResource("/recursos/imagenes/1aef2b2f-6fb1-42f3-b004-716abbd618dd.png")));
 		scrollPane.setViewportView(lblNewLabel_4);
 
 		btnSiguienteTutorial.addActionListener(new ActionListener() {
@@ -257,9 +255,9 @@ public class InterfazGrafica {
 		panel_1.setBounds(187, 63, 482, 393);
 		Juego.add(panel_1);
 		// panel_1.setLayout(null);
-		
-		final int[] filaActual = {0}; 
-		final int[] colActual = {0};
+
+		final int[] filaActual = { 0 };
+		final int[] colActual = { 0 };
 
 		JLabel[][] casillas = new JLabel[6][5];
 
@@ -278,26 +276,25 @@ public class InterfazGrafica {
 
 				panel_1.add(label);
 			}
-			
-			
+
 		}
 		for (char c = 'A'; c <= 'Z'; c++) {
-            String key = String.valueOf(c);
+			String key = String.valueOf(c);
 
-            panel_1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), key);
+			panel_1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), key);
 
-            panel_1.getActionMap().put(key, new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println(key);
-                    if (colActual[0] < 5) {
-                        casillas[filaActual[0]][colActual[0]].setText(key);
-                        colActual[0]++;
-                    }
-                    
-                }
-            });
-        }
+			panel_1.getActionMap().put(key, new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println(key);
+					if (colActual[0] < 5) {
+						casillas[filaActual[0]][colActual[0]].setText(key);
+						colActual[0]++;
+					}
+
+				}
+			});
+		}
 
 		JLabel lblNewLabel_2 = new JLabel("PUNTAJE: ");
 		lblNewLabel_2.setFont(new Font("Luckiest Guy", Font.BOLD, 20));
@@ -308,7 +305,6 @@ public class InterfazGrafica {
 		lblNewLabel_3.setFont(new Font("Luckiest Guy", Font.BOLD, 45));
 		lblNewLabel_3.setBounds(304, 11, 432, 54);
 		Juego.add(lblNewLabel_3);
-		
 
 	}
 }
