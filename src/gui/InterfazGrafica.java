@@ -60,7 +60,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Component;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 
 public class InterfazGrafica {
 
@@ -308,7 +308,6 @@ public class InterfazGrafica {
 		lblNewLabel_3.setFont(new Font("Luckiest Guy", Font.BOLD, 45));
 		lblNewLabel_3.setBounds(304, 11, 432, 54);
 		Juego.add(lblNewLabel_3);
-		Juego.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_1, lblNewLabel_2, lblNewLabel_3}));
 		
 
 	}
