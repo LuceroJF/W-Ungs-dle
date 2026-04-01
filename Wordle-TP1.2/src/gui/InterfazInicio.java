@@ -234,6 +234,7 @@ public class InterfazInicio
 		return frame;
 	}
 
+	
 	public void setFrame(JFrame frame)
 	{
 		this.frame = frame;
