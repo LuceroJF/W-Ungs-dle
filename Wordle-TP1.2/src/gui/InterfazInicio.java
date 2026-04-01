@@ -36,26 +36,6 @@ public class InterfazInicio
 	private JFrame frame;
 	private JTextField txtNombre;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					InterfazInicio window = new InterfazInicio();
-					window.frame.setVisible(true);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -79,55 +59,55 @@ public class InterfazInicio
 	 */
 	private void initialize()
 	{
-		frame = new JFrame();
-		frame.setSize(800, 600);
-		frame.getContentPane().setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		frame.getContentPane().setLayout(null);
+		setFrame(new JFrame());
+		getFrame().setSize(800, 600);
+		getFrame().getContentPane().setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		getFrame().getContentPane().setLayout(null);
 		
 		JLabel logo = new JLabel("New label");
 		logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
 		logo.setBounds(190, 41, 598, 175);
-		frame.getContentPane().add(logo);
+		getFrame().getContentPane().add(logo);
 		
 		JLabel etiquetaNombre = new JLabel("Nombre / Name:");
 		etiquetaNombre.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		etiquetaNombre.setBounds(367, 267, 130, 29);
-		frame.getContentPane().add(etiquetaNombre);
+		getFrame().getContentPane().add(etiquetaNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		txtNombre.setBounds(530, 267, 150, 29);
-		frame.getContentPane().add(txtNombre);
+		getFrame().getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		JLabel etiquetaIdioma = new JLabel("Idioma / Language:");
 		etiquetaIdioma.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		etiquetaIdioma.setBounds(361, 318, 136, 29);
-		frame.getContentPane().add(etiquetaIdioma);
+		getFrame().getContentPane().add(etiquetaIdioma);
 		
 		JComboBox idioma = new JComboBox();
 		idioma.setModel(new DefaultComboBoxModel(new String[] {"Espa\u00F1ol - ES", "English - EN"}));
 		idioma.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		idioma.setBounds(530, 318, 150, 29);
-		frame.getContentPane().add(idioma);
+		getFrame().getContentPane().add(idioma);
 		
 		JLabel etiquetaDificultad = new JLabel("Dificultad / Difficulty:");
 		etiquetaDificultad.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		etiquetaDificultad.setBounds(339, 372, 158, 29);
-		frame.getContentPane().add(etiquetaDificultad);
+		getFrame().getContentPane().add(etiquetaDificultad);
 		
 		JComboBox dificultad = new JComboBox();
 		dificultad.setModel(new DefaultComboBoxModel(new String[] {"Facil / Easy", "Dificil / Hard"}));
 		dificultad.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		dificultad.setBounds(530, 372, 150, 29);
-		frame.getContentPane().add(dificultad);
+		getFrame().getContentPane().add(dificultad);
 		
 		JButton btnSiguiente = new JButton("Siguiente ->");
 		btnSiguiente.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		btnSiguiente.setBounds(621, 511, 130, 36);
 		btnSiguiente.setEnabled(false);
 
-		frame.getContentPane().add(btnSiguiente);
+		getFrame().getContentPane().add(btnSiguiente);
 		
 
 		// Valida si el usuario ingreso un nombre, para activar el boton Siguiente //
@@ -182,7 +162,7 @@ public class InterfazInicio
                 InterfazTutorial tutorial = new InterfazTutorial(nombre, palabraSecreta); 
                 tutorial.getFrame().setVisible(true);
 
-                frame.dispose();
+                getFrame().dispose();
             } 
             catch (Exception ex) 
             {
@@ -192,8 +172,8 @@ public class InterfazInicio
 		
 		
 		
-		frame.setBounds(100, 100, 1000, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().setBounds(100, 100, 1000, 800);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 	
@@ -247,5 +227,15 @@ public class InterfazInicio
         int idx = ThreadLocalRandom.current().nextInt(palabras.size());
         return palabras.get(idx);
     }
+   
+   // Funciones auxiliares
+	public JFrame getFrame() 
+	{
+		return frame;
+	}
 
+	public void setFrame(JFrame frame)
+	{
+		this.frame = frame;
+	}
 }
