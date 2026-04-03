@@ -22,6 +22,15 @@ public class Wordle
 		return this.palabra.compararPalabra(palabraUsuario);
 	}
 	
+	public int consultarPuntosUsuario()
+	{
+		return this.usuario.retornarPuntos();
+	}
+	
+	public int consultarIntentoUsuario()
+	{
+		return this.usuario.mostrarIntento();
+	}
 	
 	
 }

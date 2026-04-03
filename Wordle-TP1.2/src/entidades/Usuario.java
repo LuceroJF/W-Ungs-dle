@@ -21,14 +21,19 @@ public class Usuario
 	}
 
 
-	public int sumaPuntoLetraCoincideEnLugar()
+	public void sumaPuntoLetraCoincideEnLugar()
 	{
-		return this.punto += 3;
+		 this.punto += 3;
 	}
 	
-	public int sumaPuntoLetraExiste()
+	public void sumaPuntoLetraExiste()
 	{
-		return this.punto += 1;
+		this.punto += 1;
+	}
+	
+	public void aciertaPalabraCompleta()
+	{
+		this.punto += (3*5);
 	}
 	
 	public int restaPuntoLetraNoCoincide()
@@ -56,5 +61,6 @@ public class Usuario
 	{
 		return this.intento;
 	}
+	
 	
 }
