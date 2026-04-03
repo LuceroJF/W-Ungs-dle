@@ -72,7 +72,7 @@ public class InterfazTutorial
 		
 
 		JLabel etiquetaLogoTutorial = new JLabel("");
-		etiquetaLogoTutorial.setIcon(new ImageIcon(interfazJuego.class.getResource("/recursos/Logo.png")));
+		etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazJuego.class.getResource("/recursos/Logo.png")));
 		etiquetaLogoTutorial.setBounds(206, 23, 600, 150);
 		frame.getContentPane().add(etiquetaLogoTutorial);
 
@@ -99,7 +99,7 @@ public class InterfazTutorial
         {
             try 
             {
-                interfazJuego juego = new interfazJuego(this.usuario, this.palabraSecreta);
+                InterfazJuego juego = new InterfazJuego(this.usuario, this.palabraSecreta);
                 juego.getFrame().setVisible(true); // o tutorial.setVisible(true) según cómo la tengas hecha
                 
                 frame.dispose(); // opcional: cierra la ventana actual

@@ -47,20 +47,16 @@ import java.awt.CardLayout;
 import java.awt.Component;
 
 
-public class interfazJuego {
+public class InterfazJuego {
 
 	private JFrame frame;
-	private JTextField txfNombre;
-	private JScrollPane scrollPane;
 	private Usuario usuario;
-	private Palabra palabraSecreta;
 	private Wordle juego;
-	private JTextField textField;
 	private String palabraUsuario = "";
 	
 
 
-	public interfazJuego(Usuario usuario, Palabra palabra)
+	public InterfazJuego(Usuario usuario, Palabra palabra)
 	{
 		this.usuario = usuario;
 		this.juego = new Wordle(this.usuario, palabra);
@@ -143,7 +139,7 @@ public class interfazJuego {
 
 		JLabel etiquetaNombreJuego = new JLabel("Wordle");
 		etiquetaNombreJuego.setBounds(138, 9, 599, 96);
-		etiquetaNombreJuego.setIcon(new ImageIcon(interfazJuego.class.getResource("/recursos/Logo.png")));
+		etiquetaNombreJuego.setIcon(new ImageIcon(InterfazJuego.class.getResource("/recursos/Logo.png")));
 		etiquetaNombreJuego.setFont(new Font("Luckiest Guy", Font.BOLD, 25));
 		Wordle.add(etiquetaNombreJuego);
 
