@@ -63,24 +63,24 @@ public class InterfazTutorial
 		
 		if (usuario != null) 
 		{
-			JLabel nombreUsuario = new JLabel("Nombre: " + this.usuario.retornarNombre());
+			JLabel nombreUsuario = new JLabel("NOMBRE: " + this.usuario.retornarNombre());
 			nombreUsuario.setHorizontalAlignment(SwingConstants.LEFT);
 			nombreUsuario.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-			nombreUsuario.setBounds(30, 51, 200, 48);
+			nombreUsuario.setBounds(10, 11, 169, 21);
 			frame.getContentPane().add(nombreUsuario);
 		}
 		
 
 		JLabel etiquetaLogoTutorial = new JLabel("");
 		etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazJuego.class.getResource("/recursos/Logo.png")));
-		etiquetaLogoTutorial.setBounds(206, 23, 600, 150);
+		etiquetaLogoTutorial.setBounds(216, 24, 600, 150);
 		frame.getContentPane().add(etiquetaLogoTutorial);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane tutorialScroll = new JScrollPane();
-		tutorialScroll.setBounds(141, 201, 724, 437);
+		tutorialScroll.setBounds(141, 200, 724, 332);
 		frame.getContentPane().add(tutorialScroll);
 		
 		JLabel etiquetaTutorial = new JLabel("");
@@ -92,7 +92,7 @@ public class InterfazTutorial
 		btnSiguienteTutorial.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
 		btnSiguienteTutorial.setBounds(735, 676, 130, 36);
 		frame.getContentPane().add(btnSiguienteTutorial);
-		frame.setBounds(100, 100, 1000, 800);
+		frame.setBounds(0, 0, 1000, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
         btnSiguienteTutorial.addActionListener(e -> 

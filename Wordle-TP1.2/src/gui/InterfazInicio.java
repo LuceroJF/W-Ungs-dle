@@ -14,6 +14,8 @@ import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import entidades.Usuario;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
@@ -32,7 +34,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class InterfazInicio
 {
-
+	//private Usuario usuario; //prueba
 	private JFrame frame;
 	private JTextField txtNombre;
 
@@ -61,45 +63,46 @@ public class InterfazInicio
 	{
 		setFrame(new JFrame());
 		getFrame().setSize(800, 600);
+		//frame.setBounds(0, 0, 800,600);
 		getFrame().getContentPane().setFont(new Font("Luckiest Guy", Font.PLAIN, 11));
 		getFrame().getContentPane().setLayout(null);
 		
 		JLabel logo = new JLabel("New label");
 		logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
-		logo.setBounds(190, 41, 598, 175);
+		logo.setBounds(153, 41, 598, 175);
 		getFrame().getContentPane().add(logo);
 		
 		JLabel etiquetaNombre = new JLabel("Nombre / Name:");
 		etiquetaNombre.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-		etiquetaNombre.setBounds(367, 267, 130, 29);
+		etiquetaNombre.setBounds(329, 267, 130, 29);
 		getFrame().getContentPane().add(etiquetaNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-		txtNombre.setBounds(530, 267, 150, 29);
+		txtNombre.setBounds(480, 267, 150, 29);
 		getFrame().getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		JLabel etiquetaIdioma = new JLabel("Idioma / Language:");
 		etiquetaIdioma.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-		etiquetaIdioma.setBounds(361, 318, 136, 29);
+		etiquetaIdioma.setBounds(323, 318, 136, 29);
 		getFrame().getContentPane().add(etiquetaIdioma);
 		
 		JComboBox idioma = new JComboBox();
 		idioma.setModel(new DefaultComboBoxModel(new String[] {"Espa\u00F1ol - ES", "English - EN"}));
 		idioma.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-		idioma.setBounds(530, 318, 150, 29);
+		idioma.setBounds(480, 318, 150, 29);
 		getFrame().getContentPane().add(idioma);
 		
 		JLabel etiquetaDificultad = new JLabel("Dificultad / Difficulty:");
 		etiquetaDificultad.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-		etiquetaDificultad.setBounds(339, 372, 158, 29);
+		etiquetaDificultad.setBounds(301, 372, 158, 29);
 		getFrame().getContentPane().add(etiquetaDificultad);
 		
 		JComboBox dificultad = new JComboBox();
 		dificultad.setModel(new DefaultComboBoxModel(new String[] {"Facil / Easy", "Dificil / Hard"}));
 		dificultad.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
-		dificultad.setBounds(530, 372, 150, 29);
+		dificultad.setBounds(480, 372, 150, 29);
 		getFrame().getContentPane().add(dificultad);
 		
 		JButton btnSiguiente = new JButton("Siguiente ->");
@@ -145,6 +148,7 @@ public class InterfazInicio
             {
             	// Capturo el nombre del usuario.
             	String nombre = txtNombre.getText();
+            	//this.usuario = new Usuario(nombre); // prueba
                 
                 // Caputuro el idioma elegido por el usuario.
                 String idiomaElegido = (String)idioma.getSelectedItem();
@@ -160,6 +164,7 @@ public class InterfazInicio
                 
                                                 
                 InterfazTutorial tutorial = new InterfazTutorial(nombre, palabraSecreta); 
+                //InterfazTutorial tutorial = new InterfazTutorial(palabraSecreta); 
                 tutorial.getFrame().setVisible(true);
 
                 getFrame().dispose();
@@ -172,7 +177,7 @@ public class InterfazInicio
 		
 		
 		
-		getFrame().setBounds(100, 100, 1000, 800);
+		getFrame().setBounds(0, 0, 1000, 800);
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
