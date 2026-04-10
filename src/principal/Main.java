@@ -19,6 +19,7 @@ public class Main extends JFrame
 				{
 					Wungsdle wungsdle = new Wungsdle();
 					wungsdle.crearPalabra("Español - ES","Facil - Easy");
+					wungsdle.setIdiomaActual("Español - ES");
 					System.out.println(wungsdle.getPalabraSecreta());
 					InterfazInicio window = new InterfazInicio(wungsdle);
 					window.setVisible(true);

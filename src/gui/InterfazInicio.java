@@ -17,6 +17,8 @@ public class InterfazInicio extends JFrame {
 	private JFrame frame;
 	private Wungsdle wordle;
 	private String iniciarJuego = "";
+	private String configuracion = "";
+
 	
 	public InterfazInicio(Wungsdle wordle) {
 		this.wordle = wordle;
@@ -32,13 +34,11 @@ public class InterfazInicio extends JFrame {
 		Button btnTutorial = new Button();
 		Button btnConfig = new Button();
 		Button btnRanking = new Button();
-
-		btnInicio.setFont(new Font("Agency FB", Font.PLAIN, 12));
-
+		actualizarTextos();
 		///////////////////////////////////////////////////////// BOTONES///////////////////////////////////////////////////
 
-		
 		btnInicio.setLabel(iniciarJuego);
+		btnInicio.setFont(new Font("Agency FB", Font.PLAIN, 12));
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazJuego(accion);
@@ -51,7 +51,7 @@ public class InterfazInicio extends JFrame {
 			}
 
 		});
-		btnConfig.setLabel("Configuración");
+		btnConfig.setLabel(configuracion);
 		btnConfig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazConfiguracion(accion);
@@ -129,4 +129,20 @@ public class InterfazInicio extends JFrame {
 		ranking.setVisible(true);
 		ranking.setLocationRelativeTo(null);
 	}
+	public void actualizarTextos() {
+	    iniciarJuego=(wordle.getTextoBotonInicio());
+	    configuracion=(wordle.getTextoConfiguracion());
+	    
+	}
+	/// Este está duplicado para diferenciarlo del que empieza con el main (el de arriba) y el que es actualizado por la configuracion (este de abajo)
+	public void actualizarTextos(String nuevo) {
+	    iniciarJuego=(wordle.getTextoBotonInicio());
+		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wordle);
+		nuevaInterfazIdiomaActual.setVisible(true);
+		nuevaInterfazIdiomaActual.setLocationRelativeTo(null);
+		this.dispose();
+		
+	}
+	
+	
 }

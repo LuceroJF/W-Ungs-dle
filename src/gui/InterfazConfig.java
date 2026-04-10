@@ -16,8 +16,11 @@ public class InterfazConfig extends JFrame {
 
 	private JFrame frame;
 	private Wungsdle wordle;
-
 	private InterfazInicio menuPrincipal;
+	private String guardar="";
+	private String volver="";
+	private String idioma="";
+	private String dificultad="";
 
 	public InterfazConfig(InterfazInicio menu, Wungsdle wordle) {
 		this.menuPrincipal = menu;
@@ -46,13 +49,18 @@ public class InterfazConfig extends JFrame {
 			}
 
 		});
-
+        volver = wordle.getTextoBotonVolver();
+        btnVolver.setText(volver);
 		btnVolver.setBounds(722, 416, 289, 36);
 		panelConfiguracion.add(btnVolver);
 
+        idioma= wordle.getTextoIdioma();
+        btnIdioma.setText(idioma);
 		btnIdioma.setBounds(722, 120, 289, 22);
 		panelConfiguracion.add(btnIdioma);
 
+		dificultad=wordle.getTextoDificultad();
+		lblNewLabel_1.setText(dificultad);
 		lblNewLabel_1.setBounds(722, 196, 289, 25);
 		panelConfiguracion.add(lblNewLabel_1);
 
@@ -69,11 +77,14 @@ public class InterfazConfig extends JFrame {
 		this.getContentPane().add(panelConfiguracion, BorderLayout.CENTER);
 
 		JButton btnGuardar = new JButton("");
+		guardar=wordle.getTextoBotonGuardar();
+		btnGuardar.setText(guardar);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wordle.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),
 						comboBox_Dificultad.getSelectedItem().toString());
-
+                wordle.setIdiomaActual(comboBox_Idioma.getSelectedItem().toString());
+                
 				System.out.println(wordle.getPalabraSecreta());
 			}
 		});
@@ -85,8 +96,7 @@ public class InterfazConfig extends JFrame {
 	}
 
 	private void volverMenuPrincipal(ActionEvent accion) {
-		menuPrincipal.setVisible(true);
-		menuPrincipal.setLocationRelativeTo(null);
+		menuPrincipal.actualizarTextos("nuevo");
 		this.dispose();
 	}
 

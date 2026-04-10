@@ -31,6 +31,8 @@ public class InterfazWungsdle extends JFrame {
 	private boolean juegoTerminado = false;
 	private JTextField txtieldNombreUsuario;
 	private boolean liberarTeclado = false;
+	private String nombre ="";
+	private String comenzar="";
 
 	public InterfazWungsdle(Wungsdle wungsdle) {
 		this.wungsdle = wungsdle;
@@ -46,7 +48,8 @@ public class InterfazWungsdle extends JFrame {
 		JPanel panelVerde = new JPanel(new GridLayout(6, 5, 5, 5));
 		panelVerde.setBounds(110, 234, 482, 393);
 		JLabel[][] casillas = new JLabel[6][5];
-
+		comenzar = wungsdle.getTextoComenzarJuego();
+		nombre = wungsdle.getTextoIngresarNombre();
 		panelJuego.setVisible(true);
 		intentos.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		long tiempoInicio = System.currentTimeMillis();
@@ -62,13 +65,15 @@ public class InterfazWungsdle extends JFrame {
 		panelNombre.add(txtieldNombreUsuario);
 		txtieldNombreUsuario.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Ingresar Nombre");
+		JLabel lblNewLabel = new JLabel(nombre);
+
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		lblNewLabel.setBounds(334, 131, 290, 32);
 		panelNombre.add(lblNewLabel);
 
-		JButton btnComenzarJuego = new JButton("Comenzar Juego");
+		JButton btnComenzarJuego = new JButton(comenzar);
+		
 		btnComenzarJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wungsdle.asignarNombreUsuario(txtieldNombreUsuario.getText());
@@ -150,9 +155,11 @@ public class InterfazWungsdle extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (palabraUsuario.length() == 5) {
-
-					String[] resultado = wungsdle.evaluarIntento(palabraUsuario.toLowerCase());
+				//// Ahora además de verificar si lo que ingresa el usuario tiene 5 caracteres, verifica si dicha palabra existe entre las 
+				/// casi 2 mil palabras de los TXT (Codigo se encuentra al final de Wungsdle, idealmente hay que modificarlo, funciona pero es copia)
+				if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario, wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
+                    
+					String[] resultado = wungsdle.evaluarColorLetra(palabraUsuario.toLowerCase());
 
 					boolean acerto = true;
 

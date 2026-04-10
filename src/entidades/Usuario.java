@@ -68,7 +68,8 @@ public class Usuario
 	{
 		this.intento -= 1;
 	}
-	
+
+
 	
 	
 }

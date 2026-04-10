@@ -17,7 +17,8 @@ public class InterfazTutorial extends JFrame {
 	private InterfazInicio menuPrincipal;
 	private JFrame frame;
 	private Wungsdle wordle;
-
+    private String volver = "";
+	
 	public InterfazTutorial(InterfazInicio menu, Wungsdle wordle) {
 		menuPrincipal = menu;
 		this.wordle = wordle;
@@ -32,7 +33,8 @@ public class InterfazTutorial extends JFrame {
 		JScrollPane tutorialScroll = new JScrollPane();
 		JLabel etiquetaTutorial = new JLabel("");
 		JButton btnVolver = new JButton("");
-
+        volver = wordle.getTextoBotonVolver();
+		btnVolver.setText(volver);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				RegresarMenuPrincipal(accion);
@@ -44,14 +46,18 @@ public class InterfazTutorial extends JFrame {
 		tutorialScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		etiquetaTutorial.setAlignmentY(0.2f);
 		btnVolver.setBounds(686, 944, 263, 52);
-		btnVolver.setText("Volver");
 		tutorial.setLayout(null);
 		tutorial.add(etiquetaLogoTutorial);
-		etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Logo.png")));
-		tutorial.add(tutorialScroll);
-
 		tutorialScroll.setViewportView(etiquetaTutorial);
+		if(wordle.getIdiomaActual().startsWith("English")) {
+			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Logo.png")));
+			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/TutorialIngles.jpg")));
+		}
+		else {
+		etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/LogoEspaniol.jpg")));
 		etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Tutorial.png")));
+		}
+		tutorial.add(tutorialScroll);
 		tutorial.add(btnVolver);
 		btnVolver.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
 

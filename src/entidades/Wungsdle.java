@@ -13,7 +13,9 @@ public class Wungsdle
 {
 	private Usuario usuario;
 	private Palabra palabra; //
-	
+	private String palabraUsuario;
+	private String idiomaActual;
+	private String dificultadActual;
 	public Wungsdle()
 	{
 		this.usuario = new Usuario();
@@ -24,6 +26,8 @@ public class Wungsdle
 	public void crearPalabra(String idiomaElegido, String dificultadElegida) {
 		String rutaRecurso = rutaTxtSegunSeleccion(idiomaElegido, dificultadElegida);
 		palabra.setPalabra(palabraAleatoriaDesdeRecurso(rutaRecurso));
+		//Acá sigilosamente me robo la dificultad
+		dificultadActual=dificultadElegida;
 	}
 	
 	public void crearUsuario(String nombre) {
@@ -42,17 +46,15 @@ public class Wungsdle
 		return this.usuario.getIntento();
 	}
 	
-	
-	//descontar intento
+
 	public void descontarIntento() {
 		usuario.descontarIntento();
 	}
 	
 	
-	
-	//Metodo para verificar la palabra
-	public String[] evaluarIntento(String intento) 
+	public String[] evaluarColorLetra(String intento) 
 	{
+		palabraUsuario = intento;
 	    String palabraSecreta = palabra.devolverPalabra();
 	    String[] resultado = new String[5];
 
@@ -78,7 +80,7 @@ public class Wungsdle
 	    return resultado;
 	}
 	
-	//Para obtener la palabra secreta y mostarla en la pantalla final
+
 	public String getPalabraSecreta() {
 	    return palabra.devolverPalabra();
 	}
@@ -139,6 +141,136 @@ public class Wungsdle
 	public void asignarNombreUsuario(String text) {
 		usuario.setNombre(text);
 	}
+
+
+	public String devolverPalabraUsuario() {
+		return palabraUsuario;
+		
+	}
+	public void setIdiomaActual(String idiomaActual) {
+		this.idiomaActual=idiomaActual;
+		
+	}
+	
+	public String getIdiomaActual() {
+		return idiomaActual;
+	}
+	
+	public String getDificultadActual() {
+		return dificultadActual;
+	}
+
+	public String getTextoBotonInicio() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Start Game";
+	    }
+	    return "Iniciar Juego";
+	}
+	
+	public String getTextoBotonVolver() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Return";
+	    }
+	    return "Volver";
+	}
+
+	public String getTextoConfiguracion() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Configuration";
+	    }
+	    return "Configuración";
+	}
+	public String getTextoIdioma() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Select Language";
+	    }
+	    return "Seleccionar Idioma";
+	}
+	public String getTextoDificultad() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Select Difficulty";
+	    }
+	    return "Seleccionar Dificultad";
+	}
+	
+	public String getTextoIngresarNombre() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Enter your name";
+	    }
+	    return "Ingrese su nombre";
+	}
+	
+	public String getTextoComenzarJuego() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Start";
+	    }
+	    return "Comenzar";
+	}
+	
+	public String getTextoBotonGuardar() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Apply Configuration";
+	    }
+	    return "Aplicar Configuración";
+	}
+
+	
+	///////////////////////////////////////////////////////////////////////////////// T E S T I N G ///////////////////////////////////////////////////////////////////////////////
+	
+	
+	//Este hay que modificarlo porque la verdad es rarísimo, pero nada, en resumen lo que hace es verificar si la palabra que recibe está en los TXT
+	public boolean verificarSiExiste(String intento, String idioma, String dificultad) {
+	    String ruta = rutaTxtSegunSeleccion(idioma, dificultad);
+	    try (InputStream is = InterfazInicio.class.getResourceAsStream(ruta);
+	         BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+	        
+	        String linea;
+	        while ((linea = br.readLine()) != null) {
+	            if (linea.trim().equalsIgnoreCase(intento.trim())) {
+	                return true;
+	            }
+	        }
+	    } catch (Exception ex) {
+	        System.err.println("Error al validar palabra: " + ex.getMessage());
+	    }
+	    
+	    return false;
+	}
+	
+	
+	
+	///////////////////// V METODO DUPLICADO SOLO CON FINES DE TESTING V ////////////////////////////////////////////
+	public String[] evaluarColorLetra(String intento, String secretaTest) 
+	{
+		palabraUsuario = intento;
+	    String palabraSecreta = secretaTest;
+	    String[] resultado = new String[5];
+
+	    for (int i = 0; i < 5; i++) 
+	    {
+	        char letraIntento = intento.charAt(i);
+	        char letraSecreta = palabraSecreta.charAt(i);
+
+	        if (letraIntento == letraSecreta) 
+	        {
+	            resultado[i] = "VERDE";
+	        } 
+	        else if (palabraSecreta.contains(String.valueOf(letraIntento))) 
+	        {
+	            resultado[i] = "AMARILLO";
+	        } 
+	        else 
+	        {
+	            resultado[i] = "GRIS";
+	        }
+	    }
+
+	    return resultado;
+	}
+	///////////////////// ^ METODO DUPLICADO SOLO CON FINES DE TESTING  ^ ////////////////////////////////////////////
+
+
+
 
 
 }
