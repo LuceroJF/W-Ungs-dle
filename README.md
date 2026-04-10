@@ -7,13 +7,14 @@ La última actualización contiene cambios en todas las siguientes instancias;
 
 Explicación breve de cómo todo esto pasó a funcionar;
 - - Dentro de WUNGSDLE se encuentran métodos del estilo 
-   - - - 	public String getTextoComenzarJuego() {
-	             if (this.idiomaActual.startsWith("English")) {
-	                    return "Start";
-	             }
-	             return "Comenzar";
-	         }
-  - - - 
+- - - 	
+	public String getTextoIngresarNombre() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Enter your name";
+	    }
+	    return "Ingrese su nombre";
+	}
+- - - 
 - - Estos métodos simplemente le preguntan a la instancia de la clase de negocio ¿Cuál es el idioma actual del juego? y deciden acorde cuál será el STRING que le setea al botón que corresponda.
 
 - - Luego, y quizá más importante, es el código que se creó para la interfaz de inicio (el menú);
