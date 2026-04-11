@@ -77,7 +77,12 @@ public class InterfazInicio extends JFrame {
 
 		logo.setBounds(89, 5, 600, 315);
 		panel.add(logo);
-		logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
+		if(wordle.getIdiomaActual().startsWith("English")) {
+			logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
+		}
+		else {
+			logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
+		}
 
 		contenedorMenu.setBounds(99, 331, 592, 320);
 		panel.add(contenedorMenu);
