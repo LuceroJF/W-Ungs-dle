@@ -1,3 +1,0 @@
-jorge,25,13
-jorge,25,21
-jorge,25,6
