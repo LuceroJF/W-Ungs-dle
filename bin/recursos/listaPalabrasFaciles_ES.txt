@@ -64,7 +64,7 @@ bruto
 bueno
 bulto
 burla
-buscar
+busca
 caber
 cable
 cabra
@@ -262,7 +262,6 @@ grifo
 grito
 grupo
 guapo
-guardar
 gueto
 guion
 gusto
@@ -297,7 +296,6 @@ impar
 impar
 impon
 imtar
-indice
 indio
 infla
 ingle
@@ -369,7 +367,6 @@ marca
 marco
 marea
 marzo
-masa
 matar
 mayor
 mejor
@@ -380,7 +377,6 @@ metal
 meter
 metro
 miedo
-miel
 milag
 minas
 mirar
@@ -388,7 +384,6 @@ mismo
 mitad
 modal
 modas
-modo
 monje
 monte
 moral
@@ -432,12 +427,10 @@ olfat
 oliva
 ondas
 opera
-opinar
 orden
 orina
 oruga
 osado
-oscuro
 ostra
 otear
 ovulo
@@ -464,8 +457,6 @@ pedir
 pegar
 pelar
 pelos
-pena
-pensar
 peque
 perro
 pesar
@@ -495,9 +486,6 @@ prima
 primo
 profe
 prono
-prueba
-pueblo
-puerta
 punto
 quedo
 queso
@@ -526,7 +514,6 @@ rodar
 romer
 rompe
 ronda
-ropa
 roper
 rosal
 rotar
@@ -554,7 +541,6 @@ senda
 señal
 serie
 serio
-servir
 sesgo
 setas
 sexto
@@ -580,7 +566,6 @@ subir
 suela
 suero
 sufro
-sujeto
 sumar
 super
 surco
@@ -603,7 +588,6 @@ tenaz
 tener
 tenor
 tenso
-teoria
 termo
 terno
 texto
@@ -625,11 +609,9 @@ trapo
 trato
 trazo
 trece
-tren
 tribu
 trigo
 trino
-triste
 trozo
 truco
 tumba
@@ -651,9 +633,7 @@ valor
 vamos
 vapor
 varon
-vaso
 veces
-vecino
 vedar
 vejez
 velar
@@ -671,7 +651,6 @@ video
 vigia
 vigor
 villa
-vino
 viola
 vivir
 vocal
@@ -685,5 +664,4 @@ yerno
 yogur
 zafar
 zanja
-zapato
 zorro

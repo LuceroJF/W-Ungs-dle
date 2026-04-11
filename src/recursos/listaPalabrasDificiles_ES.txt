@@ -261,7 +261,6 @@ ardid
 ardor
 ardua
 arduo
-area
 areca
 arena
 arete
@@ -277,10 +276,8 @@ arija
 arilo
 arios
 arisa
-arista
 arite
 ariza
-arma
 armar
 armon
 arnes
@@ -396,7 +393,6 @@ azima
 azimo
 azoga
 azogo
-azor
 azota
 azote
 aztor

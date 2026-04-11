@@ -84,7 +84,7 @@ public class InterfazConfig extends JFrame {
 				wordle.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),
 						comboBox_Dificultad.getSelectedItem().toString());
                 wordle.setIdiomaActual(comboBox_Idioma.getSelectedItem().toString());
-                
+                wordle.alertValidacion("Configuración guardada correctamente");
 				System.out.println(wordle.getPalabraSecreta());
 			}
 		});

@@ -7,6 +7,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.swing.JOptionPane;
+
 import gui.InterfazInicio;
 
 public class Wungsdle 
@@ -16,10 +19,13 @@ public class Wungsdle
 	private String palabraUsuario;
 	private String idiomaActual;
 	private String dificultadActual;
+	
 	public Wungsdle()
 	{
-		this.usuario = new Usuario();
-		this.palabra = new Palabra();
+		usuario = new Usuario();
+		palabra = new Palabra();
+		idiomaActual = "Español - ES";
+		dificultadActual = "Facil - Easy";
 	}
 
 	
@@ -55,7 +61,7 @@ public class Wungsdle
 	public String[] evaluarColorLetra(String intento) 
 	{
 		palabraUsuario = intento;
-	    String palabraSecreta = palabra.devolverPalabra();
+	    String palabraSecreta = palabra.getPalabra();
 	    String[] resultado = new String[5];
 
 	    for (int i = 0; i < 5; i++) 
@@ -82,7 +88,7 @@ public class Wungsdle
 	
 
 	public String getPalabraSecreta() {
-	    return palabra.devolverPalabra();
+	    return palabra.getPalabra();
 	}
 	
 	public String rutaTxtSegunSeleccion(String idiomaElegido, String dificultadElegida) {
@@ -269,8 +275,16 @@ public class Wungsdle
 	}
 	///////////////////// ^ METODO DUPLICADO SOLO CON FINES DE TESTING  ^ ////////////////////////////////////////////
 
+	//////////////////////////////////////// METODOS DE UTILIDAD //////////////////////////////////////////
 
-
+	public void alertError(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Error",
+				JOptionPane.ERROR_MESSAGE);
+	}
+	public void alertValidacion(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Validación",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
 
 
 }

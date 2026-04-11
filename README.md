@@ -45,3 +45,13 @@ Explicación breve de cómo todo esto pasó a funcionar;
 - - -
 - - El motivo por el cual esto es necesario, es debido a que como las interfaces se inicializan en sí mismas, y una vez inicializadas no pueden "salir" de su bucle, para poder actualizar esta información
 - - es necesario deshacerse del original y crear una nueva instancia con el idioma seleccionado, que llega desde la interfaz de configuración. 
+
+
+	# Nuevos cambios
+
+* **Nueva Clase de Configuración Inicial**: Nos ayuda a que la configuración de inicio pueda replicarse tanto cuando reiniciamos el juego como cuando comenzamos.
+* **Valores por defecto**: Se agregó al constructor de `Wungsdle` el idioma y la dificultad por default.
+* **Función de Alertas**: Se creó una función centralizada para el manejo de alertas dentro de la clase `Wungsdle`.
+* **Control de flujo (Enter)**: La tecla Enter no se activa hasta que el usuario hace clic en "Iniciar Juego" después de ingresar su nombre.
+* **Gestión de memoria**: Ahora todas las pestañas se cierran correctamente al salir de ellas (uso de `dispose`).
+* **Mejoras visuales**: Se actualizaron y mejoraron las tipografías de la interfaz.

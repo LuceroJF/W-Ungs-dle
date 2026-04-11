@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -29,10 +31,10 @@ public class InterfazWungsdle extends JFrame {
 	private Wungsdle wungsdle;
 	private String palabraUsuario = "";
 	private boolean juegoTerminado = false;
-	private JTextField txtieldNombreUsuario;
+	private JTextField txfieldNombreUsuario;
 	private boolean liberarTeclado = false;
-	private String nombre ="";
-	private String comenzar="";
+	private String nombre = "";
+	private String comenzar = "";
 
 	public InterfazWungsdle(Wungsdle wungsdle) {
 		this.wungsdle = wungsdle;
@@ -56,14 +58,16 @@ public class InterfazWungsdle extends JFrame {
 
 		JPanel panelNombre = new JPanel();
 		panelNombre.setPreferredSize(new Dimension(300, 300));
-		panelNombre.setBounds(329, 344, 889, 461);
-		getContentPane().add(panelNombre, BorderLayout.NORTH);
+		panelNombre.setBounds(329, 344, 889, 484);
+		this.getContentPane().add(panelNombre, BorderLayout.NORTH);
 		panelNombre.setLayout(null);
 
-		txtieldNombreUsuario = new JTextField();
-		txtieldNombreUsuario.setBounds(189, 174, 564, 50);
-		panelNombre.add(txtieldNombreUsuario);
-		txtieldNombreUsuario.setColumns(10);
+		txfieldNombreUsuario = new JTextField();
+		txfieldNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txfieldNombreUsuario.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
+		txfieldNombreUsuario.setBounds(189, 174, 564, 50);
+		panelNombre.add(txfieldNombreUsuario);
+		txfieldNombreUsuario.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel(nombre);
 
@@ -73,17 +77,20 @@ public class InterfazWungsdle extends JFrame {
 		panelNombre.add(lblNewLabel);
 
 		JButton btnComenzarJuego = new JButton(comenzar);
-		
+		// Hasta que no se presione el boton de comenzar, el juego no escucha la tecla
+		// "Enter"
 		btnComenzarJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				wungsdle.asignarNombreUsuario(txtieldNombreUsuario.getText());
+				wungsdle.asignarNombreUsuario(txfieldNombreUsuario.getText());
 				liberarTeclado(e);
 				panelNombre.setVisible(false);
 				System.out.println(wungsdle.devolverNombreUsuario());
+				panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "enter");
 			}
 		});
+
 		btnComenzarJuego.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
-		btnComenzarJuego.setBounds(326, 279, 344, 40);
+		btnComenzarJuego.setBounds(306, 283, 344, 40);
 		panelNombre.add(btnComenzarJuego);
 
 		panelJuego.setBounds(451, 183, 679, 667);
@@ -106,6 +113,7 @@ public class InterfazWungsdle extends JFrame {
 		for (int fila = 0; fila < 6; fila++) {
 			for (int col = 0; col < 5; col++) {
 				JLabel label = new JLabel("", SwingConstants.CENTER);
+				label.setFont(new Font("Luckiest Guy", Font.BOLD, 25));
 				label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 				label.setOpaque(true);
 				label.setBackground(Color.WHITE);
@@ -117,13 +125,13 @@ public class InterfazWungsdle extends JFrame {
 		etiquetaNombreJuego.setIcon(new ImageIcon(InterfazWungsdle.class.getResource("/recursos/Logo.png")));
 		etiquetaNombreJuego.setFont(new Font("Luckiest Guy", Font.BOLD, 25));
 		panelJuego.add(etiquetaNombreJuego);
-		getContentPane().setLayout(null);
-		getContentPane()
-				.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelNombre, txtieldNombreUsuario,
+		this.getContentPane().setLayout(null);
+		this.getContentPane()
+				.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelNombre, txfieldNombreUsuario,
 						panelJuego, panelVerde, etiquetaNombreJuego, intentos, lblNewLabel, btnComenzarJuego }));
 
 		this.setBounds(0, 0, 1920, 1080);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// ================== TECLADO ==================
 
@@ -149,16 +157,18 @@ public class InterfazWungsdle extends JFrame {
 		}
 
 		// ================== ENTER ==================
-		panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "enter");
 
 		panelVerde.getActionMap().put("enter", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				//// Ahora además de verificar si lo que ingresa el usuario tiene 5 caracteres, verifica si dicha palabra existe entre las 
-				/// casi 2 mil palabras de los TXT (Codigo se encuentra al final de Wungsdle, idealmente hay que modificarlo, funciona pero es copia)
-				if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario, wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
-                    
+				//// Ahora además de verificar si lo que ingresa el usuario tiene 5 caracteres,
+				//// verifica si dicha palabra existe entre las
+				/// casi 2 mil palabras de los TXT (Codigo se encuentra al final de Wungsdle,
+				//// idealmente hay que modificarlo, funciona pero es copia)
+				if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario,
+						wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
+
 					String[] resultado = wungsdle.evaluarColorLetra(palabraUsuario.toLowerCase());
 
 					boolean acerto = true;
@@ -194,8 +204,8 @@ public class InterfazWungsdle extends JFrame {
 						palabraUsuario = "";
 
 						SwingUtilities.invokeLater(() -> {
-							InterfazFinal fin = new InterfazFinal(wungsdle.devolverNombreUsuario(),
-									wungsdle.getPalabraSecreta(), true, wungsdle);
+							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this,
+									wungsdle.devolverNombreUsuario(), wungsdle.getPalabraSecreta(), true, wungsdle);
 							fin.setVisible(true);
 
 						});
@@ -224,15 +234,16 @@ public class InterfazWungsdle extends JFrame {
 						panelVerde.getActionMap().clear();
 
 						SwingUtilities.invokeLater(() -> {
-							InterfazFinal fin = new InterfazFinal(wungsdle.devolverNombreUsuario(),
-									wungsdle.getPalabraSecreta(), false, wungsdle);
+							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this,
+									wungsdle.devolverNombreUsuario(), wungsdle.getPalabraSecreta(), false, wungsdle);
 							fin.setVisible(true);
 
 						});
 					}
+				} else {
+					wungsdle.alertError("Ingrese una palabra correcta");
 				}
 			}
-
 		});
 
 		// ================== BACKSPACE ==================

@@ -9,6 +9,8 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import entidades.ConfiguracionInicial;
 import entidades.Wungsdle;
 import java.awt.Component;
 
@@ -19,7 +21,6 @@ public class InterfazInicio extends JFrame {
 	private String iniciarJuego = "";
 	private String configuracion = "";
 
-	
 	public InterfazInicio(Wungsdle wordle) {
 		this.wordle = wordle;
 		crearInterfazInicio();
@@ -38,13 +39,14 @@ public class InterfazInicio extends JFrame {
 		///////////////////////////////////////////////////////// BOTONES///////////////////////////////////////////////////
 
 		btnInicio.setLabel(iniciarJuego);
-		btnInicio.setFont(new Font("Agency FB", Font.PLAIN, 12));
+		btnInicio.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazJuego(accion);
 			}
 		});
 		btnTutorial.setLabel("Tutorial");
+		btnTutorial.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnTutorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazTutorial(accion);
@@ -52,6 +54,7 @@ public class InterfazInicio extends JFrame {
 
 		});
 		btnConfig.setLabel(configuracion);
+		btnConfig.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnConfig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazConfiguracion(accion);
@@ -59,6 +62,7 @@ public class InterfazInicio extends JFrame {
 
 		});
 		btnRanking.setLabel("Ranking");
+		btnRanking.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnRanking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazRanking(accion);
@@ -116,33 +120,38 @@ public class InterfazInicio extends JFrame {
 		InterfazTutorial tutorial = new InterfazTutorial(this, this.wordle);
 		tutorial.setVisible(true);
 		tutorial.setLocationRelativeTo(null);
+		this.dispose();
 	}
 
 	private void visualizarInterfazConfiguracion(ActionEvent accion) {
 		InterfazConfig config = new InterfazConfig(this, this.wordle);
 		config.setVisible(true);
 		config.setLocationRelativeTo(null);
+		this.dispose();
 	}
 
 	private void visualizarInterfazRanking(ActionEvent accion) {
 		InterfazRanking ranking = new InterfazRanking(this, wordle);
 		ranking.setVisible(true);
 		ranking.setLocationRelativeTo(null);
+		this.dispose();
 	}
+
 	public void actualizarTextos() {
-	    iniciarJuego=(wordle.getTextoBotonInicio());
-	    configuracion=(wordle.getTextoConfiguracion());
-	    
+		iniciarJuego = (wordle.getTextoBotonInicio());
+		configuracion = (wordle.getTextoConfiguracion());
+
 	}
-	/// Este está duplicado para diferenciarlo del que empieza con el main (el de arriba) y el que es actualizado por la configuracion (este de abajo)
+
+	/// Este está duplicado para diferenciarlo del que empieza con el main (el de
+	/// arriba) y el que es actualizado por la configuracion (este de abajo)
 	public void actualizarTextos(String nuevo) {
-	    iniciarJuego=(wordle.getTextoBotonInicio());
+		iniciarJuego = (wordle.getTextoBotonInicio());
 		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wordle);
 		nuevaInterfazIdiomaActual.setVisible(true);
 		nuevaInterfazIdiomaActual.setLocationRelativeTo(null);
 		this.dispose();
-		
+
 	}
-	
-	
+
 }
