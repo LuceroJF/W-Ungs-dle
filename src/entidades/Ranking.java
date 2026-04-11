@@ -8,15 +8,6 @@ public class Ranking {
     // ================== OBTENER ARCHIVO ==================
     private static File obtenerArchivo() {
         File archivo = new File("puntajes.txt");
-
-        try {
-            if (!archivo.exists()) {
-                archivo.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         return archivo;
     }
 
