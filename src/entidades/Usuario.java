@@ -10,7 +10,6 @@ public class Usuario
 	
 	public Usuario()
 	{
-		this.nombre = "";
 		this.tiempoRespuesta = 0L;
 		this.intento = 6;
 		this.puntos = 0;
@@ -24,6 +23,9 @@ public class Usuario
 		this.puntos=0;
 	}
 
+	public void crearNombreUsuario(String nombre) {
+		this.nombre = nombre;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -77,10 +79,11 @@ public class Usuario
 
 	public void sumarPuntos(int i) {
 		this.puntos += i;
-		
 	}
 
-
+	public boolean estaVacioNombre() {
+		return nombre.isEmpty();
+	}
 	
 	
 }

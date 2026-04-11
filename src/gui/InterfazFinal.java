@@ -2,11 +2,11 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-
 import entidades.ConfiguracionInicial;
 import entidades.Wungsdle;
 
 public class InterfazFinal extends JFrame{
+	
 	private ConfiguracionInicial configuracionInicial;
 	private InterfazWungsdle interfazJuego;
 	private Wungsdle wungsdle;
@@ -35,13 +35,13 @@ public class InterfazFinal extends JFrame{
         this.add(titulo);
 
         //NOMBRE
-        JLabel nombre = new JLabel("Jugador: " + wungsdle.devolverNombreUsuario());
+        JLabel nombre = new JLabel("Jugador: " + wungsdle.getNombreUsuario());
         nombre.setBounds(180, 90, 300, 25);
         nombre.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         this.add(nombre);
 
         //Tiempo
-        JLabel tiempo = new JLabel("Tiempo: " + wungsdle.getTimeMilis(wungsdle.retornarTiempoUsuario()));
+        JLabel tiempo = new JLabel("Tiempo: " + wungsdle.getTimeMilis(wungsdle.getTiempoUsuario()));
         tiempo.setBounds(180, 120, 300, 25);
         tiempo.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         this.add(tiempo);

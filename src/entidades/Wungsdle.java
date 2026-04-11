@@ -4,12 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
-import javax.swing.JOptionPane;
-
+import java.util.*;
+import java.util.concurrent.*;
+import javax.swing.*;
 import gui.InterfazInicio;
 
 public class Wungsdle 
@@ -28,7 +25,6 @@ public class Wungsdle
 		dificultadActual = "Facil - Easy";
 	}
 
-	
 	public void crearPalabra(String idiomaElegido, String dificultadElegida) {
 		String rutaRecurso = rutaTxtSegunSeleccion(idiomaElegido, dificultadElegida);
 		palabra.setPalabra(palabraAleatoriaDesdeRecurso(rutaRecurso));
@@ -36,11 +32,9 @@ public class Wungsdle
 		dificultadActual=dificultadElegida;
 	}
 	
-	public void crearUsuario(String nombre) {
-		Usuario usuario = new Usuario(nombre);
+	public void crearNombreUsuario(String nombre) {
+		usuario.crearNombreUsuario(nombre);
 	}
-	
-	
 	
 	public boolean comparaPalabraUsuario(String palabraUsuario)
 	{
@@ -87,9 +81,7 @@ public class Wungsdle
 	}
 	
 
-	public String getPalabraSecreta() {
-	    return palabra.getPalabra();
-	}
+	
 	
 	public String rutaTxtSegunSeleccion(String idiomaElegido, String dificultadElegida) {
 		boolean esEspanol = (idiomaElegido != null) && idiomaElegido.startsWith("Español");
@@ -100,7 +92,8 @@ public class Wungsdle
 
 		return "/recursos/" + dif + "_" + lang + ".txt";
 	}
-
+	
+    //Elige una palabra random de los txt de palabrass
 	public String palabraAleatoriaDesdeRecurso(String rutaRecurso) {
 		List<String> palabras = new ArrayList<>();
 
@@ -155,7 +148,6 @@ public class Wungsdle
 	}
 	
 	
-	
 	///////////////////// V METODO DUPLICADO SOLO CON FINES DE TESTING V ////////////////////////////////////////////
 	public String[] evaluarColorLetra(String intento, String secretaTest) 
 	{
@@ -186,28 +178,7 @@ public class Wungsdle
 	}
 	///////////////////// ^ METODO DUPLICADO SOLO CON FINES DE TESTING  ^ ////////////////////////////////////////////
 
-	//////////////////////////////////////// METODOS DE UTILIDAD //////////////////////////////////////////
-
-	public void alertError(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Error",
-				JOptionPane.ERROR_MESSAGE);
-	}
-	public void alertValidacion(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Validación",
-				JOptionPane.INFORMATION_MESSAGE);
-	}
 	
-	public String getTimeMilis(Long ms) {
-	    long seg = (ms / 1000) % 60;
-	    long min = (ms / (1000 * 60)) % 60;
-	    return String.format("%02d:%02d", min, seg);
-	}
-
-	//PUNTOS
-    public int getPuntosUsuario() {
-        return usuario.getPuntos();
-    }
-    
     //Suma puntos dependiendo el resultado
     public void sumarPuntosPorResultado(String[] resultado) {
         for(int i = 0; i<resultado.length; i++) {
@@ -219,7 +190,7 @@ public class Wungsdle
         }
     }
     //Si gana
-    public void sumarVictoria() {
+    public void sumarPuntosGanador() {
         usuario.sumarPuntos(10);
     }
 
@@ -237,26 +208,39 @@ public class Wungsdle
     ////////////////////////////////////////////////////////////////////////////// Setters y Getters /////////////////////////////////////////////////
     /// 
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public String devolverNombreUsuario() {
+	public String getNombreUsuario() {
 		return usuario.getNombre();
 	}
 
-
-	public Long retornarTiempoUsuario() {
+	public Long getTiempoUsuario() {
 		return usuario.getTiempoRespuesta();
 	}
 	
-	public void asignarTiempoRespuesta(Long tiempo) {
+	public void setTiempoRespuesta(Long tiempo) {
 		usuario.setTiempoRespuesta(tiempo);
 	}
 
 
-	public void asignarNombreUsuario(String text) {
+	public void setNombreUsuario(String text) {
 		usuario.setNombre(text);
 	}
+	
+	public String getPalabraSecreta() {
+	    return palabra.getPalabra();
+	}
+	
+	public String getTimeMilis(Long ms) {
+	    long seg = (ms / 1000) % 60;
+	    long min = (ms / (1000 * 60)) % 60;
+	    return String.format("%02d:%02d", min, seg);
+	}
+
+    public int getPuntosUsuario() {
+        return usuario.getPuntos();
+    }
 
 
-	public String devolverPalabraUsuario() {
+	public String getPalabraUsuario() {
 		return palabraUsuario;
 		
 	}
@@ -350,10 +334,30 @@ public class Wungsdle
 		
 	}
 	
+	public void nombreUsuarioVacio() {
+		if(usuario.estaVacioNombre()) {
+			throw new IllegalArgumentException("palabra vacia");
+		}
+	}
+	
 	public String getTextoMensajeErrorNombre() {
 	    if (this.idiomaActual.startsWith("English")) {
 	        return "Enter your name!";
 	    }
 	    return "Ingresa tu nombre!";
 	}
+	
+////////////////////////////////////////METODOS DE UTILIDAD //////////////////////////////////////////
+
+public void alertError(String mensaje) {
+	JOptionPane.showMessageDialog(null, mensaje, "Error",
+	JOptionPane.ERROR_MESSAGE);
+}
+public void alertValidacion(String mensaje) {
+	JOptionPane.showMessageDialog(null, mensaje, "Validación",
+	JOptionPane.INFORMATION_MESSAGE);
+}
+
+
+
 }

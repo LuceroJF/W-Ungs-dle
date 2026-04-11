@@ -1,18 +1,12 @@
 package testing.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
-
+import static org.junit.Assert.*;
 import org.junit.Test;
-
 import entidades.Wungsdle;
 
 public class TestJuego extends Wungsdle {
 	Wungsdle wungsdle = new Wungsdle();
-	String palabraUsuario = wungsdle.devolverPalabraUsuario(); 
+	String palabraUsuario = wungsdle.getPalabraUsuario(); 
 	// Verifica si el sistema maneja correctamente una entrada nula
     @Test(expected = NullPointerException.class)
     public void palabraVaciaTest() {
@@ -100,9 +94,12 @@ public class TestJuego extends Wungsdle {
         assertTrue(resultadoValido);
         assertFalse(resultadoInvalido);
     }
- 
     
     //Estaría bueno agregar el test para el nombre de usuario vacío 
-    
+    @Test(expected = IllegalArgumentException.class)
+    public void nombreUsuarioVacio() {
+    	wungsdle.crearNombreUsuario("");
+    	wungsdle.nombreUsuarioVacio();
+    }
     //Estaría bueno agregar el test del length del nombre de usuario, para que no supere el maximo de char que soporta el programa...
 }

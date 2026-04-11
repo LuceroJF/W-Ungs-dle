@@ -1,22 +1,15 @@
 package gui;
 
 import javax.swing.JFrame;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.Button;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import entidades.ConfiguracionInicial;
 import entidades.Wungsdle;
-import java.awt.Component;
 
 public class InterfazInicio extends JFrame {
 
-	private JFrame frame;
 	private Wungsdle wordle;
 	private String iniciarJuego = "";
 	private String configuracion = "";
@@ -137,8 +130,8 @@ public class InterfazInicio extends JFrame {
 
 	private void visualizarInterfazRanking(ActionEvent accion) {
 	    InterfazRanking ranking = new InterfazRanking(this, wordle);
-	    ranking.getFrame().setVisible(true);
-	    ranking.getFrame().setLocationRelativeTo(null);
+	    ranking.setVisible(true);
+	    ranking.setLocationRelativeTo(null);
 	    this.dispose();
 	}
 

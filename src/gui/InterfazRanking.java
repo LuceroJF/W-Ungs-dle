@@ -3,15 +3,12 @@ package gui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+import java.awt.event.*;
 import entidades.Ranking;
 import entidades.Wungsdle;
 
-public class InterfazRanking {
+public class InterfazRanking extends JFrame {
 
-    private JFrame frame;
     private InterfazInicio menuPrincipal;
     private String volver ="";
     private String rankingBoton ="";
@@ -21,22 +18,21 @@ public class InterfazRanking {
     public InterfazRanking(InterfazInicio menu, Wungsdle wordle) {
         this.menuPrincipal = menu;
         this.wordle = wordle;
-        initialize();
+        crearInterfazRanking();
     }
 
-    private void initialize() {
+    private void crearInterfazRanking() {
 
-        frame = new JFrame();
-        frame.setSize(800, 600);
-        frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(800, 600);
+        this.setLayout(null);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // ================== TITULO ==================
         JLabel titulo = new JLabel("RANKING", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 28));
         titulo.setBounds(250, 20, 300, 40);
-        frame.add(titulo);
+        this.add(titulo);
 
         // ================== COLUMNAS ==================
         String[] columnas = {"Jugador", "Puntos", "Tiempo"};
@@ -65,7 +61,7 @@ public class InterfazRanking {
 
         JScrollPane scroll = new JScrollPane(tabla);
         scroll.setBounds(200, 100, 400, 300);
-        frame.add(scroll);
+        this.add(scroll);
 
         // ================== BOTON RESET ==================
         JButton btnReset = new JButton();
@@ -77,15 +73,14 @@ public class InterfazRanking {
             public void actionPerformed(ActionEvent e) {
                 Ranking.resetearPuntajes();
                 mensaje= wordle.getTextoMensajeRanking();
-                JOptionPane.showMessageDialog(frame, mensaje);
-
-                frame.dispose();
+                JOptionPane.showMessageDialog(InterfazRanking.this, mensaje);
+                InterfazRanking.this.dispose();
                 InterfazRanking nueva = new InterfazRanking(menuPrincipal, wordle);
-                nueva.getFrame().setVisible(true);
+                nueva.setVisible(true);
             }
         });
 
-        frame.add(btnReset);
+        this.add(btnReset);
 
         // ================== BOTON VOLVER ==================
         JButton btnVolver = new JButton(); // "Volver al menú"
@@ -95,16 +90,13 @@ public class InterfazRanking {
 
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                InterfazRanking.this.dispose();
                 menuPrincipal.setVisible(true);
                 menuPrincipal.setLocationRelativeTo(null);
             }
         });
 
-        frame.add(btnVolver);
+        this.add(btnVolver);
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
 }

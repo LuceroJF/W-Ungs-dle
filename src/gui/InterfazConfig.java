@@ -1,20 +1,13 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 import entidades.Wungsdle;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
 
 public class InterfazConfig extends JFrame {
 
-	private JFrame frame;
 	private Wungsdle wordle;
 	private InterfazInicio menuPrincipal;
 	private String guardar="";
@@ -50,6 +43,7 @@ public class InterfazConfig extends JFrame {
 			}
 
 		});
+		
         volver = wordle.getTextoBotonVolver();
         btnVolver.setText(volver);
 		btnVolver.setBounds(722, 416, 289, 36);
@@ -80,6 +74,7 @@ public class InterfazConfig extends JFrame {
 		JButton btnGuardar = new JButton("");
 		guardar=wordle.getTextoBotonGuardar();
 		btnGuardar.setText(guardar);
+		
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wordle.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),

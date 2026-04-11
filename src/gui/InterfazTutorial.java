@@ -1,19 +1,12 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import entidades.Wungsdle;
-import java.awt.Font;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.ScrollPaneConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 public class InterfazTutorial extends JFrame {
+	
 	private InterfazInicio menuPrincipal;
 	private JFrame frame;
 	private Wungsdle wordle;
@@ -26,13 +19,13 @@ public class InterfazTutorial extends JFrame {
 	}
 
 	private void crearInterfazTutorial() {
-		////////////////////////////////////////////////////// BOTONES/////////////////////////////////////////////////////////
 
 		JPanel tutorial = new JPanel();
 		JLabel etiquetaLogoTutorial = new JLabel();
 		JScrollPane tutorialScroll = new JScrollPane();
 		JLabel etiquetaTutorial = new JLabel("");
 		JButton btnVolver = new JButton("");
+		
         volver = wordle.getTextoBotonVolver();
 		btnVolver.setText(volver);
 		btnVolver.addActionListener(new ActionListener() {
@@ -49,13 +42,15 @@ public class InterfazTutorial extends JFrame {
 		tutorial.setLayout(null);
 		tutorial.add(etiquetaLogoTutorial);
 		tutorialScroll.setViewportView(etiquetaTutorial);
+		
 		if(wordle.getIdiomaActual().startsWith("English")) {
 			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Logo.png")));
 			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/TutorialIngles.jpg")));
 		}
 		else {
-		etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/LogoEspaniol.png")));
-		etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Tutorial.png")));
+			
+			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/LogoEspaniol.png")));
+			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Tutorial.png")));
 		}
 		tutorial.add(tutorialScroll);
 		tutorial.add(btnVolver);
