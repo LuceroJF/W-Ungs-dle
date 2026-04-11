@@ -29,7 +29,7 @@ public class InterfazFinal extends JFrame{
 
         //TITULO
         JLabel titulo = new JLabel(gano ? "¡GANASTE!" : "GAME OVER");
-        titulo.setFont(new Font("Arial", Font.BOLD, 32));
+        titulo.setFont(new Font("Luckiest Guy", Font.PLAIN, 30));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setBounds(150, 20, 300, 50);
         this.add(titulo);
@@ -37,19 +37,19 @@ public class InterfazFinal extends JFrame{
         //NOMBRE
         JLabel nombre = new JLabel("Jugador: " + wungsdle.devolverNombreUsuario());
         nombre.setBounds(180, 90, 300, 25);
-        nombre.setFont(new Font("Arial", Font.PLAIN, 16));
+        nombre.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         this.add(nombre);
 
         //Tiempo
-        JLabel tiempo = new JLabel("Tiempo: " + wungsdle.retornarTiempoUsuario());
+        JLabel tiempo = new JLabel("Tiempo: " + wungsdle.getTimeMilis(wungsdle.retornarTiempoUsuario()));
         tiempo.setBounds(180, 120, 300, 25);
-        tiempo.setFont(new Font("Arial", Font.PLAIN, 16));
+        tiempo.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         this.add(tiempo);
 
         //PALABRA CORRECTA
         JLabel palabra = new JLabel("La palabra era: " + wungsdle.getPalabraSecreta().toUpperCase());
         palabra.setBounds(150, 160, 300, 30);
-        palabra.setFont(new Font("Arial", Font.BOLD, 18));
+        palabra.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         palabra.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(palabra);
 
@@ -57,7 +57,7 @@ public class InterfazFinal extends JFrame{
         JLabel mensaje = new JLabel(gano ? "¡Excelente!" : "Mejor suerte la próxima");
         mensaje.setBounds(150, 200, 300, 30);
         mensaje.setHorizontalAlignment(SwingConstants.CENTER);
-        mensaje.setFont(new Font("Arial", Font.ITALIC, 16));
+        mensaje.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         this.add(mensaje);
 
         //BOTON REINICIAR

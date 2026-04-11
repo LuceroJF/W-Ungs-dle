@@ -188,10 +188,14 @@ public class InterfazWungsdle extends JFrame {
 
 					// ================== GANA ==================
 					if (acerto) {
+						// TIEMPO
 						long tiempoFinal = System.currentTimeMillis();
-						Long latencia = tiempoInicio - tiempoFinal;
-						System.out.println(latencia);
-						wungsdle.asignarTiempoRespuesta(latencia);
+						long latenciaMs = tiempoFinal - tiempoInicio;
+
+						long minutos = (latenciaMs / 1000) / 60;
+						long segundos = (latenciaMs / 1000) % 60;
+
+						wungsdle.asignarTiempoRespuesta(latenciaMs);
 
 						juegoTerminado = true;
 
@@ -200,7 +204,6 @@ public class InterfazWungsdle extends JFrame {
 						panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).clear();
 						panelVerde.getActionMap().clear();
 
-						//
 						palabraUsuario = "";
 
 						SwingUtilities.invokeLater(() -> {

@@ -35,9 +35,9 @@ public class InterfazConfig extends JFrame {
 		JLabel btnIdioma = new JLabel("");
 		JLabel lblNewLabel_1 = new JLabel("");
 		JComboBox comboBox_Idioma = new JComboBox();
-		comboBox_Idioma.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		comboBox_Idioma.setFont(new Font("Luckiest Guy", Font.PLAIN, 15));
 		JComboBox comboBox_Dificultad = new JComboBox();
-		comboBox_Dificultad.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		comboBox_Dificultad.setFont(new Font("Luckiest Guy", Font.PLAIN, 15));
 
 		panelConfiguracion.setBounds(400, 300, 846, 576);
 		getContentPane().add(panelConfiguracion);

@@ -285,6 +285,12 @@ public class Wungsdle
 		JOptionPane.showMessageDialog(null, mensaje, "Validación",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
+	
+	public String getTimeMilis(Long ms) {
+	    long seg = (ms / 1000) % 60;
+	    long min = (ms / (1000 * 60)) % 60;
+	    return String.format("%02d:%02d", min, seg);
+	}
 
 
 }
