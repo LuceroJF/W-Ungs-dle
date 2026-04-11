@@ -122,7 +122,7 @@ public class InterfazInicio extends JFrame {
 		tutorial.setLocationRelativeTo(null);
 		this.dispose();
 	}
-
+	
 	private void visualizarInterfazConfiguracion(ActionEvent accion) {
 		InterfazConfig config = new InterfazConfig(this, this.wordle);
 		config.setVisible(true);
@@ -131,10 +131,10 @@ public class InterfazInicio extends JFrame {
 	}
 
 	private void visualizarInterfazRanking(ActionEvent accion) {
-		InterfazRanking ranking = new InterfazRanking(this, wordle);
-		ranking.setVisible(true);
-		ranking.setLocationRelativeTo(null);
-		this.dispose();
+	    InterfazRanking ranking = new InterfazRanking(this);
+	    ranking.getFrame().setVisible(true);
+	    ranking.getFrame().setLocationRelativeTo(null);
+	    this.dispose();
 	}
 
 	public void actualizarTextos() {
