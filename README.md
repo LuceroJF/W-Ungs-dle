@@ -51,7 +51,9 @@ Explicación breve de cómo todo esto pasó a funcionar;
 
 * **Nueva Clase de Configuración Inicial**: Nos ayuda a que la configuración de inicio pueda replicarse tanto cuando reiniciamos el juego como cuando comenzamos.
 * **Valores por defecto**: Se agregó al constructor de `Wungsdle` el idioma y la dificultad por default.
-* **Función de Alertas**: Se creó una función centralizada para el manejo de alertas dentro de la clase `Wungsdle`.
+* **Función de Alertas**: Se creó una función centralizada para el manejo de alertas.
 * **Control de flujo (Enter)**: La tecla Enter no se activa hasta que el usuario hace clic en "Iniciar Juego" después de ingresar su nombre.
 * **Gestión de memoria**: Ahora todas las pestañas se cierran correctamente al salir de ellas (uso de `dispose`).
 * **Mejoras visuales**: Se actualizaron y mejoraron las tipografías de la interfaz.
+* **Si la palabra no existe en el diccionario ahora se pone toda la linea en rojo
+* **el ranking queda guardado por mas que cerremos el Juego.
