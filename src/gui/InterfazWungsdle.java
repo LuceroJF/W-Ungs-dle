@@ -258,7 +258,9 @@ public class InterfazWungsdle extends JFrame {
 						});
 					}
 				} else {
-					wungsdle.alertError("Ingrese una palabra correcta");
+					for(int i = 0 ; i < 5; i++) {
+						casillas[filaActual[0]][i].setBackground(Color.RED);
+					}
 				}
 			}
 		});
@@ -276,7 +278,8 @@ public class InterfazWungsdle extends JFrame {
 				if (colActual[0] > 0) {
 					colActual[0]--;
 					casillas[filaActual[0]][colActual[0]].setText("");
-
+					casillas[filaActual[0]][colActual[0]].setBackground(Color.white);
+					
 					if (!palabraUsuario.isEmpty()) {
 						palabraUsuario = palabraUsuario.substring(0, palabraUsuario.length() - 1);
 					}
