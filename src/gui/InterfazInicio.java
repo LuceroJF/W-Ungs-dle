@@ -136,7 +136,7 @@ public class InterfazInicio extends JFrame {
 	}
 
 	private void visualizarInterfazRanking(ActionEvent accion) {
-	    InterfazRanking ranking = new InterfazRanking(this);
+	    InterfazRanking ranking = new InterfazRanking(this, wordle);
 	    ranking.getFrame().setVisible(true);
 	    ranking.getFrame().setLocationRelativeTo(null);
 	    this.dispose();

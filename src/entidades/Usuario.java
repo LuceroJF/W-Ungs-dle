@@ -5,6 +5,7 @@ public class Usuario
 {
 	private String nombre;
 	private Long tiempoRespuesta;
+	private int puntos;
 	private int intento;
 	
 	public Usuario()
@@ -12,6 +13,7 @@ public class Usuario
 		this.nombre = "";
 		this.tiempoRespuesta = 0L;
 		this.intento = 6;
+		this.puntos = 0;
 	}
 	
 	public Usuario(String nombre)
@@ -19,6 +21,7 @@ public class Usuario
 		this.nombre = nombre;
 		this.tiempoRespuesta = 0L;
 		this.intento = 6;
+		this.puntos=0;
 	}
 
 	public String getNombre() {
@@ -62,11 +65,19 @@ public class Usuario
 		this.tiempoRespuesta += (3*5);
 	}
 	
-	
+	public int getPuntos() {
+		return this.puntos;
+		
+	}
 	
 	public void descontarIntento()
 	{
 		this.intento -= 1;
+	}
+
+	public void sumarPuntos(int i) {
+		this.puntos += i;
+		
 	}
 
 

@@ -35,6 +35,7 @@ public class InterfazWungsdle extends JFrame {
 	private boolean liberarTeclado = false;
 	private String nombre = "";
 	private String comenzar = "";
+	private String mensajeErrorNombre;
 
 	public InterfazWungsdle(Wungsdle wungsdle) {
 		this.wungsdle = wungsdle;
@@ -79,16 +80,26 @@ public class InterfazWungsdle extends JFrame {
 		JButton btnComenzarJuego = new JButton(comenzar);
 		// Hasta que no se presione el boton de comenzar, el juego no escucha la tecla
 		// "Enter"
+		
 		btnComenzarJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				wungsdle.asignarNombreUsuario(txfieldNombreUsuario.getText());
+			  if((txfieldNombreUsuario.getText() != null) && (txfieldNombreUsuario.getText() !="") && (!txfieldNombreUsuario.getText().isEmpty() && (!txfieldNombreUsuario.getText().isBlank()))) {
+			    wungsdle.asignarNombreUsuario(txfieldNombreUsuario.getText());
 				liberarTeclado(e);
 				panelNombre.setVisible(false);
 				System.out.println(wungsdle.devolverNombreUsuario());
 				panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "enter");
 			}
+				else {
+					mensajeErrorNombre = wungsdle.getTextoMensajeErrorNombre();
+					wungsdle.alertError(mensajeErrorNombre);
+					throw new IllegalArgumentException(mensajeErrorNombre);
+					
+				}
+			}
 		});
-
+		
+		
 		btnComenzarJuego.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnComenzarJuego.setBounds(306, 283, 344, 40);
 		panelNombre.add(btnComenzarJuego);
@@ -170,7 +181,7 @@ public class InterfazWungsdle extends JFrame {
 						wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
 
 					String[] resultado = wungsdle.evaluarColorLetra(palabraUsuario.toLowerCase());
-
+					wungsdle.sumarPuntosPorResultado(resultado);
 					boolean acerto = true;
 
 					for (int i = 0; i < 5; i++) {
@@ -196,7 +207,10 @@ public class InterfazWungsdle extends JFrame {
 						long segundos = (latenciaMs / 1000) % 60;
 
 						wungsdle.asignarTiempoRespuesta(latenciaMs);
-
+						//punto si gana
+                        wungsdle.sumarVictoria();
+                        //guardar
+                        wungsdle.guardarResultado();
 						juegoTerminado = true;
 
 						panelVerde.setEnabled(false);
@@ -230,7 +244,7 @@ public class InterfazWungsdle extends JFrame {
 						System.out.println(latencia);
 						wungsdle.asignarTiempoRespuesta(latencia);
 						juegoTerminado = true;
-
+                        wungsdle.guardarResultado();
 						panelVerde.setEnabled(false);
 						panelVerde.setFocusable(false);
 						panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).clear();
@@ -270,6 +284,7 @@ public class InterfazWungsdle extends JFrame {
 			}
 		});
 	}
+
 
 	private void liberarTeclado(ActionEvent e) {
 		liberarTeclado = true;

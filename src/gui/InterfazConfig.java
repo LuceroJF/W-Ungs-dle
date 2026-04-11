@@ -21,6 +21,7 @@ public class InterfazConfig extends JFrame {
 	private String volver="";
 	private String idioma="";
 	private String dificultad="";
+	private String mensaje="";
 
 	public InterfazConfig(InterfazInicio menu, Wungsdle wordle) {
 		this.menuPrincipal = menu;
@@ -84,7 +85,8 @@ public class InterfazConfig extends JFrame {
 				wordle.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),
 						comboBox_Dificultad.getSelectedItem().toString());
                 wordle.setIdiomaActual(comboBox_Idioma.getSelectedItem().toString());
-                wordle.alertValidacion("Configuración guardada correctamente");
+                mensaje = wordle.getTextoMensajeConfig();
+                wordle.alertValidacion(mensaje);
 				System.out.println(wordle.getPalabraSecreta());
 			}
 		});

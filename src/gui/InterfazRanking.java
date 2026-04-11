@@ -7,14 +7,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import entidades.Ranking;
+import entidades.Wungsdle;
 
 public class InterfazRanking {
 
     private JFrame frame;
     private InterfazInicio menuPrincipal;
+    private String volver ="";
+    private String rankingBoton ="";
+    private Wungsdle wordle;
+    private String mensaje = "";
 
-    public InterfazRanking(InterfazInicio menu) {
+    public InterfazRanking(InterfazInicio menu, Wungsdle wordle) {
         this.menuPrincipal = menu;
+        this.wordle = wordle;
         initialize();
     }
 
@@ -62,16 +68,19 @@ public class InterfazRanking {
         frame.add(scroll);
 
         // ================== BOTON RESET ==================
-        JButton btnReset = new JButton("Reiniciar Ranking");
+        JButton btnReset = new JButton();
+        rankingBoton = wordle.getTextoBotonRanking();
+        btnReset.setText(rankingBoton);
         btnReset.setBounds(250, 420, 300, 40);
 
         btnReset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Ranking.resetearPuntajes();
-                JOptionPane.showMessageDialog(frame, "Ranking reiniciado");
+                mensaje= wordle.getTextoMensajeRanking();
+                JOptionPane.showMessageDialog(frame, mensaje);
 
                 frame.dispose();
-                InterfazRanking nueva = new InterfazRanking(menuPrincipal);
+                InterfazRanking nueva = new InterfazRanking(menuPrincipal, wordle);
                 nueva.getFrame().setVisible(true);
             }
         });
@@ -79,7 +88,9 @@ public class InterfazRanking {
         frame.add(btnReset);
 
         // ================== BOTON VOLVER ==================
-        JButton btnVolver = new JButton("Volver al menú");
+        JButton btnVolver = new JButton(); // "Volver al menú"
+        volver = wordle.getTextoBotonVolver();
+        btnVolver.setText(volver);
         btnVolver.setBounds(250, 480, 300, 40);
 
         btnVolver.addActionListener(new ActionListener() {

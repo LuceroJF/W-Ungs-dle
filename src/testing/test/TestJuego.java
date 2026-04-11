@@ -2,6 +2,7 @@ package testing.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -99,6 +100,9 @@ public class TestJuego extends Wungsdle {
         assertTrue(resultadoValido);
         assertFalse(resultadoInvalido);
     }
-
  
+    
+    //Estaría bueno agregar el test para el nombre de usuario vacío 
+    
+    //Estaría bueno agregar el test del length del nombre de usuario, para que no supere el maximo de char que soporta el programa...
 }

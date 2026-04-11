@@ -130,6 +130,113 @@ public class Wungsdle
 		int idx = ThreadLocalRandom.current().nextInt(palabras.size());
 		return palabras.get(idx);
 	}
+
+	
+	///////////////////////////////////////////////////////////////////////////////// T E S T I N G ///////////////////////////////////////////////////////////////////////////////
+	
+	
+	//Este hay que modificarlo porque la verdad es rarísimo, pero nada, en resumen lo que hace es verificar si la palabra que recibe está en los TXT
+	public boolean verificarSiExiste(String intento, String idioma, String dificultad) {
+	    String ruta = rutaTxtSegunSeleccion(idioma, dificultad);
+	    try (InputStream is = InterfazInicio.class.getResourceAsStream(ruta);
+	         BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+	        
+	        String linea;
+	        while ((linea = br.readLine()) != null) {
+	            if (linea.trim().equalsIgnoreCase(intento.trim())) {
+	                return true;
+	            }
+	        }
+	    } catch (Exception ex) {
+	        System.err.println("Error al validar palabra: " + ex.getMessage());
+	    }
+	    
+	    return false;
+	}
+	
+	
+	
+	///////////////////// V METODO DUPLICADO SOLO CON FINES DE TESTING V ////////////////////////////////////////////
+	public String[] evaluarColorLetra(String intento, String secretaTest) 
+	{
+		palabraUsuario = intento;
+	    String palabraSecreta = secretaTest;
+	    String[] resultado = new String[5];
+
+	    for (int i = 0; i < 5; i++) 
+	    {
+	        char letraIntento = intento.charAt(i);
+	        char letraSecreta = palabraSecreta.charAt(i);
+
+	        if (letraIntento == letraSecreta) 
+	        {
+	            resultado[i] = "VERDE";
+	        } 
+	        else if (palabraSecreta.contains(String.valueOf(letraIntento))) 
+	        {
+	            resultado[i] = "AMARILLO";
+	        } 
+	        else 
+	        {
+	            resultado[i] = "GRIS";
+	        }
+	    }
+
+	    return resultado;
+	}
+	///////////////////// ^ METODO DUPLICADO SOLO CON FINES DE TESTING  ^ ////////////////////////////////////////////
+
+	//////////////////////////////////////// METODOS DE UTILIDAD //////////////////////////////////////////
+
+	public void alertError(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Error",
+				JOptionPane.ERROR_MESSAGE);
+	}
+	public void alertValidacion(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Validación",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public String getTimeMilis(Long ms) {
+	    long seg = (ms / 1000) % 60;
+	    long min = (ms / (1000 * 60)) % 60;
+	    return String.format("%02d:%02d", min, seg);
+	}
+
+	//PUNTOS
+    public int getPuntosUsuario() {
+        return usuario.getPuntos();
+    }
+    
+    //Suma puntos dependiendo el resultado
+    public void sumarPuntosPorResultado(String[] resultado) {
+        for(int i = 0; i<resultado.length; i++) {
+            if(resultado[i].equals("VERDE")) {
+                usuario.sumarPuntos(3);                
+            }else if(resultado[i].equals("AMARILLO")) {
+                usuario.sumarPuntos(1);
+            }
+        }
+    }
+    //Si gana
+    public void sumarVictoria() {
+        usuario.sumarPuntos(10);
+    }
+
+    
+    //Guardar resultado
+    public void guardarResultado() {
+        String nombre = usuario.getNombre();
+        int puntos = usuario.getPuntos();
+        int tiempo = (int) (usuario.getTiempoRespuesta()/1000);
+        
+        Ranking.guardarPuntaje(nombre, puntos, tiempo);
+    }
+    
+    
+    ////////////////////////////////////////////////////////////////////////////// Setters y Getters /////////////////////////////////////////////////
+    /// 
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public String devolverNombreUsuario() {
 		return usuario.getNombre();
 	}
@@ -220,77 +327,33 @@ public class Wungsdle
 	    return "Aplicar Configuración";
 	}
 
-	
-	///////////////////////////////////////////////////////////////////////////////// T E S T I N G ///////////////////////////////////////////////////////////////////////////////
-	
-	
-	//Este hay que modificarlo porque la verdad es rarísimo, pero nada, en resumen lo que hace es verificar si la palabra que recibe está en los TXT
-	public boolean verificarSiExiste(String intento, String idioma, String dificultad) {
-	    String ruta = rutaTxtSegunSeleccion(idioma, dificultad);
-	    try (InputStream is = InterfazInicio.class.getResourceAsStream(ruta);
-	         BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-	        
-	        String linea;
-	        while ((linea = br.readLine()) != null) {
-	            if (linea.trim().equalsIgnoreCase(intento.trim())) {
-	                return true;
-	            }
-	        }
-	    } catch (Exception ex) {
-	        System.err.println("Error al validar palabra: " + ex.getMessage());
+	public String getTextoBotonRanking() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Reset Ranking";
 	    }
-	    
-	    return false;
+	    return "Reiniciar Ranking";
 	}
 	
-	
-	
-	///////////////////// V METODO DUPLICADO SOLO CON FINES DE TESTING V ////////////////////////////////////////////
-	public String[] evaluarColorLetra(String intento, String secretaTest) 
-	{
-		palabraUsuario = intento;
-	    String palabraSecreta = secretaTest;
-	    String[] resultado = new String[5];
 
-	    for (int i = 0; i < 5; i++) 
-	    {
-	        char letraIntento = intento.charAt(i);
-	        char letraSecreta = palabraSecreta.charAt(i);
-
-	        if (letraIntento == letraSecreta) 
-	        {
-	            resultado[i] = "VERDE";
-	        } 
-	        else if (palabraSecreta.contains(String.valueOf(letraIntento))) 
-	        {
-	            resultado[i] = "AMARILLO";
-	        } 
-	        else 
-	        {
-	            resultado[i] = "GRIS";
-	        }
+	public String getTextoMensajeRanking() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Reset Done!";
 	    }
-
-	    return resultado;
+	    return "Reinicio Realizado!";
 	}
-	///////////////////// ^ METODO DUPLICADO SOLO CON FINES DE TESTING  ^ ////////////////////////////////////////////
 
-	//////////////////////////////////////// METODOS DE UTILIDAD //////////////////////////////////////////
-
-	public void alertError(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Error",
-				JOptionPane.ERROR_MESSAGE);
-	}
-	public void alertValidacion(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Validación",
-				JOptionPane.INFORMATION_MESSAGE);
+	public String getTextoMensajeConfig() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "New Configuration saved correctly";
+	    }
+	    return "Nueva Configuración guardada correctamente";
+		
 	}
 	
-	public String getTimeMilis(Long ms) {
-	    long seg = (ms / 1000) % 60;
-	    long min = (ms / (1000 * 60)) % 60;
-	    return String.format("%02d:%02d", min, seg);
+	public String getTextoMensajeErrorNombre() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Enter your name!";
+	    }
+	    return "Ingresa tu nombre!";
 	}
-
-
 }
