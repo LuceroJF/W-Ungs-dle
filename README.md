@@ -55,3 +55,6 @@ Explicación breve de cómo todo esto pasó a funcionar;
 * **Control de flujo (Enter)**: La tecla Enter no se activa hasta que el usuario hace clic en "Iniciar Juego" después de ingresar su nombre.
 * **Gestión de memoria**: Ahora todas las pestañas se cierran correctamente al salir de ellas (uso de `dispose`).
 * **Mejoras visuales**: Se actualizaron y mejoraron las tipografías de la interfaz.
+* **las palabras que no estan en el diccionario ahora se pintan de rojo y si borramos una letra se le va el color rojo a toda la palabra.
+* **el nombre no puede estar vacio y tira excepcion si asi fuera.
+* **El ranking se guarda indefinidamente.
