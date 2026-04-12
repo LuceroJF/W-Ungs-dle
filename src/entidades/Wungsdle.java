@@ -342,9 +342,9 @@ public class Wungsdle
 	
 	public String getTextoMensajeErrorNombre() {
 	    if (this.idiomaActual.startsWith("English")) {
-	        return "Enter your name!";
+	        return "Incorrect name entered. Please try again.";
 	    }
-	    return "Ingresa tu nombre!";
+	    return "Nombre ingresado incorrectamente, por que favor vuelva a intentarlo";
 	}
 	
 ////////////////////////////////////////METODOS DE UTILIDAD //////////////////////////////////////////

@@ -95,11 +95,10 @@ public class TestJuego extends Wungsdle {
         assertFalse(resultadoInvalido);
     }
     
-    //Estaría bueno agregar el test para el nombre de usuario vacío 
+    //Verifica que el usuario no escriba un nombre vacio
     @Test(expected = IllegalArgumentException.class)
     public void nombreUsuarioVacio() {
     	wungsdle.crearNombreUsuario("");
     	wungsdle.nombreUsuarioVacio();
     }
-    //Estaría bueno agregar el test del length del nombre de usuario, para que no supere el maximo de char que soporta el programa...
 }

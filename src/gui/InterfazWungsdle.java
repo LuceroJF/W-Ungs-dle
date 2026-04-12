@@ -25,24 +25,22 @@ public class InterfazWungsdle extends JFrame {
 	public void crearInterfazWungsdle() {
 		JPanel panelJuego = new JPanel();
 		panelJuego.setVisible(true);
-		
+
 		JLabel etiquetaNombreJuego = new JLabel();
 		etiquetaNombreJuego.setBounds(47, 64, 599, 96);
-		
+
 		JLabel intentos = new JLabel("INTENTOS: " + wungsdle.consultarIntentoUsuario());
 		intentos.setBounds(312, 203, 200, 20);
 		intentos.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
+
 		JPanel panelVerde = new JPanel(new GridLayout(6, 5, 5, 5));
 		panelVerde.setBounds(110, 234, 482, 393);
-		
+
 		JLabel[][] casillas = new JLabel[6][5];
-		
+
 		comenzar = wungsdle.getTextoComenzarJuego();
 		nombre = wungsdle.getTextoIngresarNombre();
-		
-		
-		
+
 		long tiempoInicio = System.currentTimeMillis();
 
 		JPanel panelNombre = new JPanel();
@@ -55,7 +53,7 @@ public class InterfazWungsdle extends JFrame {
 		txfieldNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txfieldNombreUsuario.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		txfieldNombreUsuario.setBounds(189, 174, 564, 50);
-		
+
 		panelNombre.add(txfieldNombreUsuario);
 		txfieldNombreUsuario.setColumns(10);
 
@@ -70,27 +68,29 @@ public class InterfazWungsdle extends JFrame {
 		btnComenzarJuego.setText(comenzar);
 		btnComenzarJuego.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnComenzarJuego.setBounds(306, 283, 344, 40);
-		
-		// Hasta que no se presione el boton de comenzar, el juego no escucha la tecla "Enter"
+
+		// Hasta que no se presione el boton de comenzar, el juego no escucha la tecla
+		// "Enter"
 		btnComenzarJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((txfieldNombreUsuario.getText() != null) && (txfieldNombreUsuario.getText() !="") && (!txfieldNombreUsuario.getText().isEmpty() && (!txfieldNombreUsuario.getText().isBlank()))) {
-			    wungsdle.crearNombreUsuario(txfieldNombreUsuario.getText());
-				liberarTeclado(e);
-				panelNombre.setVisible(false);
-				System.out.println(wungsdle.getNombreUsuario());
-				panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "enter");
-			}
-				else{
+				if ((txfieldNombreUsuario.getText() != null) && (txfieldNombreUsuario.getText() != "")
+						&& (!txfieldNombreUsuario.getText().isEmpty() && (!txfieldNombreUsuario.getText().isBlank()
+								&& txfieldNombreUsuario.getText().length() < 10))) {
+					wungsdle.crearNombreUsuario(txfieldNombreUsuario.getText());
+					liberarTeclado(e);
+					panelNombre.setVisible(false);
+					System.out.println(wungsdle.getNombreUsuario());
+					panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"),
+							"enter");
+				} else {
 					mensajeErrorNombre = wungsdle.getTextoMensajeErrorNombre();
 					wungsdle.alertError(mensajeErrorNombre);
-					throw new IllegalArgumentException(mensajeErrorNombre);	
+					txfieldNombreUsuario.setText("");
+					throw new IllegalArgumentException(mensajeErrorNombre);
 				}
 			}
 		});
-		
-		
-		
+
 		panelNombre.add(btnComenzarJuego);
 
 		panelJuego.setBounds(451, 183, 679, 667);
@@ -162,10 +162,12 @@ public class InterfazWungsdle extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				/* Ahora además de verificar si lo que ingresa el usuario tiene 5 caracteres,
-				 verifica si dicha palabra existe entre las
-				 casi 2 mil palabras de los TXT (Codigo se encuentra al final de Wungsdle,
-				 idealmente hay que modificarlo, funciona pero es copia)*/
+				/*
+				 * Ahora además de verificar si lo que ingresa el usuario tiene 5 caracteres,
+				 * verifica si dicha palabra existe entre las casi 2 mil palabras de los TXT
+				 * (Codigo se encuentra al final de Wungsdle, idealmente hay que modificarlo,
+				 * funciona pero es copia)
+				 */
 				if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario,
 						wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
 
@@ -196,10 +198,10 @@ public class InterfazWungsdle extends JFrame {
 						long segundos = (latenciaMs / 1000) % 60;
 
 						wungsdle.setTiempoRespuesta(latenciaMs);
-						//punto si gana
-                        wungsdle.sumarPuntosGanador();
-                        //guardar
-                        wungsdle.guardarResultado();
+						// punto si gana
+						wungsdle.sumarPuntosGanador();
+						// guardar
+						wungsdle.guardarResultado();
 						juegoTerminado = true;
 
 						panelVerde.setEnabled(false);
@@ -210,8 +212,8 @@ public class InterfazWungsdle extends JFrame {
 						palabraUsuario = "";
 
 						SwingUtilities.invokeLater(() -> {
-							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this,
-									wungsdle.getNombreUsuario(), wungsdle.getPalabraSecreta(), true, wungsdle);
+							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this, wungsdle.getNombreUsuario(),
+									wungsdle.getPalabraSecreta(), true, wungsdle);
 							fin.setVisible(true);
 
 						});
@@ -233,23 +235,24 @@ public class InterfazWungsdle extends JFrame {
 						System.out.println(latencia);
 						wungsdle.setTiempoRespuesta(latencia);
 						juegoTerminado = true;
-                        wungsdle.guardarResultado();
+						wungsdle.guardarResultado();
 						panelVerde.setEnabled(false);
 						panelVerde.setFocusable(false);
 						panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).clear();
 						panelVerde.getActionMap().clear();
 
 						SwingUtilities.invokeLater(() -> {
-							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this,
-									wungsdle.getNombreUsuario(), wungsdle.getPalabraSecreta(), false, wungsdle);
+							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this, wungsdle.getNombreUsuario(),
+									wungsdle.getPalabraSecreta(), false, wungsdle);
 							fin.setVisible(true);
 
 						});
 					}
 				} else {
-					for(int i = 0 ; i < 5; i++) {
+					for (int i = 0; i < 5; i++) {
 						casillas[filaActual[0]][i].setBackground(Color.RED);
-					};
+					}
+					;
 				}
 			}
 		});
@@ -267,10 +270,10 @@ public class InterfazWungsdle extends JFrame {
 				if (colActual[0] > 0) {
 					colActual[0]--;
 					casillas[filaActual[0]][colActual[0]].setText("");
-					for(int i = 0; i < 5; i++) {
-						casillas[filaActual[0]][i].setBackground(Color.white);						
+					for (int i = 0; i < 5; i++) {
+						casillas[filaActual[0]][i].setBackground(Color.white);
 					}
-					
+
 					if (!palabraUsuario.isEmpty()) {
 						palabraUsuario = palabraUsuario.substring(0, palabraUsuario.length() - 1);
 					}
@@ -278,7 +281,6 @@ public class InterfazWungsdle extends JFrame {
 			}
 		});
 	}
-
 
 	private void liberarTeclado(ActionEvent e) {
 		liberarTeclado = true;
