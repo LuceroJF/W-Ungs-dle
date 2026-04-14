@@ -12,6 +12,7 @@ public class InterfazTutorial extends JFrame {
 	private Wungsdle wordle;
     private String volver = "";
 	
+    //==========================CONSTRUCTOR============================//
 	public InterfazTutorial(InterfazInicio menu, Wungsdle wordle) {
 		menuPrincipal = menu;
 		this.wordle = wordle;
@@ -63,7 +64,7 @@ public class InterfazTutorial extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-
+	//============================METODOS==============================//
 	private void RegresarMenuPrincipal(ActionEvent accion) {
 		menuPrincipal.setVisible(true);
 		menuPrincipal.setLocationRelativeTo(null);

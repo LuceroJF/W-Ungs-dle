@@ -15,7 +15,8 @@ public class InterfazConfig extends JFrame {
 	private String idioma="";
 	private String dificultad="";
 	private String mensaje="";
-
+	
+	//=======================CONSTRUCTOR==========================//
 	public InterfazConfig(InterfazInicio menu, Wungsdle wordle) {
 		this.menuPrincipal = menu;
 		this.wordle = wordle;
@@ -41,9 +42,8 @@ public class InterfazConfig extends JFrame {
 			public void actionPerformed(ActionEvent accion) {
 				volverMenuPrincipal(accion);
 			}
-
 		});
-		
+
         volver = wordle.getTextoBotonVolver();
         btnVolver.setText(volver);
 		btnVolver.setBounds(722, 416, 289, 36);
@@ -91,7 +91,7 @@ public class InterfazConfig extends JFrame {
 		this.setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	//=============================METODOS==========================//
 	private void volverMenuPrincipal(ActionEvent accion) {
 		menuPrincipal.actualizarTextos("nuevo");
 		this.dispose();

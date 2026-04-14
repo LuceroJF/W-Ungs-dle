@@ -8,6 +8,7 @@ public class Usuario
 	private int puntos;
 	private int intento;
 	
+	//========================CONSTRUCTORES=======================//
 	public Usuario()
 	{
 		this.tiempoRespuesta = 0L;
@@ -23,9 +24,7 @@ public class Usuario
 		this.puntos=0;
 	}
 
-	public void crearNombreUsuario(String nombre) {
-		this.nombre = nombre;
-	}
+	//========================SETTER Y GETTERS===================//
 	public String getNombre() {
 		return nombre;
 	}
@@ -51,7 +50,16 @@ public class Usuario
 	public void setIntento(int intento) {
 		this.intento = intento;
 	}
-
+	
+	public int getPuntos() {
+		return this.puntos;
+		
+	}
+	//=========================METODOS======================//
+	public void crearNombreUsuario(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public void sumaPuntoLetraCoincideEnLugar()
 	{
 		 this.tiempoRespuesta += 3;
@@ -65,11 +73,6 @@ public class Usuario
 	public void aciertaPalabraCompleta()
 	{
 		this.tiempoRespuesta += (3*5);
-	}
-	
-	public int getPuntos() {
-		return this.puntos;
-		
 	}
 	
 	public void descontarIntento()

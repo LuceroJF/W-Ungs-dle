@@ -5,10 +5,11 @@ import gui.InterfazInicio;
 public class ConfiguracionInicial {
 	
 	private Wungsdle wungsdle;
+	
+	//======================CONSTRUCTOR=========================//	
+	public void crearConfiguracionInicial(Wungsdle juego) {
 		
-	public void crearConfiguracionInicial(Wungsdle wordle) {
-		
-		wungsdle = wordle;
+		this.wungsdle = juego;
 		wungsdle.crearPalabra("Español - ES","Facil - Easy");
 		System.out.println(wungsdle.getPalabraSecreta());
 		InterfazInicio window = new InterfazInicio(wungsdle);
@@ -17,7 +18,7 @@ public class ConfiguracionInicial {
 		
 	}
 	
-	
+	//=====================SETTER Y GETTERS======================//
 	public Wungsdle getWungsdle() {
 		return wungsdle;
 	}

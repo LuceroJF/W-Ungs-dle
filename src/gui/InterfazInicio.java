@@ -14,6 +14,7 @@ public class InterfazInicio extends JFrame {
 	private String iniciarJuego = "";
 	private String configuracion = "";
 
+	//========================CONSTRUCTOR=========================//
 	public InterfazInicio(Wungsdle wordle) {
 		this.wordle = wordle;
 		crearInterfazInicio();
@@ -29,8 +30,8 @@ public class InterfazInicio extends JFrame {
 		Button btnConfig = new Button();
 		Button btnRanking = new Button();
 		actualizarTextos();
-		///////////////////////////////////////////////////////// BOTONES///////////////////////////////////////////////////
 
+		
 		btnInicio.setLabel(iniciarJuego);
 		btnInicio.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnInicio.addActionListener(new ActionListener() {
@@ -107,6 +108,7 @@ public class InterfazInicio extends JFrame {
 
 	}
 
+	//==============================METODOS==========================//
 	private void visualizarInterfazJuego(ActionEvent accion) {
 		InterfazWungsdle juego = new InterfazWungsdle(wordle);
 		juego.setVisible(true);
@@ -138,7 +140,6 @@ public class InterfazInicio extends JFrame {
 	public void actualizarTextos() {
 		iniciarJuego = (wordle.getTextoBotonInicio());
 		configuracion = (wordle.getTextoConfiguracion());
-
 	}
 
 	/// Este está duplicado para diferenciarlo del que empieza con el main (el de
@@ -149,7 +150,6 @@ public class InterfazInicio extends JFrame {
 		nuevaInterfazIdiomaActual.setVisible(true);
 		nuevaInterfazIdiomaActual.setLocationRelativeTo(null);
 		this.dispose();
-
 	}
 
 }

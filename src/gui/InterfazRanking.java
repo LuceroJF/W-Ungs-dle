@@ -15,6 +15,7 @@ public class InterfazRanking extends JFrame {
     private Wungsdle wordle;
     private String mensaje = "";
 
+    //===========================CONSTRUCTOR================================//
     public InterfazRanking(InterfazInicio menu, Wungsdle wordle) {
         this.menuPrincipal = menu;
         this.wordle = wordle;
@@ -98,5 +99,4 @@ public class InterfazRanking extends JFrame {
 
         this.add(btnVolver);
     }
-
 }

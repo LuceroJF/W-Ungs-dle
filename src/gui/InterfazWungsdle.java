@@ -17,11 +17,12 @@ public class InterfazWungsdle extends JFrame {
 	private String comenzar = "";
 	private String mensajeErrorNombre;
 
+	//====================CONSTRUCTOR=========================//
 	public InterfazWungsdle(Wungsdle wungsdle) {
 		this.wungsdle = wungsdle;
 		crearInterfazWungsdle();
 	}
-
+	
 	public void crearInterfazWungsdle() {
 		JPanel panelJuego = new JPanel();
 		panelJuego.setVisible(true);
