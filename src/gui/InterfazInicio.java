@@ -10,13 +10,13 @@ import entidades.Wungsdle;
 
 public class InterfazInicio extends JFrame {
 
-	private Wungsdle wordle;
+	private Wungsdle wungsdle;
 	private String iniciarJuego = "";
 	private String configuracion = "";
 
 	//========================CONSTRUCTOR=========================//
-	public InterfazInicio(Wungsdle wordle) {
-		this.wordle = wordle;
+	public InterfazInicio(Wungsdle juego) {
+		this.wungsdle = juego;
 		crearInterfazInicio();
 	}
 
@@ -64,21 +64,21 @@ public class InterfazInicio extends JFrame {
 
 		});
 
-		setSize(1920, 1080);
+		setSize(1366,768);
 		getContentPane().setFont(new Font("Luckiest Guy", Font.PLAIN, 11));
 		getContentPane().setLayout(null);
 		panel.setLayout(null);
 
-		logo.setBounds(89, 5, 600, 315);
+		logo.setBounds(160, 135, 600, 315);
 		panel.add(logo);
-		if(wordle.getIdiomaActual().startsWith("English")) {
+		if(wungsdle.getIdiomaActual().startsWith("English")) {
 			logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
 		}
 		else {
 			logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
 		}
 
-		contenedorMenu.setBounds(99, 331, 592, 320);
+		contenedorMenu.setBounds(168, 437, 592, 320);
 		panel.add(contenedorMenu);
 		contenedorMenu.setLayout(null);
 
@@ -96,57 +96,57 @@ public class InterfazInicio extends JFrame {
 		contenedorMenu.setFocusTraversalPolicy(
 				new FocusTraversalOnArray(new Component[] { btnInicio, btnTutorial, btnConfig, btnRanking }));
 
-		panel.setBounds(450, 100, 1920, 1080);
+		panel.setBounds(222, -178, 1366,768);
 		panel.setLayout(null);
 
 		this.getContentPane().add(panel);
 		panel.setFocusTraversalPolicy(new FocusTraversalOnArray(
 				new Component[] { contenedorMenu, logo, btnInicio, btnTutorial, btnConfig, btnRanking }));
 
-		this.setBounds(0, 0, 1920, 1080);
+		this.setBounds(0, 0, 1366,768);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 
 	//==============================METODOS==========================//
 	private void visualizarInterfazJuego(ActionEvent accion) {
-		InterfazWungsdle juego = new InterfazWungsdle(wordle);
+		InterfazWungsdle juego = new InterfazWungsdle(wungsdle);
 		juego.setVisible(true);
 		juego.setLocationRelativeTo(null);
 		this.dispose();
 	}
 
 	private void visualizarInterfazTutorial(ActionEvent accion) {
-		InterfazTutorial tutorial = new InterfazTutorial(this, this.wordle);
+		InterfazTutorial tutorial = new InterfazTutorial(this, this.wungsdle);
 		tutorial.setVisible(true);
 		tutorial.setLocationRelativeTo(null);
 		this.dispose();
 	}
 	
 	private void visualizarInterfazConfiguracion(ActionEvent accion) {
-		InterfazConfig config = new InterfazConfig(this, this.wordle);
+		InterfazConfig config = new InterfazConfig(this, this.wungsdle);
 		config.setVisible(true);
 		config.setLocationRelativeTo(null);
 		this.dispose();
 	}
 
 	private void visualizarInterfazRanking(ActionEvent accion) {
-	    InterfazRanking ranking = new InterfazRanking(this, wordle);
+	    InterfazRanking ranking = new InterfazRanking(this, wungsdle);
 	    ranking.setVisible(true);
 	    ranking.setLocationRelativeTo(null);
 	    this.dispose();
 	}
 
 	public void actualizarTextos() {
-		iniciarJuego = (wordle.getTextoBotonInicio());
-		configuracion = (wordle.getTextoConfiguracion());
+		iniciarJuego = (wungsdle.getTextoBotonInicio());
+		configuracion = (wungsdle.getTextoConfiguracion());
 	}
 
 	/// Este está duplicado para diferenciarlo del que empieza con el main (el de
 	/// arriba) y el que es actualizado por la configuracion (este de abajo)
 	public void actualizarTextos(String nuevo) {
-		iniciarJuego = (wordle.getTextoBotonInicio());
-		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wordle);
+		iniciarJuego = (wungsdle.getTextoBotonInicio());
+		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wungsdle);
 		nuevaInterfazIdiomaActual.setVisible(true);
 		nuevaInterfazIdiomaActual.setLocationRelativeTo(null);
 		this.dispose();

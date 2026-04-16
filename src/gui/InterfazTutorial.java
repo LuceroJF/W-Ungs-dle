@@ -9,13 +9,13 @@ public class InterfazTutorial extends JFrame {
 	
 	private InterfazInicio menuPrincipal;
 	private JFrame frame;
-	private Wungsdle wordle;
+	private Wungsdle wungsdle;
     private String volver = "";
 	
     //==========================CONSTRUCTOR============================//
-	public InterfazTutorial(InterfazInicio menu, Wungsdle wordle) {
+	public InterfazTutorial(InterfazInicio menu, Wungsdle juego) {
 		menuPrincipal = menu;
-		this.wordle = wordle;
+		this.wungsdle = juego;
 		crearInterfazTutorial();
 	}
 
@@ -27,7 +27,7 @@ public class InterfazTutorial extends JFrame {
 		JLabel etiquetaTutorial = new JLabel("");
 		JButton btnVolver = new JButton("");
 		
-        volver = wordle.getTextoBotonVolver();
+        volver = wungsdle.getTextoBotonVolver();
 		btnVolver.setText(volver);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
@@ -35,16 +35,16 @@ public class InterfazTutorial extends JFrame {
 			}
 		});
 
-		etiquetaLogoTutorial.setBounds(513, 11, 600, 167);
-		tutorialScroll.setBounds(450, 197, 699, 720);
+		etiquetaLogoTutorial.setBounds(378, 11, 600, 167);
+		tutorialScroll.setBounds(329, 224, 699, 329);
 		tutorialScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		etiquetaTutorial.setAlignmentY(0.2f);
-		btnVolver.setBounds(686, 944, 263, 52);
+		btnVolver.setBounds(552, 613, 263, 59);
 		tutorial.setLayout(null);
 		tutorial.add(etiquetaLogoTutorial);
 		tutorialScroll.setViewportView(etiquetaTutorial);
 		
-		if(wordle.getIdiomaActual().startsWith("English")) {
+		if(wungsdle.getIdiomaActual().startsWith("English")) {
 			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Logo.png")));
 			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/TutorialIngles.jpg")));
 		}
@@ -60,7 +60,7 @@ public class InterfazTutorial extends JFrame {
 		tutorial.setBounds(450, 100, 800, 800);
 
 		this.getContentPane().add(tutorial, BorderLayout.CENTER);
-		this.setBounds(0, 0, 1920, 1080);
+		this.setBounds(0, 0, 1366,768);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}

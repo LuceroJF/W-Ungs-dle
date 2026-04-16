@@ -17,12 +17,12 @@ public class InterfazWungsdle extends JFrame {
 	private String comenzar = "";
 	private String mensajeErrorNombre;
 
-	//====================CONSTRUCTOR=========================//
-	public InterfazWungsdle(Wungsdle wungsdle) {
-		this.wungsdle = wungsdle;
+	// ====================CONSTRUCTOR=========================//
+	public InterfazWungsdle(Wungsdle juego) {
+		this.wungsdle = juego;
 		crearInterfazWungsdle();
 	}
-	
+
 	public void crearInterfazWungsdle() {
 		JPanel panelJuego = new JPanel();
 		panelJuego.setVisible(true);
@@ -46,7 +46,7 @@ public class InterfazWungsdle extends JFrame {
 
 		JPanel panelNombre = new JPanel();
 		panelNombre.setPreferredSize(new Dimension(300, 300));
-		panelNombre.setBounds(329, 344, 889, 484);
+		panelNombre.setBounds(213, 172, 889, 484);
 		this.getContentPane().add(panelNombre, BorderLayout.NORTH);
 		panelNombre.setLayout(null);
 
@@ -80,7 +80,6 @@ public class InterfazWungsdle extends JFrame {
 					wungsdle.crearNombreUsuario(txfieldNombreUsuario.getText());
 					liberarTeclado(e);
 					panelNombre.setVisible(false);
-					System.out.println(wungsdle.getNombreUsuario());
 					panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"),
 							"enter");
 				} else {
@@ -94,7 +93,7 @@ public class InterfazWungsdle extends JFrame {
 
 		panelNombre.add(btnComenzarJuego);
 
-		panelJuego.setBounds(451, 183, 679, 667);
+		panelJuego.setBounds(335, 11, 679, 667);
 		this.getContentPane().add(panelJuego);
 		panelJuego.setLayout(null);
 
@@ -131,7 +130,7 @@ public class InterfazWungsdle extends JFrame {
 				.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelNombre, txfieldNombreUsuario,
 						panelJuego, panelVerde, etiquetaNombreJuego, intentos, lblNewLabel, btnComenzarJuego }));
 
-		this.setBounds(0, 0, 1920, 1080);
+		this.setBounds(0, 0, 1366, 768);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// ================== TECLADO ==================
@@ -233,7 +232,6 @@ public class InterfazWungsdle extends JFrame {
 
 						long tiempoFinal = System.currentTimeMillis();
 						Long latencia = tiempoInicio - tiempoFinal;
-						System.out.println(latencia);
 						wungsdle.setTiempoRespuesta(latencia);
 						juegoTerminado = true;
 						wungsdle.guardarResultado();

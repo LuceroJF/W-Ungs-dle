@@ -13,9 +13,9 @@ public class InterfazFinal extends JFrame{
     private boolean gano;
 
     //=========================CONSTRUCTOR========================//
-    public InterfazFinal(InterfazWungsdle juego, String usuario, String palabraSecreta, boolean gano, Wungsdle wordle) {
+    public InterfazFinal(InterfazWungsdle juego, String usuario, String palabraSecreta, boolean gano, Wungsdle wungsdleJuego) {
     	interfazJuego = juego;
-    	this.wungsdle = wordle;
+    	this.wungsdle = wungsdleJuego;
         this.gano = gano;
         crearInterfazFinal();
     }
