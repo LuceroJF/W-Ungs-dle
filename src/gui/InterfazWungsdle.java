@@ -192,7 +192,7 @@ public class InterfazWungsdle extends JFrame {
 					if (acerto) {
 						// TIEMPO
 						long tiempoFinal = System.currentTimeMillis();
-						long latenciaMs = tiempoInicio-tiempoFinal;
+						long latenciaMs = tiempoFinal-tiempoInicio;
 
 						long minutos = (latenciaMs / 1000) / 60;
 						long segundos = (latenciaMs / 1000) % 60;

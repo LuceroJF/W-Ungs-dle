@@ -190,26 +190,40 @@ public class Wungsdle
 		usuario.descontarIntento();
 	}
 	
-	public String[] evaluarColorLetra(String intento) 
+	public String[] evaluarColorLetra(String intento)
 	{
-		palabraUsuario = intento;
+	    palabraUsuario = intento;
 	    String palabraSecreta = palabra.getPalabra();
 	    String[] resultado = new String[5];
+	    boolean[] usadaEnSecreta = new boolean[5];
 
-	    for (int i = 0; i < 5; i++) 
+	    // Primera pasada: VERDES
+	    for (int i = 0; i < 5; i++)
 	    {
-	        char letraIntento = intento.charAt(i);
-	        char letraSecreta = palabraSecreta.charAt(i);
-
-	        if (letraIntento == letraSecreta) 
+	        if (intento.charAt(i) == palabraSecreta.charAt(i))
 	        {
 	            resultado[i] = "VERDE";
-	        } 
-	        else if (palabraSecreta.contains(String.valueOf(letraIntento))) 
+	            usadaEnSecreta[i] = true;
+	        }
+	    }
+
+	    // Segunda pasada: AMARILLOS y GRIS
+	    for (int i = 0; i < 5; i++)
+	    {
+	        if (resultado[i] != null) continue;
+
+	        boolean encontrada = false;
+	        for (int j = 0; j < 5; j++)
 	        {
-	            resultado[i] = "AMARILLO";
-	        } 
-	        else 
+	            if (!usadaEnSecreta[j] && intento.charAt(i) == palabraSecreta.charAt(j))
+	            {
+	                resultado[i] = "AMARILLO";
+	                usadaEnSecreta[j] = true;
+	                encontrada = true;
+	                break;
+	            }
+	        }
+	        if (!encontrada)
 	        {
 	            resultado[i] = "GRIS";
 	        }
@@ -223,24 +237,40 @@ public class Wungsdle
 		palabraUsuario = intento;
 	    String palabraSecreta = secretaTest;
 	    String[] resultado = new String[5];
+	    boolean[] usadaEnSecreta = new boolean[5];
 
-	    for (int i = 0; i < 5; i++) 
+	    // Verificamos los Verdes
+	    for (int i = 0; i < 5; i++)
 	    {
-	        char letraIntento = intento.charAt(i);
-	        char letraSecreta = palabraSecreta.charAt(i);
-	        if (letraIntento == letraSecreta) 
+	        if (intento.charAt(i) == palabraSecreta.charAt(i))
 	        {
 	            resultado[i] = "VERDE";
-	        } 
-	        else if (palabraSecreta.contains(String.valueOf(letraIntento))) 
+	            usadaEnSecreta[i] = true;
+	        }
+	    }
+
+	    // Verificamos los Amarillos Y Grises
+	    for (int i = 0; i < 5; i++)
+	    {
+	        if (resultado[i] != null) continue;
+
+	        boolean encontrada = false;
+	        for (int j = 0; j < 5; j++)
 	        {
-	            resultado[i] = "AMARILLO";
-	        } 
-	        else 
+	            if (!usadaEnSecreta[j] && intento.charAt(i) == palabraSecreta.charAt(j))
+	            {
+	                resultado[i] = "AMARILLO";
+	                usadaEnSecreta[j] = true;
+	                encontrada = true;
+	                break;
+	            }
+	        }
+	        if (!encontrada)
 	        {
 	            resultado[i] = "GRIS";
 	        }
 	    }
+
 	    return resultado;
 	}
 	

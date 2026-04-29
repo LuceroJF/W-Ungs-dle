@@ -1,3 +1,5 @@
 jorge,20,-63
 jorge,12,-377
 jorge,29,78
+jorge,43,-88
+jorge,22,99
