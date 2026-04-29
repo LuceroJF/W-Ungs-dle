@@ -192,7 +192,7 @@ public class InterfazWungsdle extends JFrame {
 					if (acerto) {
 						// TIEMPO
 						long tiempoFinal = System.currentTimeMillis();
-						long latenciaMs = tiempoFinal - tiempoInicio;
+						long latenciaMs = tiempoInicio-tiempoFinal;
 
 						long minutos = (latenciaMs / 1000) / 60;
 						long segundos = (latenciaMs / 1000) % 60;
@@ -231,7 +231,7 @@ public class InterfazWungsdle extends JFrame {
 					} else {
 
 						long tiempoFinal = System.currentTimeMillis();
-						Long latencia = tiempoInicio - tiempoFinal;
+						Long latencia = tiempoFinal - tiempoInicio;
 						wungsdle.setTiempoRespuesta(latencia);
 						juegoTerminado = true;
 						wungsdle.guardarResultado();
@@ -248,10 +248,22 @@ public class InterfazWungsdle extends JFrame {
 						});
 					}
 				} else {
+					//Marca la palabra invalida en rojo y luego la setea.
 					for (int i = 0; i < 5; i++) {
 						casillas[filaActual[0]][i].setBackground(Color.RED);
 					}
-					;
+					Timer timer = new Timer(1000, new ActionListener() {
+					    public void actionPerformed(ActionEvent evento) {
+					        for (int i = 0; i < 5; i++) {
+					            casillas[filaActual[0]][i].setBackground(Color.WHITE);
+					            casillas[filaActual[0]][i].setText("");
+					        }
+					        palabraUsuario = "";
+					        colActual[0] = 0;
+					    }
+					});
+					timer.setRepeats(false);
+					timer.start();
 				}
 			}
 		});
