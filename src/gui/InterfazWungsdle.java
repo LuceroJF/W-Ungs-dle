@@ -168,9 +168,13 @@ public class InterfazWungsdle extends JFrame {
 				 * (Codigo se encuentra al final de Wungsdle, idealmente hay que modificarlo,
 				 * funciona pero es copia)
 				 */
+				
+				/*
 				if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario,
 						wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
-
+				*///<-Modificacion
+				if(wungsdle.esPalabraValida(palabraUsuario)) {
+					
 					String[] resultado = wungsdle.evaluarColorLetra(palabraUsuario.toLowerCase());
 					wungsdle.sumarPuntosPorResultado(resultado);
 					boolean acerto = true;

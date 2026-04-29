@@ -358,6 +358,15 @@ public class Wungsdle
         Ranking.guardarPuntaje(nombre, puntos, tiempo);
     }
 	
+    //Correcion linea 171 Interfaz
+    //if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario,
+	//wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
+    //Se crea un metodo que valida la palabra
+    public boolean esPalabraValida(String palabra) {
+    	return palabra.length() == 5 && verificarSiExiste(palabra, idiomaActual, dificultadActual);
+    }
+    
+    
 ////////////////////////////////////////METODOS DE UTILIDAD //////////////////////////////////////////
 
 	public void alertError(String mensaje) {
