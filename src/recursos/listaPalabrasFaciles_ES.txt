@@ -255,7 +255,7 @@ evita
 exito
 extra
 falla
-falso
+FALSO
 falta
 famos
 fango
@@ -353,9 +353,6 @@ imito
 impon
 index
 indio
-inicia
-inicio
-inmune
 input
 irado
 islas
@@ -372,7 +369,6 @@ junta
 junto
 justo
 karma
-kilo
 labio
 labor
 lados
@@ -420,7 +416,6 @@ marca
 marco
 marea
 marzo
-masa
 matar
 mayor
 mejor
@@ -431,14 +426,12 @@ metal
 meter
 metro
 miedo
-miel
 minas
 mirar
 mismo
 mitad
 modal
 modas
-modo
 monje
 monte
 moral
@@ -508,7 +501,6 @@ pedir
 pegar
 pelar
 pelos
-pena
 perro
 pesar
 piano
@@ -575,7 +567,6 @@ rocas
 rodar
 rompe
 ronda
-ropa
 rosal
 rotar
 rubio
@@ -688,9 +679,7 @@ valor
 vamos
 vapor
 varon
-vaso
 veces
-vecino
 vedar
 vejez
 velar
@@ -707,7 +696,6 @@ video
 vigia
 vigor
 villa
-vino
 viola
 vivir
 vocal

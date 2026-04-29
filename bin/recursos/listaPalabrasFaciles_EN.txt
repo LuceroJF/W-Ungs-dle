@@ -216,7 +216,6 @@ joint
 jones
 judge
 known
-abel
 large
 laser
 later
