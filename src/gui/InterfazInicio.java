@@ -126,7 +126,7 @@ public class InterfazInicio extends JFrame {
 	}
 	
 	private void visualizarInterfazConfiguracion(ActionEvent accion) {
-		InterfazConfig config = new InterfazConfig(this, this.wungsdle);
+		InterfazConfig config = new InterfazConfig(this, this.wungsdle, logica);
 		config.setVisible(true);
 		config.setLocationRelativeTo(null);
 		this.dispose();

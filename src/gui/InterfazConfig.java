@@ -19,7 +19,8 @@ public class InterfazConfig extends JFrame {
 	private LogicaPalabra logica;
 	
 	//=======================CONSTRUCTOR==========================//
-	public InterfazConfig(InterfazInicio menu, Wungsdle juego) {
+	public InterfazConfig(InterfazInicio menu, Wungsdle juego, LogicaPalabra logicaP) {
+		this.logica = logicaP;
 		this.menuPrincipal = menu;
 		this.wungsdle = juego;
 		crearInterfazConfiguracion();
