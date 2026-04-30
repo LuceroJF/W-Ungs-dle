@@ -3,7 +3,6 @@ package gui;
 import javax.swing.JFrame;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.Button;
@@ -15,10 +14,12 @@ public class InterfazInicio extends JFrame {
 	private Wungsdle wungsdle;
 	private String iniciarJuego = "";
 	private String configuracion = "";
+	private Icon logoActual;
 
 	//========================CONSTRUCTOR=========================//
 	public InterfazInicio(Wungsdle juego) {
 		this.wungsdle = juego;
+		logoActual= wungsdle.retornarLogoIdioma();
 		crearInterfazInicio();
 	}
 
@@ -73,12 +74,7 @@ public class InterfazInicio extends JFrame {
 
 		logo.setBounds(160, 135, 600, 315);
 		panel.add(logo);
-		if(wungsdle.getIdiomaActual().startsWith("English")) {
-			logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
-		}
-		else {
-			logo.setIcon(new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
-		}
+		logo.setIcon(logoActual);
 
 		contenedorMenu.setBounds(168, 437, 592, 320);
 		panel.add(contenedorMenu);

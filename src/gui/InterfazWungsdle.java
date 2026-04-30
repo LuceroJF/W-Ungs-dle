@@ -96,15 +96,10 @@ public class InterfazWungsdle extends JFrame {
 		panelJuego.setBounds(335, 11, 679, 667);
 		this.getContentPane().add(panelJuego);
 		panelJuego.setLayout(null);
-
 		panelVerde.setBackground(new Color(177, 222, 208));
 		panelJuego.add(panelVerde);
-
-		etiquetaNombreJuego.setIcon(new ImageIcon(InterfazWungsdle.class.getResource("/recursos/Logo.png")));
-		etiquetaNombreJuego.setFont(new Font("Luckiest Guy", Font.BOLD, 25));
 		panelJuego.add(etiquetaNombreJuego);
 		panelJuego.add(intentos);
-
 		panelJuego.setLayout(null);
 
 		final int[] filaActual = { 0 };
@@ -121,10 +116,6 @@ public class InterfazWungsdle extends JFrame {
 				panelVerde.add(label);
 			}
 		}
-
-		etiquetaNombreJuego.setIcon(new ImageIcon(InterfazWungsdle.class.getResource("/recursos/Logo.png")));
-		etiquetaNombreJuego.setFont(new Font("Luckiest Guy", Font.BOLD, 25));
-		panelJuego.add(etiquetaNombreJuego);
 		this.getContentPane().setLayout(null);
 		this.getContentPane()
 				.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelNombre, txfieldNombreUsuario,
@@ -161,97 +152,24 @@ public class InterfazWungsdle extends JFrame {
 		panelVerde.getActionMap().put("enter", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				/*
-				 * Ahora además de verificar si lo que ingresa el usuario tiene 5 caracteres,
-				 * verifica si dicha palabra existe entre las casi 2 mil palabras de los TXT
-				 * (Codigo se encuentra al final de Wungsdle, idealmente hay que modificarlo,
-				 * funciona pero es copia)
-				 */
-				
-				/*
-				if (palabraUsuario.length() == 5 && wungsdle.verificarSiExiste(palabraUsuario,
-						wungsdle.getIdiomaActual(), wungsdle.getDificultadActual())) {
-				*///<-Modificacion
-				if(wungsdle.esPalabraValida(palabraUsuario)) {
-					
-					String[] resultado = wungsdle.evaluarColorLetra(palabraUsuario.toLowerCase());
-					wungsdle.sumarPuntosPorResultado(resultado);
-					boolean acerto = true;
-
-					for (int i = 0; i < 5; i++) {
-
-						if (resultado[i].equals("VERDE")) {
-							casillas[filaActual[0]][i].setBackground(Color.GREEN);
-						} else if (resultado[i].equals("AMARILLO")) {
-							casillas[filaActual[0]][i].setBackground(Color.YELLOW);
-							acerto = false;
-						} else {
-							casillas[filaActual[0]][i].setBackground(Color.LIGHT_GRAY);
-							acerto = false;
-						}
-					}
-
-					// ================== GANA ==================
-					if (acerto) {
-						// TIEMPO
-						long tiempoFinal = System.currentTimeMillis();
-						long latenciaMs = tiempoFinal-tiempoInicio;
-
-						long minutos = (latenciaMs / 1000) / 60;
-						long segundos = (latenciaMs / 1000) % 60;
-
-						wungsdle.setTiempoRespuesta(latenciaMs);
-						// punto si gana
-						wungsdle.sumarPuntosGanador();
-						// guardar
-						wungsdle.guardarResultado();
-						juegoTerminado = true;
-
-						panelVerde.setEnabled(false);
-						panelVerde.setFocusable(false);
-						panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).clear();
-						panelVerde.getActionMap().clear();
-
-						palabraUsuario = "";
-
-						SwingUtilities.invokeLater(() -> {
-							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this, wungsdle.getNombreUsuario(),
-									wungsdle.getPalabraSecreta(), true, wungsdle);
-							fin.setVisible(true);
-
-						});
-					}
-
-					// ================== PIERDE ==================
-					if (wungsdle.consultarIntentoUsuario() > 1) {
-						wungsdle.descontarIntento();
-						intentos.setText("INTENTOS: " + wungsdle.consultarIntentoUsuario());
-
-						filaActual[0]++;
-						colActual[0] = 0;
-						palabraUsuario = "";
-
+				boolean gana=false;
+				String[] resultado = wungsdle.retornarColorLetra(palabraUsuario.toLowerCase());
+				for (int i = 0; i < 5; i++) {
+					if (resultado[i].equals("VERDE")) {
+						casillas[filaActual[0]][i].setBackground(Color.GREEN);
+						wungsdle.acertoUsuario(true);
+					} else if (resultado[i].equals("AMARILLO")) {
+						casillas[filaActual[0]][i].setBackground(Color.YELLOW);
+						wungsdle.acertoUsuario(false);
 					} else {
-
-						long tiempoFinal = System.currentTimeMillis();
-						Long latencia = tiempoFinal - tiempoInicio;
-						wungsdle.setTiempoRespuesta(latencia);
-						juegoTerminado = true;
-						wungsdle.guardarResultado();
-						panelVerde.setEnabled(false);
-						panelVerde.setFocusable(false);
-						panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).clear();
-						panelVerde.getActionMap().clear();
-
-						SwingUtilities.invokeLater(() -> {
-							InterfazFinal fin = new InterfazFinal(InterfazWungsdle.this, wungsdle.getNombreUsuario(),
-									wungsdle.getPalabraSecreta(), false, wungsdle);
-							fin.setVisible(true);
-
-						});
+						casillas[filaActual[0]][i].setBackground(Color.LIGHT_GRAY);
+						wungsdle.acertoUsuario(false);
 					}
-				} else {
+				}
+				wungsdle.consultarIntentoUsuario();
+				gana &= wungsdle.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
+				juegoTerminado &= gana;
+				if (wungsdle.devolverIntentoInvalido() == true) {
 					//Marca la palabra invalida en rojo y luego la setea.
 					for (int i = 0; i < 5; i++) {
 						casillas[filaActual[0]][i].setBackground(Color.RED);
@@ -262,13 +180,18 @@ public class InterfazWungsdle extends JFrame {
 					            casillas[filaActual[0]][i].setBackground(Color.WHITE);
 					            casillas[filaActual[0]][i].setText("");
 					        }
-					        palabraUsuario = "";
+					        palabraUsuario="";
 					        colActual[0] = 0;
 					    }
 					});
 					timer.setRepeats(false);
 					timer.start();
+					return;
 				}
+				intentos.setText("INTENTOS: " + wungsdle.consultarIntentoUsuario());
+				filaActual[0]++;
+				colActual[0] = 0;
+				palabraUsuario="";
 			}
 		});
 

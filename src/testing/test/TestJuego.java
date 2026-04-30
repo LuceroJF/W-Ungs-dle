@@ -10,7 +10,7 @@ public class TestJuego extends Wungsdle {
 	// Verifica si el sistema maneja correctamente una entrada nula
     @Test(expected = NullPointerException.class)
     public void palabraVaciaTest() {
-        wungsdle.evaluarColorLetra(null);
+        wungsdle.retornarColorLetra(null);
     }
 
     // Verifica que no se procesen palabras con longitud incorrecta
@@ -19,7 +19,7 @@ public class TestJuego extends Wungsdle {
         String intentoCorto = "SOL";
         int intentosIniciales = wungsdle.consultarIntentoUsuario();
         if (intentoCorto.length() == 5) {
-            wungsdle.evaluarColorLetra(intentoCorto);
+            wungsdle.retornarColorLetra(intentoCorto);
         }
         assertEquals(intentosIniciales, wungsdle.consultarIntentoUsuario());
     }

@@ -11,6 +11,7 @@ public class ConfiguracionInicial {
 		
 		this.wungsdle = juego;
 		wungsdle.crearPalabra("Español - ES","Facil - Easy");
+		System.out.println(wungsdle.getPalabraSecreta());
 		InterfazInicio window = new InterfazInicio(wungsdle);
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);

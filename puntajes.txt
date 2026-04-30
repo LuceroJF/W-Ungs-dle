@@ -1,3 +1,6 @@
 martin,25,213
 MARTIN,53,176
 MARTIN,53,176
+JHuan,10,4
+juan,0,15
+juan,10,5

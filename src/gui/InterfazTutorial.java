@@ -44,6 +44,11 @@ public class InterfazTutorial extends JFrame {
 		tutorial.add(etiquetaLogoTutorial);
 		tutorialScroll.setViewportView(etiquetaTutorial);
 		
+		
+		
+		
+		
+		///////////////////////////////////////////////////////////////////////////// Logica Idioma //////////////////////////////////////////////////
 		if(wungsdle.getIdiomaActual().startsWith("English")) {
 			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Logo.png")));
 			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/TutorialIngles.jpg")));
@@ -53,6 +58,10 @@ public class InterfazTutorial extends JFrame {
 			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/LogoEspaniol.png")));
 			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Tutorial.png")));
 		}
+///////////////////////////////////////////////////////////////////////////// Logica Idioma //////////////////////////////////////////////////
+
+		
+		
 		tutorial.add(tutorialScroll);
 		tutorial.add(btnVolver);
 		btnVolver.setFont(new Font("Luckiest Guy", Font.BOLD, 14));
