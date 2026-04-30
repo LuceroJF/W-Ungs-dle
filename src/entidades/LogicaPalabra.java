@@ -22,7 +22,7 @@ public class LogicaPalabra {
 	private Usuario usuario;
 	private Wungsdle wungsdle;
 	private boolean fueInvalido=false;
-	private boolean intentoActualUsuario;
+	private boolean intentoActualUsuario= true;
 	
 	public LogicaPalabra(Usuario usuarioWungsdle, Palabra palabraWungsdle, Wungsdle juego)
 	{
@@ -141,7 +141,7 @@ public class LogicaPalabra {
 			return intentoUsuario;
 		}
 		
-	   public boolean devolverIntentoInvalido(){
+	   public boolean getIntentoInvalido(){
 		   return this.fueInvalido;
 	   }
 		
@@ -170,7 +170,7 @@ public class LogicaPalabra {
 			usuario.descontarIntento();
 		}
 		
-		public String[] retornarColorLetra(String intento)
+		public String[] getColorLetra(String intento)
 		{
 		    palabraUsuario = intento;
 		    String palabraSecreta = palabra.getPalabra();
@@ -220,10 +220,8 @@ public class LogicaPalabra {
 	    	
 		
 	public void acertoUsuario(boolean intento) {
-        
-		boolean intentoUsuario = true;
-		intentoUsuario &= intento;
-		intentoActualUsuario = intentoUsuario;
+		
+		intentoActualUsuario &= intento;
 	}
 	    
 	    public boolean estadoActualPartida(String palabraUsuario, Long tiempoInicio, InterfazWungsdle actual) {
@@ -244,6 +242,7 @@ public class LogicaPalabra {
 						fueInvalido = true;
 
 					}
+					intentoActualUsuario=true;
 					return acerto;
 				}
 	    
@@ -251,43 +250,45 @@ public class LogicaPalabra {
 	    /// 
 	    public String[] evaluarColorLetra(String intento, String secretaTest) 
 	    {
-	    	palabraUsuario = intento;
-	        String palabraSecreta = secretaTest;
-	        String[] resultado = new String[5];
-	        boolean[] usadaEnSecreta = new boolean[5];
+		    palabraUsuario = intento;
+		    String palabraSecreta = secretaTest;
+		    String[] resultado = new String[5];
+		    boolean[] usadaEnSecreta = new boolean[5];
 
-	        // Verificamos los Verdes
-	        for (int i = 0; i < 5; i++)
-	        {
-	            if (intento.charAt(i) == palabraSecreta.charAt(i))
-	            {
-	                resultado[i] = "VERDE";
-	                usadaEnSecreta[i] = true;
-	            }
-	        }
+		    // Primera pasada: VERDES
+		    for (int i = 0; i < 5; i++)
+		    {
+		        if (intento.charAt(i) == palabraSecreta.charAt(i))
+		        {
+		            resultado[i] = "VERDE";
+		            usadaEnSecreta[i] = true;
+		        }
+		    }
 
-	        // Verificamos los Amarillos Y Grises
-	        for (int i = 0; i < 5; i++)
-	        {
-	            if (resultado[i] != null) continue;
+		    // Segunda pasada: AMARILLOS y GRIS
+		    for (int i = 0; i < 5; i++)
+		    {
+		        if (resultado[i] != null) continue;
 
-	            boolean encontrada = false;
-	            for (int j = 0; j < 5; j++)
-	            {
-	                if (!usadaEnSecreta[j] && intento.charAt(i) == palabraSecreta.charAt(j))
-	                {
-	                    resultado[i] = "AMARILLO";
-	                    usadaEnSecreta[j] = true;
-	                    encontrada = true;
-	                    break;
-	                }
-	            }
-	            if (!encontrada)
-	            {
-	                resultado[i] = "GRIS";
-	            }
-	        }
+		        boolean encontrada = false;
+		        for (int j = 0; j < 5; j++)
+		        {
+		            if (!usadaEnSecreta[j] && intento.charAt(i) == palabraSecreta.charAt(j))
+		            {
+		                resultado[i] = "AMARILLO";
+		                usadaEnSecreta[j] = true;
+		                encontrada = true;
+		                break;
+		            }
+		        }
+		        if (!encontrada)
+		        {
+		            resultado[i] = "GRIS";
+		        }
+		    }
 
-	        return resultado;
+		    return resultado;
 	    }
+
+
 }

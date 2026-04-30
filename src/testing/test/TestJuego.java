@@ -13,7 +13,7 @@ public class TestJuego extends Wungsdle {
 	// Verifica si el sistema maneja correctamente una entrada nula
     @Test(expected = NullPointerException.class)
     public void palabraVaciaTest() {
-    	logicaP.retornarColorLetra(null);
+    	logicaP.getColorLetra(null);
     }
 
     // Verifica que no se procesen palabras con longitud incorrecta
@@ -22,7 +22,7 @@ public class TestJuego extends Wungsdle {
         String intentoCorto = "SOL";
         int intentosIniciales = logicaP.consultarIntentoUsuario();
         if (intentoCorto.length() == 5) {
-        	logicaP.retornarColorLetra(intentoCorto);
+        	logicaP.getColorLetra(intentoCorto);
         }
         assertEquals(intentosIniciales, logicaP.consultarIntentoUsuario());
     }
@@ -59,10 +59,10 @@ public class TestJuego extends Wungsdle {
  // Verifica si la letra está en amarillo cuando existe en la palabra pero en otra posición
     @Test
     public void colorAmarilloTest() {
-        String intento = "CASAS";
-        String secreta = "SOPAS"; 
+        String intento = "TORTA";
+        String secreta = "PARTE"; 
         String[] resultado = logicaP.evaluarColorLetra(intento, secreta);
-        assertEquals("AMARILLO", resultado[1]);
+        assertEquals("AMARILLO", resultado[4]);
     }
 
     // Verifica si la letra está en verde cuando la posición coincide exactamente

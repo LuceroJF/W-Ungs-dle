@@ -71,9 +71,9 @@ public class InterfazFinal extends JFrame{
 
         btnReiniciar.addActionListener(e -> {
         	configuracionInicial = new ConfiguracionInicial();
-        	LogicaPalabra logicaP= wungsdle.comenzarLogicaPalabra();
-            configuracionInicial.crearConfiguracionInicial(new Wungsdle(), logicaP);
-           
+        	Wungsdle wungsdle1 = new Wungsdle();
+        	LogicaPalabra logicaP1= wungsdle1.comenzarLogicaPalabra();
+            configuracionInicial.crearConfiguracionInicial(wungsdle1, logicaP1);
             interfazJuego.dispose();
             this.dispose();
         });

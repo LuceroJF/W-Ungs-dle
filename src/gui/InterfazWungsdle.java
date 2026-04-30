@@ -19,11 +19,14 @@ public class InterfazWungsdle extends JFrame {
 	private String comenzar = "";
 	private String mensajeErrorNombre;
 	private LogicaPalabra logica;
+    String intentosIdioma = "";
+	private Icon logoActual;
 
 	// ====================CONSTRUCTOR=========================//
 	public InterfazWungsdle(Wungsdle juego, LogicaPalabra logicaP) {
 		this.wungsdle = juego;
 		this.logica = logicaP;
+		logoActual= wungsdle.getLogoIdioma();
 		crearInterfazWungsdle();
 	}
 
@@ -32,9 +35,10 @@ public class InterfazWungsdle extends JFrame {
 		panelJuego.setVisible(true);
 
 		JLabel etiquetaNombreJuego = new JLabel();
+		etiquetaNombreJuego.setIcon(logoActual);
 		etiquetaNombreJuego.setBounds(47, 64, 599, 96);
-
-		JLabel intentos = new JLabel("INTENTOS: " + logica.consultarIntentoUsuario());
+        intentosIdioma = wungsdle.getIntentosIdioma();
+		JLabel intentos = new JLabel(intentosIdioma+ " " + logica.consultarIntentoUsuario());
 		intentos.setBounds(312, 203, 200, 20);
 		intentos.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -157,7 +161,7 @@ public class InterfazWungsdle extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean gana=false;
-				String[] resultado = logica.retornarColorLetra(palabraUsuario.toLowerCase());
+				String[] resultado = logica.getColorLetra(palabraUsuario.toLowerCase());
 				for (int i = 0; i < 5; i++) {
 					if (resultado[i].equals("VERDE")) {
 						casillas[filaActual[0]][i].setBackground(Color.GREEN);
@@ -173,7 +177,7 @@ public class InterfazWungsdle extends JFrame {
 				logica.consultarIntentoUsuario();
 				gana &= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
 				juegoTerminado &= gana;
-				if (logica.devolverIntentoInvalido() == true) {
+				if (logica.getIntentoInvalido() == true) {
 					//Marca la palabra invalida en rojo y luego la setea.
 					for (int i = 0; i < 5; i++) {
 						casillas[filaActual[0]][i].setBackground(Color.RED);
@@ -192,7 +196,7 @@ public class InterfazWungsdle extends JFrame {
 					timer.start();
 					return;
 				}
-				intentos.setText("INTENTOS: " + logica.consultarIntentoUsuario());
+				intentos.setText(intentosIdioma + " " + logica.consultarIntentoUsuario());
 				filaActual[0]++;
 				colActual[0] = 0;
 				palabraUsuario="";

@@ -22,7 +22,7 @@ public class Wungsdle
 	private Palabra palabra; //
 	private String idiomaActual;
 	private String dificultadActual;
-	private Icon retornarLogoIdiomaActual;
+	private Icon getLogoIdiomaActual;
 
 	//===========================CONSTRUCTOR===========================//
 	public Wungsdle()
@@ -163,7 +163,29 @@ public class Wungsdle
 	    }
 	    return "Nombre ingresado incorrectamente, por que favor vuelva a intentarlo";
 	}
+	
+	public String getIntentosIdioma() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return "Tries";
+	    }
+	    return "Intentos";
+	}
+	
+	public String[] getColumnasRanking() {
+	    if (this.idiomaActual.startsWith("English")) {
+	        return new String[] {"Player", "Score", "Time"};
+	    }
+	    return new String[] {"Jugador", "Puntos", "Tiempo"};
+	}
 
+    public Icon getLogoIdioma() {
+		if(this.getIdiomaActual().startsWith("English")) {
+		return (getLogoIdiomaActual = new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
+	}
+	else {
+		return (getLogoIdiomaActual =new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
+	}
+    }
 		
 	//===============================METODOS=============================//	
 	public void crearNombreUsuario(String nombre) {
@@ -203,14 +225,7 @@ public class Wungsdle
     }
 	
     
-    public Icon retornarLogoIdioma() {
-		if(this.getIdiomaActual().startsWith("English")) {
-		return (retornarLogoIdiomaActual = new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
-	}
-	else {
-		return (retornarLogoIdiomaActual =new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
-	}
-    }
+
     
     
 ////////////////////////////////////////METODOS DE UTILIDAD //////////////////////////////////////////

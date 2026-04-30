@@ -36,9 +36,9 @@ public class InterfazRanking extends JFrame {
         getContentPane().add(titulo);
 
         // ================== COLUMNAS ==================
-        String[] columnas = {"Jugador", "Puntos", "Tiempo"};
-
-        java.util.List<String> ranking = Ranking.obtenerRankingOrdenado();
+        
+        String[] columnas = wungsdle.getColumnasRanking();
+        java.util.List<String> ranking = Ranking.getRankingOrdenado();
 
         String[][] datos = new String[ranking.size()][3];
 

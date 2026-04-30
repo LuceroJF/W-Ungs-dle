@@ -23,7 +23,7 @@ public class InterfazInicio extends JFrame {
 	public InterfazInicio(Wungsdle juego, LogicaPalabra logicaP) {
 		this.logica=logicaP;
 		this.wungsdle = juego;
-		logoActual= wungsdle.retornarLogoIdioma();
+		logoActual= wungsdle.getLogoIdioma();
 		crearInterfazInicio();
 	}
 

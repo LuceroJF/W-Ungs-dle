@@ -6,14 +6,14 @@ import java.util.*;
 public class Ranking {
 
     // ================== OBTENER ARCHIVO ==================
-    private static File obtenerArchivo() {
+    private static File getArchivo() {
         File archivo = new File("puntajes.txt");
         return archivo;
     }
 
     // ================== GUARDAR ==================
     public static void guardarPuntaje(String nombre, int puntos, int tiempo) {
-        File archivo = obtenerArchivo();
+        File archivo = getArchivo();
 
         try (FileWriter fw = new FileWriter(archivo, true)) {
             fw.write(nombre + "," + puntos + "," + tiempo + "\n");
@@ -26,7 +26,7 @@ public class Ranking {
     public static List<String> leerPuntajes() {
         List<String> lista = new ArrayList<>();
 
-        File archivo = obtenerArchivo();
+        File archivo = getArchivo();
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
@@ -43,7 +43,7 @@ public class Ranking {
     }
 
     // ================== ORDENAR ==================
-    public static List<String> obtenerRankingOrdenado() {
+    public static List<String> getRankingOrdenado() {
 
         List<String> puntajes = leerPuntajes();
 
@@ -51,17 +51,19 @@ public class Ranking {
             String[] pA = a.split(",");
             String[] pB = b.split(",");
 
-            int puntosA = Integer.parseInt(pA[1]);
-            int puntosB = Integer.parseInt(pB[1]);
+            int tiempoA = Integer.parseInt(pA[1]);
+            int tiempoB = Integer.parseInt(pB[1]);
+            
+            //esto debe ser ordenado por tiempo 
 
-            if (puntosA != puntosB) {
-                return puntosB - puntosA; 
+            if (tiempoA != tiempoB) {
+                return tiempoB - tiempoA; 
             }
 
-            int tiempoA = Integer.parseInt(pA[2]);
-            int tiempoB = Integer.parseInt(pB[2]);
+            int puntosA = Integer.parseInt(pA[2]);
+            int puntosB = Integer.parseInt(pB[2]);
 
-            return tiempoA - tiempoB; 
+            return puntosA - puntosB; 
         });
 
         return puntajes;
@@ -69,7 +71,7 @@ public class Ranking {
 
     // ================== RESETEAR ==================
     public static void resetearPuntajes() {
-        File archivo = obtenerArchivo();
+        File archivo = getArchivo();
 
         try (FileWriter fw = new FileWriter(archivo)) {
         } catch (IOException e) {
