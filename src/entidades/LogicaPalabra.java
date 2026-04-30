@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.swing.Icon;
 import javax.swing.SwingUtilities;
 import gui.InterfazFinal;
 import gui.InterfazInicio;
@@ -15,8 +17,21 @@ import gui.InterfazWungsdle;
 public class LogicaPalabra {
 	private Palabra palabra; //
 	private String palabraUsuario;
-
+	private String dificultadActual;
+	private String idiomaActual;
+	private Usuario usuario;
+	private Wungsdle wungsdle;
+	private boolean fueInvalido=false;
+	private boolean intentoActualUsuario;
 	
+	public LogicaPalabra(Usuario usuarioWungsdle, Palabra palabraWungsdle, Wungsdle juego)
+	{
+		usuario = usuarioWungsdle;
+		palabra = palabraWungsdle;
+		this.wungsdle = juego;
+
+	}
+
 		public String getPalabraSecreta() {
 		    return palabra.getPalabra();
 		}
@@ -29,7 +44,18 @@ public class LogicaPalabra {
 		public void crearPalabra(String idiomaElegido, String dificultadElegida) {
 			String rutaRecurso = rutaTxtSegunSeleccion(idiomaElegido, dificultadElegida);
 			palabra.setPalabra(palabraAleatoriaDesdeRecurso(rutaRecurso));
+			idiomaActual=idiomaElegido;
 			dificultadActual=dificultadElegida;
+		}
+		
+		public String rutaTxtSegunSeleccion(String idiomaElegido, String dificultadElegida) {
+			boolean esEspanol = (idiomaElegido != null) && idiomaElegido.startsWith("Español");
+			boolean esFacil = (dificultadElegida != null) && dificultadElegida.startsWith("Facil");
+
+			String lang = esEspanol ? "ES" : "EN";
+			String dif = esFacil ? "listaPalabrasFaciles" : "listaPalabraSDificiles";
+
+			return "/recursos/" + dif + "_" + lang + ".txt";
 		}
 		
 	    //Elige una palabra random de los txt de palabrass
@@ -104,11 +130,11 @@ public class LogicaPalabra {
 
 				long tiempoFinal = System.currentTimeMillis();
 				Long latencia = tiempoFinal - tiempoInicio;
-				this.setTiempoRespuesta(latencia);
-				this.guardarResultado();
+				wungsdle.setTiempoRespuesta(latencia);
+				wungsdle.guardarResultado();
 				SwingUtilities.invokeLater(() -> {
-					InterfazFinal fin = new InterfazFinal(juego, this.getNombreUsuario(),
-							this.getPalabraSecreta(), false, this);
+					InterfazFinal fin = new InterfazFinal(juego, wungsdle.getNombreUsuario(),
+							this.getPalabraSecreta(), false, wungsdle, this);
 					fin.setVisible(true);
 				});
 			}
@@ -128,15 +154,15 @@ public class LogicaPalabra {
 			long minutos = (latenciaMs / 1000) / 60;
 			long segundos = (latenciaMs / 1000) % 60;
 
-			this.setTiempoRespuesta(latenciaMs);
+			wungsdle.setTiempoRespuesta(latenciaMs);
 			// punto si gana
-			this.sumarPuntosGanador();
+			wungsdle.sumarPuntosGanador();
 			// guardar
-			this.guardarResultado();
+			wungsdle.guardarResultado();
 			System.out.println("llegue2");
 			SwingUtilities.invokeLater(() -> {
-				InterfazFinal fin = new InterfazFinal(actual, this.getNombreUsuario(),
-						this.getPalabraSecreta(), true, this);
+				InterfazFinal fin = new InterfazFinal(actual, wungsdle.getNombreUsuario(),
+						this.getPalabraSecreta(), true, wungsdle, this);
 				fin.setVisible(true);
 
 			});
@@ -221,4 +247,48 @@ public class LogicaPalabra {
 					}
 					return acerto;
 				}
+	    
+	    //////////////////////////////////////////////////////////////////////////////////// SOLO TEST ////////////////////////////////////////////////////////
+	    /// 
+	    public String[] evaluarColorLetra(String intento, String secretaTest) 
+	    {
+	    	palabraUsuario = intento;
+	        String palabraSecreta = secretaTest;
+	        String[] resultado = new String[5];
+	        boolean[] usadaEnSecreta = new boolean[5];
+
+	        // Verificamos los Verdes
+	        for (int i = 0; i < 5; i++)
+	        {
+	            if (intento.charAt(i) == palabraSecreta.charAt(i))
+	            {
+	                resultado[i] = "VERDE";
+	                usadaEnSecreta[i] = true;
+	            }
+	        }
+
+	        // Verificamos los Amarillos Y Grises
+	        for (int i = 0; i < 5; i++)
+	        {
+	            if (resultado[i] != null) continue;
+
+	            boolean encontrada = false;
+	            for (int j = 0; j < 5; j++)
+	            {
+	                if (!usadaEnSecreta[j] && intento.charAt(i) == palabraSecreta.charAt(j))
+	                {
+	                    resultado[i] = "AMARILLO";
+	                    usadaEnSecreta[j] = true;
+	                    encontrada = true;
+	                    break;
+	                }
+	            }
+	            if (!encontrada)
+	            {
+	                resultado[i] = "GRIS";
+	            }
+	        }
+
+	        return resultado;
+	    }
 }

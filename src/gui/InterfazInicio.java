@@ -7,6 +7,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.Button;
 import java.awt.event.*;
+
+import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
 public class InterfazInicio extends JFrame {
@@ -15,9 +17,11 @@ public class InterfazInicio extends JFrame {
 	private String iniciarJuego = "";
 	private String configuracion = "";
 	private Icon logoActual;
+	private LogicaPalabra logica;
 
 	//========================CONSTRUCTOR=========================//
-	public InterfazInicio(Wungsdle juego) {
+	public InterfazInicio(Wungsdle juego, LogicaPalabra logicaP) {
+		this.logica=logicaP;
 		this.wungsdle = juego;
 		logoActual= wungsdle.retornarLogoIdioma();
 		crearInterfazInicio();
@@ -108,7 +112,7 @@ public class InterfazInicio extends JFrame {
 
 	//==============================METODOS==========================//
 	private void visualizarInterfazJuego(ActionEvent accion) {
-		InterfazWungsdle juego = new InterfazWungsdle(wungsdle);
+		InterfazWungsdle juego = new InterfazWungsdle(wungsdle, logica);
 		juego.setVisible(true);
 		juego.setLocationRelativeTo(null);
 		this.dispose();
@@ -144,7 +148,7 @@ public class InterfazInicio extends JFrame {
 	/// arriba) y el que es actualizado por la configuracion (este de abajo)
 	public void actualizarTextos(String nuevo) {
 		iniciarJuego = (wungsdle.getTextoBotonInicio());
-		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wungsdle);
+		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wungsdle,logica);
 		nuevaInterfazIdiomaActual.setVisible(true);
 		nuevaInterfazIdiomaActual.setLocationRelativeTo(null);
 		this.dispose();

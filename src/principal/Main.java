@@ -2,6 +2,7 @@ package principal;
 
 import javax.swing.*;
 import entidades.ConfiguracionInicial;
+import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
 public class Main extends JFrame
@@ -9,7 +10,8 @@ public class Main extends JFrame
 	public static void main(String[] args) 
 	{
 		ConfiguracionInicial configuracion = new ConfiguracionInicial();
-		Wungsdle wordle = new Wungsdle();
-		configuracion.crearConfiguracionInicial(wordle);
+		Wungsdle wungsdle = new Wungsdle();
+		LogicaPalabra logicaP = wungsdle.comenzarLogicaPalabra();
+		configuracion.crearConfiguracionInicial(wungsdle,logicaP);
 	}
 }

@@ -5,14 +5,15 @@ import gui.InterfazInicio;
 public class ConfiguracionInicial {
 	
 	private Wungsdle wungsdle;
+	private LogicaPalabra logica;
 	
 	//======================CONSTRUCTOR=========================//	
-	public void crearConfiguracionInicial(Wungsdle juego) {
-		
+	public void crearConfiguracionInicial(Wungsdle juego, LogicaPalabra logicaP) {
+		this.logica = logicaP;
 		this.wungsdle = juego;
-		wungsdle.crearPalabra("Español - ES","Facil - Easy");
-		System.out.println(wungsdle.getPalabraSecreta());
-		InterfazInicio window = new InterfazInicio(wungsdle);
+		logica.crearPalabra("Español - ES","Facil - Easy");
+		System.out.println(logica.getPalabraSecreta());
+		InterfazInicio window = new InterfazInicio(wungsdle,logica);
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);
 		

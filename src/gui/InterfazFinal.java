@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import entidades.ConfiguracionInicial;
+import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
 public class InterfazFinal extends JFrame{
@@ -11,9 +12,11 @@ public class InterfazFinal extends JFrame{
 	private InterfazWungsdle interfazJuego;
 	private Wungsdle wungsdle;
     private boolean gano;
+    private LogicaPalabra logica;
 
     //=========================CONSTRUCTOR========================//
-    public InterfazFinal(InterfazWungsdle juego, String usuario, String palabraSecreta, boolean gano, Wungsdle wungsdleJuego) {
+    public InterfazFinal(InterfazWungsdle juego, String usuario, String palabraSecreta, boolean gano, Wungsdle wungsdleJuego, LogicaPalabra logicaP) {
+    	logica = logicaP;
     	interfazJuego = juego;
     	this.wungsdle = wungsdleJuego;
         this.gano = gano;
@@ -48,7 +51,7 @@ public class InterfazFinal extends JFrame{
         this.add(tiempo);
 
         //PALABRA CORRECTA
-        JLabel palabra = new JLabel("La palabra era: " + wungsdle.getPalabraSecreta().toUpperCase());
+        JLabel palabra = new JLabel("La palabra era: " + logica.getPalabraSecreta().toUpperCase());
         palabra.setBounds(150, 160, 300, 30);
         palabra.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
         palabra.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,7 +71,8 @@ public class InterfazFinal extends JFrame{
 
         btnReiniciar.addActionListener(e -> {
         	configuracionInicial = new ConfiguracionInicial();
-            configuracionInicial.crearConfiguracionInicial(new Wungsdle());
+        	LogicaPalabra logicaP= wungsdle.comenzarLogicaPalabra();
+            configuracionInicial.crearConfiguracionInicial(new Wungsdle(), logicaP);
            
             interfazJuego.dispose();
             this.dispose();

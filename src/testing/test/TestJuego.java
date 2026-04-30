@@ -2,26 +2,29 @@ package testing.test;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
 public class TestJuego extends Wungsdle {
 	Wungsdle wungsdle = new Wungsdle();
-	String palabraUsuario = wungsdle.getPalabraUsuario(); 
+	LogicaPalabra logicaP = wungsdle.comenzarLogicaPalabra();
+	String palabraUsuario = logicaP.getPalabraUsuario(); 
 	// Verifica si el sistema maneja correctamente una entrada nula
     @Test(expected = NullPointerException.class)
     public void palabraVaciaTest() {
-        wungsdle.retornarColorLetra(null);
+    	logicaP.retornarColorLetra(null);
     }
 
     // Verifica que no se procesen palabras con longitud incorrecta
     @Test
     public void palabraMenorACincoTest() {
         String intentoCorto = "SOL";
-        int intentosIniciales = wungsdle.consultarIntentoUsuario();
+        int intentosIniciales = logicaP.consultarIntentoUsuario();
         if (intentoCorto.length() == 5) {
-            wungsdle.retornarColorLetra(intentoCorto);
+        	logicaP.retornarColorLetra(intentoCorto);
         }
-        assertEquals(intentosIniciales, wungsdle.consultarIntentoUsuario());
+        assertEquals(intentosIniciales, logicaP.consultarIntentoUsuario());
     }
 
     // Verifica si la palabra fue bien construida con las letras ingresadas
@@ -40,7 +43,7 @@ public class TestJuego extends Wungsdle {
     @Test
     public void palabraAdivinadaCorrectaTest() {
         String intento = "PIZZA";
-        String[] resultado = wungsdle.evaluarColorLetra(intento.toLowerCase(), "pizza");
+        String[] resultado = logicaP.evaluarColorLetra(intento.toLowerCase(), "pizza");
         boolean todoVerde = true;
         for (String color : resultado) {
             if (!color.equals("VERDE")) {
@@ -58,7 +61,7 @@ public class TestJuego extends Wungsdle {
     public void colorAmarilloTest() {
         String intento = "CASAS";
         String secreta = "SOPAS"; 
-        String[] resultado = wungsdle.evaluarColorLetra(intento, secreta);
+        String[] resultado = logicaP.evaluarColorLetra(intento, secreta);
         assertEquals("AMARILLO", resultado[1]);
     }
 
@@ -67,7 +70,7 @@ public class TestJuego extends Wungsdle {
     public void colorVerdeTest() {
         String intento = "PERRO";
         String secreta = "PARTO";
-        String[] resultado = wungsdle.evaluarColorLetra(intento, secreta);
+        String[] resultado = logicaP.evaluarColorLetra(intento, secreta);
         assertEquals("VERDE", resultado[0]);
         assertEquals("VERDE", resultado[4]);
     }
@@ -77,7 +80,7 @@ public class TestJuego extends Wungsdle {
     public void colorGrisTest() {
         String intento = "LIMON";
         String secreta = "PERAS";
-        String[] resultado = wungsdle.evaluarColorLetra(intento, secreta);
+        String[] resultado = logicaP.evaluarColorLetra(intento, secreta);
         assertEquals("GRIS", resultado[0]);
         assertEquals("GRIS", resultado[2]);
     }
@@ -89,8 +92,8 @@ public class TestJuego extends Wungsdle {
         String dificultad = "Facil";
         String palabraValida = "CASAS";
         String palabraInvalida = "XYZWQ";
-        boolean resultadoValido = wungsdle.verificarSiExiste(palabraValida, idioma, dificultad);
-        boolean resultadoInvalido = wungsdle.verificarSiExiste(palabraInvalida, idioma, dificultad);
+        boolean resultadoValido = logicaP.verificarSiExiste(palabraValida, idioma, dificultad);
+        boolean resultadoInvalido = logicaP.verificarSiExiste(palabraInvalida, idioma, dificultad);
         assertTrue(resultadoValido);
         assertFalse(resultadoInvalido);
     }

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
 public class InterfazConfig extends JFrame {
@@ -15,6 +16,7 @@ public class InterfazConfig extends JFrame {
 	private String idioma="";
 	private String dificultad="";
 	private String mensaje="";
+	private LogicaPalabra logica;
 	
 	//=======================CONSTRUCTOR==========================//
 	public InterfazConfig(InterfazInicio menu, Wungsdle juego) {
@@ -83,7 +85,7 @@ public class InterfazConfig extends JFrame {
 				else {
 					wungsdle.alertValidacion("Configuration saved successfully");				}
 				
-				wungsdle.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),
+				logica.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),
 				comboBox_Dificultad.getSelectedItem().toString());
                 wungsdle.setIdiomaActual(comboBox_Idioma.getSelectedItem().toString());
                 mensaje = wungsdle.getTextoMensajeConfig();

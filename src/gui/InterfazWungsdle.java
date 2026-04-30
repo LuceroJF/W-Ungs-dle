@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 import java.awt.event.*;
 import java.awt.*;
@@ -16,10 +18,12 @@ public class InterfazWungsdle extends JFrame {
 	private String nombre = "";
 	private String comenzar = "";
 	private String mensajeErrorNombre;
+	private LogicaPalabra logica;
 
 	// ====================CONSTRUCTOR=========================//
-	public InterfazWungsdle(Wungsdle juego) {
+	public InterfazWungsdle(Wungsdle juego, LogicaPalabra logicaP) {
 		this.wungsdle = juego;
+		this.logica = logicaP;
 		crearInterfazWungsdle();
 	}
 
@@ -30,7 +34,7 @@ public class InterfazWungsdle extends JFrame {
 		JLabel etiquetaNombreJuego = new JLabel();
 		etiquetaNombreJuego.setBounds(47, 64, 599, 96);
 
-		JLabel intentos = new JLabel("INTENTOS: " + wungsdle.consultarIntentoUsuario());
+		JLabel intentos = new JLabel("INTENTOS: " + logica.consultarIntentoUsuario());
 		intentos.setBounds(312, 203, 200, 20);
 		intentos.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -153,23 +157,23 @@ public class InterfazWungsdle extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean gana=false;
-				String[] resultado = wungsdle.retornarColorLetra(palabraUsuario.toLowerCase());
+				String[] resultado = logica.retornarColorLetra(palabraUsuario.toLowerCase());
 				for (int i = 0; i < 5; i++) {
 					if (resultado[i].equals("VERDE")) {
 						casillas[filaActual[0]][i].setBackground(Color.GREEN);
-						wungsdle.acertoUsuario(true);
+						logica.acertoUsuario(true);
 					} else if (resultado[i].equals("AMARILLO")) {
 						casillas[filaActual[0]][i].setBackground(Color.YELLOW);
-						wungsdle.acertoUsuario(false);
+						logica.acertoUsuario(false);
 					} else {
 						casillas[filaActual[0]][i].setBackground(Color.LIGHT_GRAY);
-						wungsdle.acertoUsuario(false);
+						logica.acertoUsuario(false);
 					}
 				}
-				wungsdle.consultarIntentoUsuario();
-				gana &= wungsdle.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
+				logica.consultarIntentoUsuario();
+				gana &= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
 				juegoTerminado &= gana;
-				if (wungsdle.devolverIntentoInvalido() == true) {
+				if (logica.devolverIntentoInvalido() == true) {
 					//Marca la palabra invalida en rojo y luego la setea.
 					for (int i = 0; i < 5; i++) {
 						casillas[filaActual[0]][i].setBackground(Color.RED);
@@ -188,7 +192,7 @@ public class InterfazWungsdle extends JFrame {
 					timer.start();
 					return;
 				}
-				intentos.setText("INTENTOS: " + wungsdle.consultarIntentoUsuario());
+				intentos.setText("INTENTOS: " + logica.consultarIntentoUsuario());
 				filaActual[0]++;
 				colActual[0] = 0;
 				palabraUsuario="";
