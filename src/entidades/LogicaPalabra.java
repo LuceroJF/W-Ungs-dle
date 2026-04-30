@@ -147,7 +147,6 @@ public class LogicaPalabra {
 		
 		public void intentoUsuarioValido(Long tiempoInicio, InterfazWungsdle actual) {
 			// TIEMPO
-			System.out.println("llegue1");
 			long tiempoFinal = System.currentTimeMillis();
 			long latenciaMs = tiempoFinal-tiempoInicio;
 
@@ -159,7 +158,6 @@ public class LogicaPalabra {
 			wungsdle.sumarPuntosGanador();
 			// guardar
 			wungsdle.guardarResultado();
-			System.out.println("llegue2");
 			SwingUtilities.invokeLater(() -> {
 				InterfazFinal fin = new InterfazFinal(actual, wungsdle.getNombreUsuario(),
 						this.getPalabraSecreta(), true, wungsdle, this);
@@ -222,18 +220,19 @@ public class LogicaPalabra {
 	    	
 		
 	public void acertoUsuario(boolean intento) {
-		intentoActualUsuario = intento;
+        
+		boolean intentoUsuario = true;
+		intentoUsuario &= intento;
+		intentoActualUsuario = intentoUsuario;
 	}
 	    
 	    public boolean estadoActualPartida(String palabraUsuario, Long tiempoInicio, InterfazWungsdle actual) {
 
 			fueInvalido=false;		
 	    	boolean acerto = false;
-					if(this.esPalabraValida(palabraUsuario)) {
-						System.out.println("llegue35");
+					if(this.esPalabraValida(palabraUsuario)) {;
 						// ================== GANA ==================
 						if (intentoActualUsuario) {
-							System.out.println("llegue0");
 	                    intentoUsuarioValido(tiempoInicio, actual);
 	                    acerto = true;
 						}
