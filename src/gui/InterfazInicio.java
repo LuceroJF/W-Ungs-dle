@@ -23,7 +23,7 @@ public class InterfazInicio extends JFrame {
 	public InterfazInicio(Wungsdle juego, LogicaPalabra logicaP) {
 		this.logica=logicaP;
 		this.wungsdle = juego;
-		logoActual= wungsdle.getLogoIdioma();
+		logoActual= wungsdle.getLogoDependiendoIdioma();
 		crearInterfazInicio();
 	}
 
@@ -38,7 +38,7 @@ public class InterfazInicio extends JFrame {
 		Button btnRanking = new Button();
 		actualizarTextos();
 
-		
+		//BOTON INICIO
 		btnInicio.setLabel(iniciarJuego);
 		btnInicio.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnInicio.addActionListener(new ActionListener() {
@@ -46,29 +46,29 @@ public class InterfazInicio extends JFrame {
 				visualizarInterfazJuego(accion);
 			}
 		});
+		//BOTON TUTORIAL
 		btnTutorial.setLabel("Tutorial");
 		btnTutorial.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnTutorial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent accion) {
-				visualizarInterfazTutorial(accion);
-			}
-
+		public void actionPerformed(ActionEvent accion) {
+			visualizarInterfazTutorial(accion);
+		}
 		});
+		//BOTON CONFIGURACIÓN
 		btnConfig.setLabel(configuracion);
 		btnConfig.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnConfig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazConfiguracion(accion);
 			}
-
 		});
+		//BOTON RANKING
 		btnRanking.setLabel("Ranking");
 		btnRanking.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnRanking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
 				visualizarInterfazRanking(accion);
 			}
-
 		});
 
 		setSize(1366,768);
@@ -79,7 +79,7 @@ public class InterfazInicio extends JFrame {
 		logo.setBounds(160, 135, 600, 315);
 		panel.add(logo);
 		logo.setIcon(logoActual);
-
+		//MENU CONTENEDOR
 		contenedorMenu.setBounds(168, 437, 592, 320);
 		panel.add(contenedorMenu);
 		contenedorMenu.setLayout(null);

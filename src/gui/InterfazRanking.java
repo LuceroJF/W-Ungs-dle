@@ -29,19 +29,16 @@ public class InterfazRanking extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // ================== TITULO ==================
+        //LABEL TITULO
         JLabel titulo = new JLabel("RANKING", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 28));
         titulo.setBounds(484, 71, 300, 40);
         getContentPane().add(titulo);
 
-        // ================== COLUMNAS ==================
-        
+        //COLUMNAS
         String[] columnas = wungsdle.getColumnasRanking();
         java.util.List<String> ranking = Ranking.getRankingOrdenado();
-
         String[][] datos = new String[ranking.size()][3];
-
         for (int i = 0; i < ranking.size(); i++) {
             String[] partes = ranking.get(i).split(",");
             datos[i][0] = partes[0];
@@ -49,14 +46,13 @@ public class InterfazRanking extends JFrame {
             datos[i][2] = partes[2] + " seg";
         }
 
-        // ================== TABLA ==================
+        //TABLA
         JTable tabla = new JTable(new DefaultTableModel(datos, columnas) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
         });
-
         tabla.setRowHeight(30);
         tabla.setFont(new Font("Arial", Font.PLAIN, 14));
 
@@ -64,12 +60,11 @@ public class InterfazRanking extends JFrame {
         scroll.setBounds(434, 151, 400, 300);
         getContentPane().add(scroll);
 
-        // ================== BOTON RESET ==================
+        //BOTON RESET
         JButton btnReset = new JButton();
         rankingBoton = wungsdle.getTextoBotonRanking();
         btnReset.setText(rankingBoton);
         btnReset.setBounds(484, 471, 300, 40);
-
         btnReset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Ranking.resetearPuntajes();
@@ -83,12 +78,11 @@ public class InterfazRanking extends JFrame {
 
         getContentPane().add(btnReset);
 
-        // ================== BOTON VOLVER ==================
+        //BOTON VOLVER
         JButton btnVolver = new JButton(); // "Volver al menú"
         volver = wungsdle.getTextoBotonVolver();
         btnVolver.setText(volver);
         btnVolver.setBounds(484, 531, 300, 40);
-
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 InterfazRanking.this.dispose();
@@ -96,7 +90,6 @@ public class InterfazRanking extends JFrame {
                 menuPrincipal.setLocationRelativeTo(null);
             }
         });
-
         getContentPane().add(btnVolver);
     }
 }

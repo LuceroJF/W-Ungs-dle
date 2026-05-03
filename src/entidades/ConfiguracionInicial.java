@@ -17,7 +17,6 @@ public class ConfiguracionInicial {
 		window.setLocationRelativeTo(null);
 		
 	}
-	
 	//=====================SETTER Y GETTERS======================//
 	public Wungsdle getWungsdle() {
 		return wungsdle;
@@ -26,5 +25,4 @@ public class ConfiguracionInicial {
 	public void setWungsdle(Wungsdle wungsdle) {
 		this.wungsdle = wungsdle;
 	}
-	
 }

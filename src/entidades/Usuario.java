@@ -24,48 +24,46 @@ public class Usuario
 		this.puntos=0;
 	}
 
-	//========================SETTER Y GETTERS===================//
+	//========================GETTERS===================//
 	public String getNombre() {
 		return nombre;
 	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	
 	public Long getTiempoRespuesta() {
 		return tiempoRespuesta;
 	}
 
-	public void setTiempoRespuesta(Long tiempoRespuesta) {
-		this.tiempoRespuesta = tiempoRespuesta;
-	}
-
-
 	public int getIntento() {
 		return intento;
-	}
-
-	public void setIntento(int intento) {
-		this.intento = intento;
 	}
 	
 	public int getPuntos() {
 		return this.puntos;
-		
 	}
+	//========================SETTERS===================//
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setTiempoRespuesta(Long tiempoRespuesta) {
+		this.tiempoRespuesta = tiempoRespuesta;
+	}
+	
+	public void setIntento(int intento) {
+		this.intento = intento;
+	}
+	
 	//=========================METODOS======================//
 	public void crearNombreUsuario(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	public void sumaPuntoLetraCoincideEnLugar()
+	public void sumaPuntoSiLetraCoincideEnLugar()
 	{
 		 this.tiempoRespuesta += 3;
 	}
 	
-	public void sumaPuntoLetraExiste()
+	public void sumaPuntoSiLetraExiste()
 	{
 		this.tiempoRespuesta += 1;
 	}
@@ -84,7 +82,7 @@ public class Usuario
 		this.puntos += i;
 	}
 
-	public boolean estaVacioNombre() {
+	public boolean isNombreVacio() {
 		return nombre.isEmpty();
 	}
 	

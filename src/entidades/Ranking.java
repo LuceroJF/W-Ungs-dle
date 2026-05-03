@@ -23,7 +23,7 @@ public class Ranking {
     }
 
     // ================== LEER ==================
-    public static List<String> leerPuntajes() {
+    public static List<String> leerArchivoRanking() {
         List<String> lista = new ArrayList<>();
 
         File archivo = getArchivo();
@@ -44,29 +44,20 @@ public class Ranking {
 
     // ================== ORDENAR ==================
     public static List<String> getRankingOrdenado() {
+    	
+        List<String> ranking = leerArchivoRanking();
 
-        List<String> puntajes = leerPuntajes();
-
-        puntajes.sort((a, b) -> {
-            String[] pA = a.split(",");
-            String[] pB = b.split(",");
-
-            int tiempoA = Integer.parseInt(pA[1]);
-            int tiempoB = Integer.parseInt(pB[1]);
+        ranking.sort((a, b) -> {
+            String[] datosA = a.split(",");
+            String[] datosB= b.split(",");
             
-            //esto debe ser ordenado por tiempo 
+            int tiempoA = Integer.parseInt(datosA[2]);
+            int tiempoB = Integer.parseInt(datosB[2]);
 
-            if (tiempoA != tiempoB) {
-                return tiempoB - tiempoA; 
-            }
-
-            int puntosA = Integer.parseInt(pA[2]);
-            int puntosB = Integer.parseInt(pB[2]);
-
-            return puntosA - puntosB; 
+            return tiempoA - tiempoB; 
         });
 
-        return puntajes;
+        return ranking;
     }
 
     // ================== RESETEAR ==================

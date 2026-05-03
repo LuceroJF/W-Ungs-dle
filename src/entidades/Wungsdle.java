@@ -32,13 +32,13 @@ public class Wungsdle
 		idiomaActual = "Español - ES";
 		dificultadActual = "Facil - Easy";
 	}
+	
     public LogicaPalabra comenzarLogicaPalabra() {
-	LogicaPalabra logica = new LogicaPalabra(this.usuario, this.palabra, Wungsdle.this);
-	return logica;
+    	LogicaPalabra logica = new LogicaPalabra(this.usuario, this.palabra, Wungsdle.this);
+		return logica;
     }
 
-	
-		//============================SETTER Y GETTERS===========================//
+	//============================GETTERS===========================//
 	public String getNombreUsuario() {
 		return usuario.getNombre();
 	}
@@ -46,16 +46,6 @@ public class Wungsdle
 	public Long getTiempoUsuario() {
 		return usuario.getTiempoRespuesta();
 	}
-	
-	public void setTiempoRespuesta(Long tiempo) {
-		usuario.setTiempoRespuesta(tiempo);
-	}
-
-
-	public void setNombreUsuario(String text) {
-		usuario.setNombre(text);
-	}
-	
 	
 	public String getTimeMilis(Long ms) {
 	    long seg = (ms / 1000) % 60;
@@ -67,11 +57,6 @@ public class Wungsdle
         return usuario.getPuntos();
     }
 
-	public void setIdiomaActual(String idiomaActual) {
-		this.idiomaActual=idiomaActual;
-		
-	}
-	
 	public String getIdiomaActual() {
 		return idiomaActual;
 	}
@@ -171,6 +156,20 @@ public class Wungsdle
 	    return "Intentos";
 	}
 	
+	public String getPuntosIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "points";
+		}
+		return "puntos";
+	}
+	
+	public String getTiempoIdioma() {
+		if(this.idiomaActual.startsWith("English")) {
+			return "Time";
+		}
+		return "tiempo";
+	}
+	
 	public String[] getColumnasRanking() {
 	    if (this.idiomaActual.startsWith("English")) {
 	        return new String[] {"Player", "Score", "Time"};
@@ -178,27 +177,46 @@ public class Wungsdle
 	    return new String[] {"Jugador", "Puntos", "Tiempo"};
 	}
 
-    public Icon getLogoIdioma() {
+    public Icon getLogoDependiendoIdioma() {
 		if(this.getIdiomaActual().startsWith("English")) {
-		return (getLogoIdiomaActual = new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
-	}
-	else {
-		return (getLogoIdiomaActual =new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
-	}
+			return (getLogoIdiomaActual = new ImageIcon(InterfazInicio.class.getResource("/recursos/Logo.png")));
+		}
+		else{
+			return (getLogoIdiomaActual =new ImageIcon(InterfazInicio.class.getResource("/recursos/LogoEspaniol.png")));
+		}
     }
+    //============================SETTERS===========================//
+    
+    public void setTiempoRespuesta(Long tiempo) {
+		usuario.setTiempoRespuesta(tiempo);
+	}
+
+	public void setNombreUsuario(String text) {
+		usuario.setNombre(text);
+	}
+	
+	public void setIdiomaActual(String idiomaActual) {
+		this.idiomaActual=idiomaActual;
+	}
 		
 	//===============================METODOS=============================//	
+    public void iniciarJuego() {
+    	ConfiguracionInicial configuracion = new ConfiguracionInicial();
+		Wungsdle wungsdle = new Wungsdle();
+		LogicaPalabra logicaP = wungsdle.comenzarLogicaPalabra();
+		configuracion.crearConfiguracionInicial(wungsdle,logicaP);
+    }
+    
 	public void crearNombreUsuario(String nombre) {
 		usuario.crearNombreUsuario(nombre);
 	}
 	
 	public void nombreUsuarioVacio() {
-		if(usuario.estaVacioNombre()) {
-			throw new IllegalArgumentException("palabra vacia");
+		if(usuario.isNombreVacio()) {
+			throw new IllegalArgumentException("Nombre vacio");
 		}
 	}
-
-
+	
     //Suma puntos dependiendo el resultado
     public void sumarPuntosPorResultado(String[] resultado) {
         for(int i = 0; i<resultado.length; i++) {
@@ -225,9 +243,6 @@ public class Wungsdle
     }
 	
     
-
-    
-    
 ////////////////////////////////////////METODOS DE UTILIDAD //////////////////////////////////////////
 
 	public void alertError(String mensaje) {
@@ -238,6 +253,8 @@ public class Wungsdle
 		JOptionPane.showMessageDialog(null, mensaje, "Validación",
 		JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	
 
 
 }

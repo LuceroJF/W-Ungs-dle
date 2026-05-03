@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 
 import entidades.LogicaPalabra;
+import entidades.Usuario;
 import entidades.Wungsdle;
 import java.awt.event.*;
 import java.awt.*;
@@ -19,39 +20,43 @@ public class InterfazWungsdle extends JFrame {
 	private String comenzar = "";
 	private String mensajeErrorNombre;
 	private LogicaPalabra logica;
-    String intentosIdioma = "";
+	String intentosIdioma = "";
+	String puntajeIdioma = "";
+	String tiempoIdioma = "";
 	private Icon logoActual;
+	private Timer contador;
+	private long tiempoInicio;
 
 	// ====================CONSTRUCTOR=========================//
 	public InterfazWungsdle(Wungsdle juego, LogicaPalabra logicaP) {
 		this.wungsdle = juego;
 		this.logica = logicaP;
-		logoActual= wungsdle.getLogoIdioma();
+		logoActual = wungsdle.getLogoDependiendoIdioma();
 		crearInterfazWungsdle();
 	}
 
 	public void crearInterfazWungsdle() {
 		JPanel panelJuego = new JPanel();
 		panelJuego.setVisible(true);
+		// LOGO JUEGO
+		JLabel lblNombreJuego = new JLabel();
+		lblNombreJuego.setIcon(logoActual);
+		lblNombreJuego.setBounds(47, 64, 599, 96);
+		// LABEL INTENTOS
+		intentosIdioma = wungsdle.getIntentosIdioma();
+		JLabel intentos = new JLabel(intentosIdioma + " " + logica.consultarIntentoUsuario());
+		intentos.setBounds(478, 203, 114, 30);
+		intentos.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 
-		JLabel etiquetaNombreJuego = new JLabel();
-		etiquetaNombreJuego.setIcon(logoActual);
-		etiquetaNombreJuego.setBounds(47, 64, 599, 96);
-        intentosIdioma = wungsdle.getIntentosIdioma();
-		JLabel intentos = new JLabel(intentosIdioma+ " " + logica.consultarIntentoUsuario());
-		intentos.setBounds(312, 203, 200, 20);
-		intentos.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JPanel panelGrillaJuego = new JPanel(new GridLayout(6, 5, 5, 5));
+		panelGrillaJuego.setBounds(110, 234, 482, 393);
 
-		JPanel panelVerde = new JPanel(new GridLayout(6, 5, 5, 5));
-		panelVerde.setBounds(110, 234, 482, 393);
-
-		JLabel[][] casillas = new JLabel[6][5];
+		JLabel[][] celdas = new JLabel[6][5];
 
 		comenzar = wungsdle.getTextoComenzarJuego();
 		nombre = wungsdle.getTextoIngresarNombre();
 
-		long tiempoInicio = System.currentTimeMillis();
-
+		// PANEL NOMBRE
 		JPanel panelNombre = new JPanel();
 		panelNombre.setPreferredSize(new Dimension(300, 300));
 		panelNombre.setBounds(213, 172, 889, 484);
@@ -72,11 +77,25 @@ public class InterfazWungsdle extends JFrame {
 		lblNewLabel.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		lblNewLabel.setBounds(334, 131, 290, 32);
 		panelNombre.add(lblNewLabel);
-
+		// BOTON COMENZAR
 		JButton btnComenzarJuego = new JButton();
 		btnComenzarJuego.setText(comenzar);
 		btnComenzarJuego.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnComenzarJuego.setBounds(306, 283, 344, 40);
+
+		puntajeIdioma = wungsdle.getPuntosIdioma();
+		JLabel puntaje = new JLabel(puntajeIdioma + " " + logica.consultarPuntaje());
+		puntaje.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
+		puntaje.setBounds(319, 203, 125, 30);
+		panelJuego.add(puntaje);
+
+		// LABEL TIEMPO
+		tiempoIdioma = wungsdle.getTiempoIdioma();
+		JLabel tiempo = new JLabel();
+		tiempo.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
+		tiempo.setText("<dynamic> 0");
+		tiempo.setBounds(106, 203, 172, 30);
+		panelJuego.add(tiempo);
 
 		// Hasta que no se presione el boton de comenzar, el juego no escucha la tecla
 		// "Enter"
@@ -85,10 +104,27 @@ public class InterfazWungsdle extends JFrame {
 				if ((txfieldNombreUsuario.getText() != null) && (txfieldNombreUsuario.getText() != "")
 						&& (!txfieldNombreUsuario.getText().isEmpty() && (!txfieldNombreUsuario.getText().isBlank()
 								&& txfieldNombreUsuario.getText().length() < 10))) {
+
 					wungsdle.crearNombreUsuario(txfieldNombreUsuario.getText());
 					liberarTeclado(e);
 					panelNombre.setVisible(false);
-					panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"),
+					// Inicializador de reloj
+
+					tiempo.setText(tiempoIdioma + ": 00:00");
+
+					InterfazWungsdle.this.tiempoInicio = System.currentTimeMillis();
+
+					contador = new Timer(1000, new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							long diferencia = System.currentTimeMillis() - tiempoInicio;
+							tiempo.setText(tiempoIdioma + ": " + wungsdle.getTimeMilis(diferencia));
+						}
+					});
+
+					contador.start();
+
+					panelGrillaJuego.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"),
 							"enter");
 				} else {
 					mensajeErrorNombre = wungsdle.getTextoMensajeErrorNombre();
@@ -104,10 +140,11 @@ public class InterfazWungsdle extends JFrame {
 		panelJuego.setBounds(335, 11, 679, 667);
 		this.getContentPane().add(panelJuego);
 		panelJuego.setLayout(null);
-		panelVerde.setBackground(new Color(177, 222, 208));
-		panelJuego.add(panelVerde);
-		panelJuego.add(etiquetaNombreJuego);
+		panelGrillaJuego.setBackground(new Color(177, 222, 208));
+		panelJuego.add(panelGrillaJuego);
+		panelJuego.add(lblNombreJuego);
 		panelJuego.add(intentos);
+		panelJuego.add(puntaje);
 		panelJuego.setLayout(null);
 
 		final int[] filaActual = { 0 };
@@ -120,15 +157,14 @@ public class InterfazWungsdle extends JFrame {
 				label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 				label.setOpaque(true);
 				label.setBackground(Color.WHITE);
-				casillas[fila][col] = label;
-				panelVerde.add(label);
+				celdas[fila][col] = label;
+				panelGrillaJuego.add(label);
 			}
 		}
 		this.getContentPane().setLayout(null);
-		this.getContentPane()
-				.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelNombre, txfieldNombreUsuario,
-						panelJuego, panelVerde, etiquetaNombreJuego, intentos, lblNewLabel, btnComenzarJuego }));
-
+		getContentPane().setFocusTraversalPolicy(
+				new FocusTraversalOnArray(new Component[] { panelNombre, txfieldNombreUsuario, panelJuego,
+						panelGrillaJuego, lblNombreJuego, intentos, lblNewLabel, btnComenzarJuego, puntaje, tiempo }));
 		this.setBounds(0, 0, 1366, 768);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -138,17 +174,18 @@ public class InterfazWungsdle extends JFrame {
 
 			String key = String.valueOf(c);
 
-			panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), key);
+			panelGrillaJuego.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), key);
 
-			panelVerde.getActionMap().put(key, new AbstractAction() {
+			panelGrillaJuego.getActionMap().put(key, new AbstractAction() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (juegoTerminado)
+					if (juegoTerminado) {
+						contador.stop();
 						return;
-
+					}
 					if (filaActual[0] < 6 && colActual[0] < 5 && liberarTeclado == true) {
 						palabraUsuario += key;
-						casillas[filaActual[0]][colActual[0]].setText(key);
+						celdas[filaActual[0]][colActual[0]].setText(key);
 						colActual[0]++;
 					}
 				}
@@ -157,20 +194,20 @@ public class InterfazWungsdle extends JFrame {
 
 		// ================== ENTER ==================
 
-		panelVerde.getActionMap().put("enter", new AbstractAction() {
+		panelGrillaJuego.getActionMap().put("enter", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean gana=false;
+				boolean gana = false;
 				String[] resultado = logica.getColorLetra(palabraUsuario.toLowerCase());
 				for (int i = 0; i < 5; i++) {
 					if (resultado[i].equals("VERDE")) {
-						casillas[filaActual[0]][i].setBackground(Color.GREEN);
+						celdas[filaActual[0]][i].setBackground(Color.GREEN);
 						logica.acertoUsuario(true);
 					} else if (resultado[i].equals("AMARILLO")) {
-						casillas[filaActual[0]][i].setBackground(Color.YELLOW);
+						celdas[filaActual[0]][i].setBackground(Color.YELLOW);
 						logica.acertoUsuario(false);
 					} else {
-						casillas[filaActual[0]][i].setBackground(Color.LIGHT_GRAY);
+						celdas[filaActual[0]][i].setBackground(Color.LIGHT_GRAY);
 						logica.acertoUsuario(false);
 					}
 				}
@@ -178,46 +215,46 @@ public class InterfazWungsdle extends JFrame {
 				gana &= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
 				juegoTerminado &= gana;
 				if (logica.getIntentoInvalido() == true) {
-					//Marca la palabra invalida en rojo y luego la setea.
+					// Marca la palabra invalida en rojo y luego la setea.
 					for (int i = 0; i < 5; i++) {
-						casillas[filaActual[0]][i].setBackground(Color.RED);
+						celdas[filaActual[0]][i].setBackground(Color.RED);
 					}
 					Timer timer = new Timer(1000, new ActionListener() {
-					    public void actionPerformed(ActionEvent evento) {
-					        for (int i = 0; i < 5; i++) {
-					            casillas[filaActual[0]][i].setBackground(Color.WHITE);
-					            casillas[filaActual[0]][i].setText("");
-					        }
-					        palabraUsuario="";
-					        colActual[0] = 0;
-					    }
+						public void actionPerformed(ActionEvent evento) {
+							for (int i = 0; i < 5; i++) {
+								celdas[filaActual[0]][i].setBackground(Color.WHITE);
+								celdas[filaActual[0]][i].setText("");
+							}
+							palabraUsuario = "";
+							colActual[0] = 0;
+						}
 					});
 					timer.setRepeats(false);
 					timer.start();
 					return;
 				}
 				intentos.setText(intentosIdioma + " " + logica.consultarIntentoUsuario());
+				puntaje.setText(puntajeIdioma + " " + logica.consultarPuntaje());
 				filaActual[0]++;
 				colActual[0] = 0;
-				palabraUsuario="";
+				palabraUsuario = "";
 			}
 		});
 
 		// ================== BACKSPACE ==================
-		panelVerde.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("BACK_SPACE"), "borrar");
+		panelGrillaJuego.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("BACK_SPACE"),
+				"borrar");
 
-		panelVerde.getActionMap().put("borrar", new AbstractAction() {
+		panelGrillaJuego.getActionMap().put("borrar", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				if (juegoTerminado)
 					return;
-
 				if (colActual[0] > 0) {
 					colActual[0]--;
-					casillas[filaActual[0]][colActual[0]].setText("");
+					celdas[filaActual[0]][colActual[0]].setText("");
 					for (int i = 0; i < 5; i++) {
-						casillas[filaActual[0]][i].setBackground(Color.white);
+						celdas[filaActual[0]][i].setBackground(Color.white);
 					}
 
 					if (!palabraUsuario.isEmpty()) {

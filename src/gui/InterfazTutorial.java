@@ -12,7 +12,7 @@ public class InterfazTutorial extends JFrame {
 	private Wungsdle wungsdle;
     private String volver = "";
 	
-    //==========================CONSTRUCTOR============================//
+    //CONSTRUCTOR
 	public InterfazTutorial(InterfazInicio menu, Wungsdle juego) {
 		menuPrincipal = menu;
 		this.wungsdle = juego;
@@ -58,9 +58,7 @@ public class InterfazTutorial extends JFrame {
 			etiquetaLogoTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/LogoEspaniol.png")));
 			etiquetaTutorial.setIcon(new ImageIcon(InterfazTutorial.class.getResource("/recursos/Tutorial.png")));
 		}
-///////////////////////////////////////////////////////////////////////////// Logica Idioma //////////////////////////////////////////////////
-
-		
+		///////////////////////////////////////////////////////////////////////////// Logica Idioma //////////////////////////////////////////////////
 		
 		tutorial.add(tutorialScroll);
 		tutorial.add(btnVolver);
@@ -71,7 +69,6 @@ public class InterfazTutorial extends JFrame {
 		this.getContentPane().add(tutorial, BorderLayout.CENTER);
 		this.setBounds(0, 0, 1366,768);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
 	//============================METODOS==============================//
 	private void RegresarMenuPrincipal(ActionEvent accion) {
