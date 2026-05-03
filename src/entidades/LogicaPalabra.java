@@ -129,6 +129,8 @@ public class LogicaPalabra {
 			wungsdle.setTiempoRespuesta(latencia);
 			wungsdle.guardarResultado();
 			SwingUtilities.invokeLater(() -> {
+				GestionSonido.musicaFondo.detener();
+				GestionSonido.gameOverSound.reproducir();
 				InterfazFinal fin = new InterfazFinal(juego, wungsdle.getNombreUsuario(),
 						this.getPalabraSecreta(), false, wungsdle, this);
 				fin.setVisible(true);
@@ -153,6 +155,8 @@ public class LogicaPalabra {
 		// guardar
 		wungsdle.guardarResultado();
 		SwingUtilities.invokeLater(() -> {
+			GestionSonido.musicaFondo.detener();
+			GestionSonido.winningSound.reproducir();
 			InterfazFinal fin = new InterfazFinal(actual, wungsdle.getNombreUsuario(),
 			this.getPalabraSecreta(), true, wungsdle, this);
 			fin.setVisible(true);
@@ -228,8 +232,10 @@ public class LogicaPalabra {
     public boolean estadoActualPartida(String palabraUsuario, Long tiempoInicio, InterfazWungsdle actual) {	
     	boolean acerto = false;
     	boolean ganaPartida = false;
+    	fueInvalido=true;
 		if(this.isPalabraValida(palabraUsuario)) {
 			// ================== GANA ==================
+			fueInvalido=false;
 			if (intentoUsuarioTodoVerde) {
 				intentoUsuarioGanaPartida(tiempoInicio, actual);
 				acerto = true;

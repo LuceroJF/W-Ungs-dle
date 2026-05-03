@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import entidades.GestionSonido;
 import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
@@ -48,6 +49,7 @@ public class InterfazConfig extends JFrame {
 		panelConfiguracion.add(btnVolver);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
+				GestionSonido.sonidoClick.reproducir();
 				volverMenuPrincipal(accion);
 			}
 		});
@@ -86,6 +88,7 @@ public class InterfazConfig extends JFrame {
 		panelConfiguracion.add(btnGuardar);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GestionSonido.sonidoClick.reproducir();
 				if(comboBox_Idioma.getSelectedItem().toString() == "Español - ES") {
 					wungsdle.alertValidacion("Configuración guardada exitosamente");
 				}

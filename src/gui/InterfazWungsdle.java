@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 
+import entidades.GestionSonido;
 import entidades.LogicaPalabra;
 import entidades.Usuario;
 import entidades.Wungsdle;
@@ -29,6 +30,7 @@ public class InterfazWungsdle extends JFrame {
 
 	// ====================CONSTRUCTOR=========================//
 	public InterfazWungsdle(Wungsdle juego, LogicaPalabra logicaP) {
+		getContentPane().setBackground(new Color(255, 255, 255));
 		this.wungsdle = juego;
 		this.logica = logicaP;
 		logoActual = wungsdle.getLogoDependiendoIdioma();
@@ -36,7 +38,9 @@ public class InterfazWungsdle extends JFrame {
 	}
 
 	public void crearInterfazWungsdle() {
+		GestionSonido.musicaFondo.repetirInfinito();
 		JPanel panelJuego = new JPanel();
+		panelJuego.setBackground(new Color(255, 255, 255));
 		panelJuego.setVisible(true);
 		// LOGO JUEGO
 		JLabel lblNombreJuego = new JLabel();
@@ -58,6 +62,7 @@ public class InterfazWungsdle extends JFrame {
 
 		// PANEL NOMBRE
 		JPanel panelNombre = new JPanel();
+		panelNombre.setBackground(new Color(255, 255, 255));
 		panelNombre.setPreferredSize(new Dimension(300, 300));
 		panelNombre.setBounds(213, 172, 889, 484);
 		this.getContentPane().add(panelNombre, BorderLayout.NORTH);
@@ -109,6 +114,7 @@ public class InterfazWungsdle extends JFrame {
 		// "Enter"
 		btnComenzarJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GestionSonido.sonidoClick.reproducir();
 				if ((txfieldNombreUsuario.getText() != null) && (txfieldNombreUsuario.getText() != "")
 						&& (!txfieldNombreUsuario.getText().isEmpty() && (!txfieldNombreUsuario.getText().isBlank()
 								&& txfieldNombreUsuario.getText().length() < 10))) {
@@ -187,6 +193,7 @@ public class InterfazWungsdle extends JFrame {
 			panelGrillaJuego.getActionMap().put(key, new AbstractAction() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					GestionSonido.sonidoTipeo.reproducir();
 					if (juegoTerminado) {
 						contador.stop();
 						return;
@@ -205,6 +212,7 @@ public class InterfazWungsdle extends JFrame {
 		panelGrillaJuego.getActionMap().put("enter", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GestionSonido.sonidoTipeo.reproducir();
 				String[] resultado = logica.getColorLetra(palabraUsuario.toLowerCase());
 				for (int i = 0; i < 5; i++) {
 					if (resultado[i].equals("VERDE")) {
@@ -218,9 +226,9 @@ public class InterfazWungsdle extends JFrame {
 						logica.acertoUsuario(false);
 					}
 				}
-				juegoTerminado |= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
+				juegoTerminado &= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
 				if (logica.getIntentoInvalido() == true) {
-					// Marca la palabra invalida en rojo y luego la setea.
+					GestionSonido.palabraInvalida.reproducir();
 					for (int i = 0; i < 5; i++) {
 						celdas[filaActual[0]][i].setBackground(Color.RED);
 					}
@@ -253,6 +261,7 @@ public class InterfazWungsdle extends JFrame {
 		panelGrillaJuego.getActionMap().put("borrar", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GestionSonido.sonidoTipeo.reproducir();
 				if (juegoTerminado)
 					return;
 				if (colActual[0] > 0) {

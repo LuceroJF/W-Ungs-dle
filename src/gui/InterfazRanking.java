@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+
+import entidades.GestionSonido;
 import entidades.Ranking;
 import entidades.Wungsdle;
 
@@ -67,6 +69,7 @@ public class InterfazRanking extends JFrame {
         btnReset.setBounds(484, 471, 300, 40);
         btnReset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	GestionSonido.sonidoClick.reproducir();
                 Ranking.resetearPuntajes();
                 mensaje= wungsdle.getTextoMensajeRanking();
                 JOptionPane.showMessageDialog(InterfazRanking.this, mensaje);
@@ -85,6 +88,7 @@ public class InterfazRanking extends JFrame {
         btnVolver.setBounds(484, 531, 300, 40);
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	GestionSonido.sonidoClick.reproducir();
                 InterfazRanking.this.dispose();
                 menuPrincipal.setVisible(true);
                 menuPrincipal.setLocationRelativeTo(null);

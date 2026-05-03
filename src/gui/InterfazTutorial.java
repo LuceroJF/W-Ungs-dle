@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import entidades.GestionSonido;
 import entidades.Wungsdle;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,6 +24,7 @@ public class InterfazTutorial extends JFrame {
 	private void crearInterfazTutorial() {
 
 		JPanel tutorial = new JPanel();
+		tutorial.setBackground(new Color(255, 255, 255));
 		JLabel etiquetaLogoTutorial = new JLabel();
 		JScrollPane tutorialScroll = new JScrollPane();
 		JLabel etiquetaTutorial = new JLabel("");
@@ -31,6 +34,7 @@ public class InterfazTutorial extends JFrame {
 		btnVolver.setText(volver);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
+				GestionSonido.sonidoClick.reproducir();
 				RegresarMenuPrincipal(accion);
 			}
 		});

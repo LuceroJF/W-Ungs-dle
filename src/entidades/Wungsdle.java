@@ -31,6 +31,7 @@ public class Wungsdle
 		palabra = new Palabra();
 		idiomaActual = "Español - ES";
 		dificultadActual = "Facil - Easy";
+		
 	}
 	public Wungsdle(String idiomaActualReinicio, String dificultadReinicio)
 	{

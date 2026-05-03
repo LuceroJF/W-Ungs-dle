@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.Button;
 import java.awt.event.*;
 
+import entidades.GestionSonido;
 import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 
@@ -21,17 +22,29 @@ public class InterfazInicio extends JFrame {
 
 	//========================CONSTRUCTOR=========================//
 	public InterfazInicio(Wungsdle juego, LogicaPalabra logicaP) {
+		getContentPane().setBackground(new Color(255, 255, 255));
+		setBackground(new Color(255, 255, 255));
 		this.logica=logicaP;
 		this.wungsdle = juego;
 		logoActual= wungsdle.getLogoDependiendoIdioma();
 		crearInterfazInicio();
+		{
+		    try {
+		        Image icon = new ImageIcon(getClass().getResource("/recursos/Wungsdle.png")).getImage();
+		        setIconImage(icon);
+		    } catch (Exception e) {
+		        System.out.println("No se pudo cargar el icono de la ventana.");
+		    }
+		}
 	}
 
 	private void crearInterfazInicio() {
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
 		JLabel logo = new JLabel();
 		JPanel contenedorMenu = new JPanel();
+		contenedorMenu.setBackground(new Color(255, 255, 255));
 		Button btnInicio = new Button();
 		Button btnTutorial = new Button();
 		Button btnConfig = new Button();
@@ -43,7 +56,9 @@ public class InterfazInicio extends JFrame {
 		btnInicio.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
+				GestionSonido.sonidoClick.reproducir();
 				visualizarInterfazJuego(accion);
+				
 			}
 		});
 		//BOTON TUTORIAL
@@ -51,7 +66,9 @@ public class InterfazInicio extends JFrame {
 		btnTutorial.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnTutorial.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent accion) {
+			GestionSonido.sonidoClick.reproducir();
 			visualizarInterfazTutorial(accion);
+			
 		}
 		});
 		//BOTON CONFIGURACIÓN
@@ -59,7 +76,9 @@ public class InterfazInicio extends JFrame {
 		btnConfig.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnConfig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
+				GestionSonido.sonidoClick.reproducir();
 				visualizarInterfazConfiguracion(accion);
+				
 			}
 		});
 		//BOTON RANKING
@@ -67,7 +86,9 @@ public class InterfazInicio extends JFrame {
 		btnRanking.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnRanking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent accion) {
+				GestionSonido.sonidoClick.reproducir();
 				visualizarInterfazRanking(accion);
+				
 			}
 		});
 

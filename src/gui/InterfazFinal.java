@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import entidades.ConfiguracionInicial;
+import entidades.GestionSonido;
 import entidades.LogicaPalabra;
 import entidades.Wungsdle;
 import java.awt.event.ActionListener;
@@ -90,6 +91,7 @@ public class InterfazFinal extends JFrame {
 		getContentPane().add(btnReiniciar);
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GestionSonido.sonidoClick.reproducir();
 				String idiomaActual = wungsdle.getIdiomaActual();
 				String dificultadActual = wungsdle.getDificultadActual();
 				Wungsdle wungsdle = new Wungsdle();
@@ -106,6 +108,7 @@ public class InterfazFinal extends JFrame {
 		getContentPane().add(btnSalir);
 
 		btnSalir.addActionListener(e -> {
+			GestionSonido.sonidoClick.reproducir();
 			System.exit(0);
 		});
 
