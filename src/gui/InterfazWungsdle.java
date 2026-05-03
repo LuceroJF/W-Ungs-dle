@@ -83,6 +83,14 @@ public class InterfazWungsdle extends JFrame {
 		btnComenzarJuego.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
 		btnComenzarJuego.setBounds(306, 283, 344, 40);
 
+		txfieldNombreUsuario.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    btnComenzarJuego.doClick();
+                }
+            }
+        });
 		puntajeIdioma = wungsdle.getPuntosIdioma();
 		JLabel puntaje = new JLabel(puntajeIdioma + " " + logica.consultarPuntaje());
 		puntaje.setFont(new Font("Luckiest Guy", Font.PLAIN, 20));
@@ -130,7 +138,7 @@ public class InterfazWungsdle extends JFrame {
 					mensajeErrorNombre = wungsdle.getTextoMensajeErrorNombre();
 					wungsdle.alertError(mensajeErrorNombre);
 					txfieldNombreUsuario.setText("");
-					throw new IllegalArgumentException(mensajeErrorNombre);
+//					throw new IllegalArgumentException(mensajeErrorNombre);
 				}
 			}
 		});

@@ -169,7 +169,60 @@ public class Wungsdle
 		}
 		return "tiempo";
 	}
-	
+	public String getBotonSalirIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "Exit";
+		}
+		return "Salir";
+	}
+	public String getBotonReiniciarIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "Reset";
+		}
+		return "Reiniciar";
+	}
+	public String getMensajeFinalIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "Good luck next time";
+		}
+		return "Mejor suerte la próxima";
+	}
+	public String getMensajeFinal2Idioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "Excelent!";
+		}
+		return "¡Excelente!";
+	}
+	public String getMensajePalabraFinalIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "The word was";
+		}
+		return "La palabra era";
+	}
+	public String getMensajeTiempoFinalIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "Time";
+		}
+		return "Tiempo";
+	}
+	public String getMensajeJugadorFinalIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "Player";
+		}
+		return "Jugador";
+	}
+	public String getMensajeGanasteFinalIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "¡YOU WIN!";
+		}
+		return "¡GANASTE!";
+	}
+	public String getMensajePerdisteFinalIdioma() {
+		if(this.idiomaActual.startsWith("English")){
+			return "GAME OVER";
+		}
+		return "PERDISTE";
+	}
 	public String[] getColumnasRanking() {
 	    if (this.idiomaActual.startsWith("English")) {
 	        return new String[] {"Player", "Score", "Time"};
@@ -237,6 +290,10 @@ public class Wungsdle
 		JOptionPane.showMessageDialog(null, mensaje, "Validación",
 		JOptionPane.INFORMATION_MESSAGE);
 	}
+
+
+
+
 
 	
 

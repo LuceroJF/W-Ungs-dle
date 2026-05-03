@@ -176,15 +176,18 @@ public class LogicaPalabra {
 	    // Primera pasada: VERDES
 	    for (int i = 0; i < 5; i++)
 	    {
-	        if (intento.charAt(i) == palabraSecreta.charAt(i)){
+	      if(palabraUsuario != "" && palabraUsuario != null) {
+	        if (palabraUsuario.charAt(i) == palabraSecreta.charAt(i)){
 	            resultado[i] = "VERDE";
 	            usadaEnSecreta[i] = true;
 	            //Sumar puntos
 	            if(letrasDescubiertas[i] != true) {
+	            	System.out.println("Suma 5");
 	            	usuario.sumarPuntos(5);
 	            	letrasDescubiertas[i] = true;
 	            }
 	        }
+	    }
 	    }
 
 	    // Segunda pasada: AMARILLOS y GRIS
@@ -195,13 +198,18 @@ public class LogicaPalabra {
 	        boolean encontrada = false;
 	        for (int j = 0; j < 5; j++)
 	        {
-	            if (!usadaEnSecreta[j] && intento.charAt(i) == palabraSecreta.charAt(j))
+	  	      if(palabraUsuario != "" && palabraUsuario != null) {
+	            if (!usadaEnSecreta[j] && palabraUsuario.charAt(i) == palabraSecreta.charAt(j))
 	            {
 	                resultado[i] = "AMARILLO";
 	                usadaEnSecreta[j] = true;
 	                encontrada = true;
 	                break;
 	            }
+	        }
+	  	      else {
+	  	    throw new NullPointerException("Campo Vacío");
+	  	      }
 	        }
 	        if (!encontrada)
 	        {
