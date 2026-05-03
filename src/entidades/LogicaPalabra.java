@@ -117,7 +117,7 @@ public class LogicaPalabra {
 		return usuario.getPuntos();
 	}
 	
-	public boolean consultarIntentoUsuarioPartida(Long tiempoInicio, InterfazWungsdle juego)
+	public boolean consultarIntentoUsuarioPartida(Long tiempoInicio, InterfazWungsdle juego, boolean ganaPartida)
 	{
 		boolean intentoUsuario=false;
 		if (this.consultarIntentoUsuario() > 1) {
@@ -125,6 +125,8 @@ public class LogicaPalabra {
 			intentoUsuario=true;
 		}
 		else {
+			System.out.println(ganaPartida);
+			if(!ganaPartida) {
 			long tiempoFinal = System.currentTimeMillis();
 			Long latencia = tiempoFinal - tiempoInicio;
 			wungsdle.setTiempoRespuesta(latencia);
@@ -134,6 +136,7 @@ public class LogicaPalabra {
 						this.getPalabraSecreta(), false, wungsdle, this);
 				fin.setVisible(true);
 			});
+		}
 		}
 		return intentoUsuario;
 	}
@@ -176,13 +179,12 @@ public class LogicaPalabra {
 	    // Primera pasada: VERDES
 	    for (int i = 0; i < 5; i++)
 	    {
-	      if(palabraUsuario != "" && palabraUsuario != null) {
+	      if(palabraUsuario != "" && palabraUsuario != null && isPalabraValida(palabraUsuario)) {
 	        if (palabraUsuario.charAt(i) == palabraSecreta.charAt(i)){
 	            resultado[i] = "VERDE";
 	            usadaEnSecreta[i] = true;
 	            //Sumar puntos
 	            if(letrasDescubiertas[i] != true) {
-	            	System.out.println("Suma 5");
 	            	usuario.sumarPuntos(5);
 	            	letrasDescubiertas[i] = true;
 	            }
@@ -233,7 +235,7 @@ public class LogicaPalabra {
 
 		fueInvalido=false;		
     	boolean acerto = false;
-    	
+    	boolean ganaPartida = false;
 		if(this.isPalabraValida(palabraUsuario)) {
 			// ================== GANA ==================
 			if (intentoActualUsuario) {
@@ -241,7 +243,8 @@ public class LogicaPalabra {
 				acerto = true;
 			}
 			// ================== PIERDE ==================
-			consultarIntentoUsuarioPartida(tiempoInicio, actual);
+			ganaPartida = intentoActualUsuario;
+			consultarIntentoUsuarioPartida(tiempoInicio, actual, ganaPartida);
 			} else {
 				fueInvalido = true;
 		}

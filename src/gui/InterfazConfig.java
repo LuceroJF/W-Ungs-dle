@@ -94,6 +94,7 @@ public class InterfazConfig extends JFrame {
 				logica.crearPalabra(comboBox_Idioma.getSelectedItem().toString(),
 				comboBox_Dificultad.getSelectedItem().toString());
                 wungsdle.setIdiomaActual(comboBox_Idioma.getSelectedItem().toString());
+                wungsdle.setDificultadActual(comboBox_Dificultad.getSelectedItem().toString());
                 mensaje = wungsdle.getTextoMensajeConfig();
 				}
 		});

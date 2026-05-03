@@ -90,8 +90,10 @@ public class InterfazFinal extends JFrame {
 		getContentPane().add(btnReiniciar);
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String idiomaActual = wungsdle.getIdiomaActual();
+				String dificultadActual = wungsdle.getDificultadActual();
 				Wungsdle wungsdle = new Wungsdle();
-				wungsdle.iniciarJuego();
+				wungsdle.iniciarJuego(idiomaActual, dificultadActual);
 				interfazJuego.dispose();
 				InterfazFinal.this.dispose();
 			}

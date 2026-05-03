@@ -32,6 +32,13 @@ public class Wungsdle
 		idiomaActual = "Español - ES";
 		dificultadActual = "Facil - Easy";
 	}
+	public Wungsdle(String idiomaActualReinicio, String dificultadReinicio)
+	{
+		usuario = new Usuario();
+		palabra = new Palabra();
+		idiomaActual = idiomaActualReinicio;
+		dificultadActual = dificultadReinicio;
+	}
 	
     public LogicaPalabra comenzarLogicaPalabra() {
     	LogicaPalabra logica = new LogicaPalabra(this.usuario, this.palabra, Wungsdle.this);
@@ -252,12 +259,22 @@ public class Wungsdle
 		this.idiomaActual=idiomaActual;
 	}
 		
+	public void setDificultadActual(String dificultadActual) {
+		this.dificultadActual=dificultadActual;
+		
+	}
 	//===============================METODOS=============================//	
     public void iniciarJuego() {
     	ConfiguracionInicial configuracion = new ConfiguracionInicial();
 		Wungsdle wungsdle = new Wungsdle();
 		LogicaPalabra logicaP = wungsdle.comenzarLogicaPalabra();
 		configuracion.crearConfiguracionInicial(wungsdle,logicaP);
+    }
+    public void iniciarJuego(String idiomaActualReinicio, String dificultadReinicio) {
+    	ConfiguracionInicial configuracion = new ConfiguracionInicial();
+		Wungsdle wungsdle = new Wungsdle(idiomaActualReinicio,dificultadReinicio);
+		LogicaPalabra logicaP = wungsdle.comenzarLogicaPalabra();
+		configuracion.crearConfiguracionInicial(wungsdle,logicaP, idiomaActualReinicio,dificultadReinicio);
     }
     
 	public void crearNombreUsuario(String nombre) {
@@ -290,6 +307,7 @@ public class Wungsdle
 		JOptionPane.showMessageDialog(null, mensaje, "Validación",
 		JOptionPane.INFORMATION_MESSAGE);
 	}
+
 
 
 
