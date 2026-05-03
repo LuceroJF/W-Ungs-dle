@@ -102,6 +102,5 @@ public class TestJuego extends Wungsdle {
     @Test(expected = IllegalArgumentException.class)
     public void nombreUsuarioVacio() {
     	wungsdle.crearNombreUsuario("");
-    	wungsdle.nombreUsuarioVacio();
     }
 }

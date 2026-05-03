@@ -138,7 +138,7 @@ public class InterfazWungsdle extends JFrame {
 					mensajeErrorNombre = wungsdle.getTextoMensajeErrorNombre();
 					wungsdle.alertError(mensajeErrorNombre);
 					txfieldNombreUsuario.setText("");
-//					throw new IllegalArgumentException(mensajeErrorNombre);
+					throw new IllegalArgumentException(mensajeErrorNombre);
 				}
 			}
 		});
@@ -205,7 +205,6 @@ public class InterfazWungsdle extends JFrame {
 		panelGrillaJuego.getActionMap().put("enter", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean gana = false;
 				String[] resultado = logica.getColorLetra(palabraUsuario.toLowerCase());
 				for (int i = 0; i < 5; i++) {
 					if (resultado[i].equals("VERDE")) {
@@ -219,9 +218,7 @@ public class InterfazWungsdle extends JFrame {
 						logica.acertoUsuario(false);
 					}
 				}
-				logica.consultarIntentoUsuario();
-				gana &= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
-				juegoTerminado &= gana;
+				juegoTerminado |= logica.estadoActualPartida(palabraUsuario, tiempoInicio, InterfazWungsdle.this);
 				if (logica.getIntentoInvalido() == true) {
 					// Marca la palabra invalida en rojo y luego la setea.
 					for (int i = 0; i < 5; i++) {

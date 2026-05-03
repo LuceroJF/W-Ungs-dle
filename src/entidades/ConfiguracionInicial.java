@@ -12,7 +12,6 @@ public class ConfiguracionInicial {
 		this.logica = logicaP;
 		this.wungsdle = juego;
 		logica.crearPalabra("Español - ES","Facil - Easy");
-		System.out.println(logica.getPalabraSecreta());
 		InterfazInicio window = new InterfazInicio(wungsdle,logica);
 		window.setVisible(true);
 		window.setLocationRelativeTo(null);

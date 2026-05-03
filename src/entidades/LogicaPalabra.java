@@ -22,7 +22,7 @@ public class LogicaPalabra {
 	private Usuario usuario;
 	private Wungsdle wungsdle;
 	private boolean fueInvalido=false;
-	private boolean intentoActualUsuario= true;
+	private boolean intentoUsuarioTodoVerde= true;
 	private boolean[] letrasDescubiertas = new boolean[5];
 	
 	public LogicaPalabra(Usuario usuarioWungsdle, Palabra palabraWungsdle, Wungsdle juego)
@@ -117,15 +117,12 @@ public class LogicaPalabra {
 		return usuario.getPuntos();
 	}
 	
-	public boolean consultarIntentoUsuarioPartida(Long tiempoInicio, InterfazWungsdle juego, boolean ganaPartida)
+	public void consultarIntentoUsuarioPartida(Long tiempoInicio, InterfazWungsdle juego, boolean ganaPartida)
 	{
-		boolean intentoUsuario=false;
 		if (this.consultarIntentoUsuario() > 1) {
 			this.descontarIntento();
-			intentoUsuario=true;
 		}
 		else {
-			System.out.println(ganaPartida);
 			if(!ganaPartida) {
 			long tiempoFinal = System.currentTimeMillis();
 			Long latencia = tiempoFinal - tiempoInicio;
@@ -138,21 +135,18 @@ public class LogicaPalabra {
 			});
 		}
 		}
-		return intentoUsuario;
 	}
 	
     public boolean getIntentoInvalido(){
     	return this.fueInvalido;
     }
 	
-	public void intentoUsuarioValido(Long tiempoInicio, InterfazWungsdle actual) {
+	public void intentoUsuarioGanaPartida(Long tiempoInicio, InterfazWungsdle actual) {
 		// TIEMPO
 		long tiempoFinal = System.currentTimeMillis();
 		long latenciaMs = tiempoFinal-tiempoInicio;
-
 		long minutos = (latenciaMs / 1000) / 60;
 		long segundos = (latenciaMs / 1000) % 60;
-
 		wungsdle.setTiempoRespuesta(latenciaMs);
 		/*// punto si gana
 		wungsdle.sumarPuntosGanador();*/
@@ -228,27 +222,23 @@ public class LogicaPalabra {
     }	
 	    		
 	public void acertoUsuario(boolean intento) {	
-		intentoActualUsuario &= intento;
+		intentoUsuarioTodoVerde &= intento;
 	}
 	    
-    public boolean estadoActualPartida(String palabraUsuario, Long tiempoInicio, InterfazWungsdle actual) {
-
-		fueInvalido=false;		
+    public boolean estadoActualPartida(String palabraUsuario, Long tiempoInicio, InterfazWungsdle actual) {	
     	boolean acerto = false;
     	boolean ganaPartida = false;
 		if(this.isPalabraValida(palabraUsuario)) {
 			// ================== GANA ==================
-			if (intentoActualUsuario) {
-				intentoUsuarioValido(tiempoInicio, actual);
+			if (intentoUsuarioTodoVerde) {
+				intentoUsuarioGanaPartida(tiempoInicio, actual);
 				acerto = true;
 			}
 			// ================== PIERDE ==================
-			ganaPartida = intentoActualUsuario;
+			ganaPartida = intentoUsuarioTodoVerde;
 			consultarIntentoUsuarioPartida(tiempoInicio, actual, ganaPartida);
-			} else {
-				fueInvalido = true;
-		}
-		intentoActualUsuario=true;
+			}
+		intentoUsuarioTodoVerde=true;
 		return acerto;
 	}
 	    

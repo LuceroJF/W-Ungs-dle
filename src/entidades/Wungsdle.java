@@ -278,14 +278,12 @@ public class Wungsdle
     }
     
 	public void crearNombreUsuario(String nombre) {
+		if(nombre == null || nombre.length()==0 || nombre=="") {
+			throw new IllegalArgumentException("Nombre vacio");
+		}
 		usuario.crearNombreUsuario(nombre);
 	}
 	
-	public void nombreUsuarioVacio() {
-		if(usuario.isNombreVacio()) {
-			throw new IllegalArgumentException("Nombre vacio");
-		}
-	}
 
     //Guardar resultado
     public void guardarResultado() {

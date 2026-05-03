@@ -1,6 +1,0 @@
-Jorge,5,101
-Diego,25,106
-Diego,25,106
-cassafs,25,1
-asf,25,6
-as,0,5
