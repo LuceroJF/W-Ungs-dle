@@ -151,8 +151,8 @@ public class LogicaPalabra {
 		long segundos = (latenciaMs / 1000) % 60;
 
 		wungsdle.setTiempoRespuesta(latenciaMs);
-		// punto si gana
-		wungsdle.sumarPuntosGanador();
+		/*// punto si gana
+		wungsdle.sumarPuntosGanador();*/
 		// guardar
 		wungsdle.guardarResultado();
 		SwingUtilities.invokeLater(() -> {
@@ -179,7 +179,7 @@ public class LogicaPalabra {
 	        if (intento.charAt(i) == palabraSecreta.charAt(i)){
 	            resultado[i] = "VERDE";
 	            usadaEnSecreta[i] = true;
-	            
+	            //Sumar puntos
 	            if(letrasDescubiertas[i] != true) {
 	            	usuario.sumarPuntos(5);
 	            	letrasDescubiertas[i] = true;

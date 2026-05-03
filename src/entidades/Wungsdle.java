@@ -216,22 +216,6 @@ public class Wungsdle
 			throw new IllegalArgumentException("Nombre vacio");
 		}
 	}
-	
-    /*//Suma puntos dependiendo el resultado
-    public void sumarPuntosPorResultado(String[] resultado) {
-        for(int i = 0; i<resultado.length; i++) {
-            if(resultado[i].equals("VERDE")) {
-                usuario.sumarPuntos(3);                
-            }else if(resultado[i].equals("AMARILLO")) {
-                usuario.sumarPuntos(1);
-            }
-        }
-    }*/
-    
-    //Si gana
-    public void sumarPuntosGanador() {
-        usuario.sumarPuntos(10);
-    }
 
     //Guardar resultado
     public void guardarResultado() {
