@@ -217,7 +217,7 @@ public class Wungsdle
 		}
 	}
 	
-    //Suma puntos dependiendo el resultado
+    /*//Suma puntos dependiendo el resultado
     public void sumarPuntosPorResultado(String[] resultado) {
         for(int i = 0; i<resultado.length; i++) {
             if(resultado[i].equals("VERDE")) {
@@ -226,7 +226,7 @@ public class Wungsdle
                 usuario.sumarPuntos(1);
             }
         }
-    }
+    }*/
     
     //Si gana
     public void sumarPuntosGanador() {

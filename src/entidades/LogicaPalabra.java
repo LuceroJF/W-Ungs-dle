@@ -180,7 +180,7 @@ public class LogicaPalabra {
 	            resultado[i] = "VERDE";
 	            usadaEnSecreta[i] = true;
 	            
-	            if(!letrasDescubiertas[i]) {
+	            if(letrasDescubiertas[i] != true) {
 	            	usuario.sumarPuntos(5);
 	            	letrasDescubiertas[i] = true;
 	            }
