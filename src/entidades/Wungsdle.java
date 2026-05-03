@@ -1,6 +1,7 @@
 package entidades;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ import gui.InterfazFinal;
 import gui.InterfazInicio;
 import gui.InterfazWungsdle;
 
-public class Wungsdle 
+public class Wungsdle
 {
 	private Usuario usuario;
 	private Palabra palabra; //
@@ -306,6 +307,7 @@ public class Wungsdle
 		JOptionPane.showMessageDialog(null, mensaje, "Validación",
 		JOptionPane.INFORMATION_MESSAGE);
 	}
+ 
 
 
 

@@ -35,6 +35,14 @@ public class InterfazWungsdle extends JFrame {
 		this.logica = logicaP;
 		logoActual = wungsdle.getLogoDependiendoIdioma();
 		crearInterfazWungsdle();
+		{
+		    try {
+		        Image icon = new ImageIcon(getClass().getResource("/recursos/Wungsdle.png")).getImage();
+		        setIconImage(icon);
+		    } catch (Exception e) {
+		        System.out.println("No se pudo cargar el icono de la ventana.");
+		    }
+		}
 	}
 
 	public void crearInterfazWungsdle() {

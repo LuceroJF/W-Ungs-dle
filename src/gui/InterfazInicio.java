@@ -1,11 +1,9 @@
 package gui;
 
-import javax.swing.JFrame;
-
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Button;
+
 import java.awt.event.*;
 
 import entidades.GestionSonido;

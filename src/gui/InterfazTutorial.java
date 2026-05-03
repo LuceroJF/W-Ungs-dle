@@ -19,6 +19,14 @@ public class InterfazTutorial extends JFrame {
 		menuPrincipal = menu;
 		this.wungsdle = juego;
 		crearInterfazTutorial();
+		{
+		    try {
+		        Image icon = new ImageIcon(getClass().getResource("/recursos/Wungsdle.png")).getImage();
+		        setIconImage(icon);
+		    } catch (Exception e) {
+		        System.out.println("No se pudo cargar el icono de la ventana.");
+		    }
+		}
 	}
 
 	private void crearInterfazTutorial() {
