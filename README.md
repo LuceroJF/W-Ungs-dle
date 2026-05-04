@@ -1,60 +1,50 @@
-La última actualización contiene cambios en todas las siguientes instancias;
--Finalmente cuando vamos a Configuración -> English -> Aplicar cambios, TODOS los botones e imágenes cambian al idioma seleccionado (ingles o español) 
--Se agregó una nueva clase Test que contiene, no muchos, pero suficientes test que permiten verificar que nuestro código está funcionando "bien" 
-- - - ( Necesario aclarar que de todos los test, hay uno que todavía me gustaría debatir con ustedes porque realmente ya eran las 5 de la mañana y estaba tan cansado de codear que lo recontra copie del gemini)
--Se agregó la funcionalidad que permite que si el usuario escribe cualquier cosa, como por ejemplo "wwwww", no se le permita adivinar, y que realmente deba ingresar una palabra válida 
-- - - (Las palabras "válidas" se toman del gigantesco "diccionario" que en realidad son los 4 txt con sus respectivos idiomas, unas 2 mil palabras mas o menos) 
+# Wungsdle - Juego de Palabras
 
-Explicación breve de cómo todo esto pasó a funcionar;
-- - Dentro de WUNGSDLE se encuentran métodos del estilo 
-- - - 	
-	public String getTextoIngresarNombre() {
-	    if (this.idiomaActual.startsWith("English")) {
-	        return "Enter your name";
-	    }
-	    return "Ingrese su nombre";
-	}
-- - - 
-- - Estos métodos simplemente le preguntan a la instancia de la clase de negocio ¿Cuál es el idioma actual del juego? y deciden acorde cuál será el STRING que le setea al botón que corresponda.
+## Desarrolladores
+Este proyecto fue desarrollado por:
+* **Lucero Juan**
+* **Dino Martin**
+* **Lizarraga Jorge**
+* **Mansilla Diego**
 
-- - Luego, y quizá más importante, es el código que se creó para la interfaz de inicio (el menú);
-- - - 
-	public void actualizarTextos() {
-	    iniciarJuego=(wordle.getTextoBotonInicio());
-	    configuracion=(wordle.getTextoConfiguracion());
-	    
-	}
-	/// Este está duplicado para diferenciarlo del que empieza con el main (el de arriba) y el que es actualizado por la configuracion (este de abajo)
-	public void actualizarTextos(String nuevo) {
-	    iniciarJuego=(wordle.getTextoBotonInicio());
-		InterfazInicio nuevaInterfazIdiomaActual = new InterfazInicio(wordle);
-		nuevaInterfazIdiomaActual.setVisible(true);
-		nuevaInterfazIdiomaActual.setLocationRelativeTo(null);
-		this.dispose();
-		
-	}
-- - -
-- - Como se puede apreciar, "actualizarTextos()" es llamado desde el main, para que de esta manera una vez que el menu se crea, no aparezca "vacío".
-- - Y como bien está explicado dentro del código con un comentario, "ActualizarTextos(String nuevo)" es simplemente un constructor diferente que lo extrapola de su contraparte "actualizarTextos()", 
-- - para este ser llamado desde la interfaz de configuración de la siguiente manera; 
-- - - 
-	private void volverMenuPrincipal(ActionEvent accion) {
-		menuPrincipal.actualizarTextos("nuevo");
-		this.dispose();
-	}
-- - -
-- - El motivo por el cual esto es necesario, es debido a que como las interfaces se inicializan en sí mismas, y una vez inicializadas no pueden "salir" de su bucle, para poder actualizar esta información
-- - es necesario deshacerse del original y crear una nueva instancia con el idioma seleccionado, que llega desde la interfaz de configuración. 
+**Cátedra:** Programación 3 (Proyecto Universitario)
 
+---
 
-	# Nuevos cambios
+## Descripción del Proyecto
+Este programa, denominado **Wungsdle**, es una recreación del popular juego **Wordle**, diseñada como una aplicación de escritorio. El objetivo principal es adivinar una palabra oculta de 5 letras en un máximo de 6 intentos, utilizando pistas visuales basadas en colores.
 
-* **Nueva Clase de Configuración Inicial**: Nos ayuda a que la configuración de inicio pueda replicarse tanto cuando reiniciamos el juego como cuando comenzamos.
-* **Valores por defecto**: Se agregó al constructor de `Wungsdle` el idioma y la dificultad por default.
-* **Función de Alertas**: Se creó una función centralizada para el manejo de alertas dentro de la clase `Wungsdle`.
-* **Control de flujo (Enter)**: La tecla Enter no se activa hasta que el usuario hace clic en "Iniciar Juego" después de ingresar su nombre.
-* **Gestión de memoria**: Ahora todas las pestañas se cierran correctamente al salir de ellas (uso de `dispose`).
-* **Mejoras visuales**: Se actualizaron y mejoraron las tipografías de la interfaz.
-* **las palabras que no estan en el diccionario ahora se pintan de rojo y si borramos una letra se le va el color rojo a toda la palabra.
-* **el nombre no puede estar vacio y tira excepcion si asi fuera.
-* **El ranking se guarda indefinidamente.
+## Reglas del Juego
+Para ganar, el jugador debe descubrir la palabra secreta siguiendo estas normas:
+
+1.  **Intentos:** Tienes 6 oportunidades para adivinar la palabra.
+2.  **Longitud:** Cada palabra ingresada debe tener exactamente 5 letras.
+3.  **Retroalimentación por Colores:** Después de cada intento, el color de las celdas cambiará:
+    * 🟩 **Verde:** La letra está en la palabra y en la posición correcta.
+    * 🟨 **Amarillo:** La letra está en la palabra, pero en la posición incorrecta.
+    * ⬜ **Gris:** La letra no forma parte de la palabra secreta.
+4.  **Diccionario:** Solo se aceptan palabras válidas dentro del diccionario del juego.
+
+---
+
+## Especificaciones Técnicas
+El desarrollo se basó en estándares de ingeniería de software para garantizar un sistema escalable y organizado:
+
+* **Lenguaje:** Java.
+* **Interfaz Gráfica (GUI):** Implementada con **Java Swing**, proporcionando una experiencia de usuario interactiva[cite: 1].
+* **Arquitectura:** Se utilizó el patrón de diseño **Modelo-Vista-Controlador (MVC)** para separar la lógica, la interfaz y el control de eventos.
+* **Patrones de Diseño:**
+* **Singleton:** Implementado para la gestión centralizada de la música y efectos de sonido.
+* **POO (Programación Orientada a Objetos):** Uso de clases y objetos para estructurar el sistema.
+* **Persistencia de Datos:** En lugar de una base de datos convencional, el sistema utiliza un **archivo de texto (.txt)** para almacenar y persistir la información del **ranking** de jugadores.
+
+---
+
+## Instalación y Ejecución
+Para facilitar el acceso a diferentes usuarios, el proyecto incluye:
+
+1.  **Versión Ejecutable (.exe):** Ideal para usuarios que no cuentan con entornos de desarrollo configurados.
+2.  **Código Fuente:** El proyecto puede ser importado y ejecutado en cualquier IDE compatible con Java.
+
+---
+*Este documento resume el trabajo realizado para la materia Programación 3.*
